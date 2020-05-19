@@ -1,0 +1,70 @@
+name: Evolution
+version: 3.3.0
+api-version: 1.15
+author: GiverPlay007
+description: 'Plugin elaborado para EvolutionCity, da rede Evolution'
+softdepend: [Vault, PermissionsEx, RedProtect]
+main: me.giverplay.evolution.Evolution
+load: POSTWORLD
+commands:
+  evolution:
+    description: 'Comando para Staff'
+  nivel:
+    description: 'Exibir nivel e xp proprio ou de outro jogador'
+  tell:
+    description: 'Enviar mensagens privadas'
+    aliases: [message, msg, pm]
+  reply:
+    description: 'Responder mensagem privada do ultimo jogador que enviou um tell'
+    aliases: [r, responder]
+  lixeira:
+    desciprion: 'Exibe um menu para descartar os itens'
+    aliases: [lixo]
+  reiniciar:
+    description: 'Reiniciar o servidor com tempo e motivo'
+    aliases: [restart]
+  tntrun:
+    description: '[Em desenvolvimento] Evento TnT Run'
+  reparar:
+    description: 'Reparar o item na mao'
+  tokenreparo:
+    description: 'Token para usar no /reparar'
+  home:
+    description: 'Teleportar para casa'
+    aliases: [h]
+  home-of:
+      description: 'Teleportar para casa de outro jogador'
+  homes:
+    description: 'Listagem de casas'
+    aliases: [lh]
+  sethome:
+    description: 'Definir um ponto casa'
+    aliases: [sh]
+  delhome:
+    description: 'Apaga uma casa'
+    aliases: dh
+  delhome-of:
+    description: 'Apagar casa de outro jogador'
+  playerwarp:
+    description: 'Warp para jogadores'
+    aliases: [pw, pwarp, playerw]
+  createplayerwarp:
+    description: 'Criar warp de jogador'
+    aliases: [cpw, createpwarp, cpwarp]
+  removeplayerwarp:
+    description: 'Remover warp de jogador'
+    aliases: [rpw, removepwarp, rpwarp]
+  mywarp:
+    description: 'Teleportar para a propria warp'
+    aliases: [myw, mwarp, myplayerwarp]
+  plugins:
+    description: 'Listagem de plugins'
+    aliases: [plugin, pl]
+  op:
+    description: 'OPERADOR KKKK'
+    aliases: [operator]
+  deop:
+    description: 'Desoperador asdasdadasdas'
+  rankup:
+    description: 'Upar de Rank'
+    aliases: [rup, upar]
