@@ -3,7 +3,7 @@ package me.giverplay.evolution.comandos;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
 
@@ -20,6 +20,6 @@ public class ComandoHome extends Comando
 		Player player = (Player) sender;
 		String uuid = player.getUniqueId().toString();
 
-		EvolutionAPI.teleportHome(player, uuid, args);
+		Evolution.getInstance().teleportHome(player, uuid, args);
 	}
 }

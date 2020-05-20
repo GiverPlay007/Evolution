@@ -9,18 +9,20 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 
 @SuppressWarnings("deprecation")
 public class ListenerPlayerWarpMenu implements Listener
 {
 	@EventHandler
-	public void onClick(InventoryClickEvent event){
+	public void onClick(InventoryClickEvent event)
+	{
 		Player player = (Player) event.getWhoClicked();
 		InventoryView inv = player.getOpenInventory();
 		ItemStack item = event.getCurrentItem();
 		
-		if(inv.getTitle().startsWith("Warps de")){
+		if(inv.getTitle().startsWith("Warps de"))
+		{
 			event.setCancelled(true);
 			
 			OfflinePlayer vip = Bukkit.getOfflinePlayer(inv.getTitle().replace("Warps de ", "").trim());
@@ -30,7 +32,7 @@ public class ListenerPlayerWarpMenu implements Listener
 			String warpName = item.getItemMeta().getDisplayName().replace("§b", "").trim();
 			
 			player.closeInventory();
-			EvolutionAPI.getPlayerWarp(vip.getName(), warpName).teleportWarp(player);;
+			Evolution.getInstance().getPlayerWarp(vip.getName(), warpName).teleportWarp(player);;
 		}
 	}
 }

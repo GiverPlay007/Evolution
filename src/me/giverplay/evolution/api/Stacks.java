@@ -32,8 +32,10 @@ public class Stacks
 		return new ItemStack(m, quantidade);
 	}
 	
-	public static ItemStack addIcon(Material m, int quantia, String name, List<String> lore){
-		for(int i = 0; i < lore.size(); i++){
+	public static ItemStack addIcon(Material m, int quantia, String name, List<String> lore)
+	{
+		for(int i = 0; i < lore.size(); i++)
+		{
 			lore.set(i, lore.get(i).replace("&", "§"));
 		}
 		
@@ -47,8 +49,10 @@ public class Stacks
 		return item;
 	}
 	
-	public static ItemStack addIcon(Material m, String name, List<String> lore){
-		for(int i = 0; i < lore.size(); i++){
+	public static ItemStack addIcon(Material m, String name, List<String> lore)
+	{
+		for(int i = 0; i < lore.size(); i++)
+		{
 			lore.set(i, lore.get(i).replace("&", "§"));
 		}
 		
@@ -62,7 +66,8 @@ public class Stacks
 		return item;
 	}
 	
-	public static ItemStack addGlow(ItemStack i) {
+	public static ItemStack addGlow(ItemStack i)
+	{
 		net.minecraft.server.v1_15_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(i);
 		NBTTagCompound nbt = nmsItem.getTag() == null ? new NBTTagCompound() : nmsItem.getTag();
 		NBTTagList ench = new NBTTagList();

@@ -1,11 +1,12 @@
 package me.giverplay.evolution.api.manager;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.Variaveis;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
 
@@ -14,7 +15,7 @@ public class CommandManager implements CommandExecutor
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdLabel, String[] args)
 	{
-		Comando comando = Variaveis.comandos.get(cmd.getName());
+		Comando comando = Evolution.getInstance().getRegisteredCommands().get(cmd.getName());
 		
 		if((comando.getType() == ComandoType.CONSOLE) && (sender instanceof Player))
 		{
@@ -30,7 +31,7 @@ public class CommandManager implements CommandExecutor
 		
 		if(comando.getType() == ComandoType.GERAL)
 		{
-			Variaveis.console.sendMessage("Executando comando geral para " + sender.getName());
+			Bukkit.getConsoleSender().sendMessage("Executando comando geral para " + sender.getName());
 		}
 		
 		comando.execute(sender, args);

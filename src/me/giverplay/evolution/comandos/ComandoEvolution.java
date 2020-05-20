@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
 
@@ -37,7 +37,7 @@ public class ComandoEvolution extends Comando
 			
 		  if(args[0].equalsIgnoreCase("reload"))
 			{
-			  EvolutionAPI.reloadConfig();
+			  Evolution.getInstance().reloadConfig();
 			  player.sendMessage("§aConfigs recarregadas");
 			}
 			else if(args[0].equalsIgnoreCase("ram"))

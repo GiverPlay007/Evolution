@@ -60,6 +60,5 @@ public class ComandoTokenReparo extends Comando
 		target.sendMessage("§aRecebendo Token de Reparo >> por " + sender.getName());
 		
 		target.getInventory().addItem(Stacks.getTokenReparo(quantidade));
-
 	}
 }

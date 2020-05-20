@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
 import me.giverplay.evolution.api.manager.PlayerManager;
@@ -19,7 +19,7 @@ public class ComandoTell extends Comando
 	@Override
 	public void execute(CommandSender sender, String[] args)
 	{
-		PlayerManager player = EvolutionAPI.getPlayer(sender.getName());
+		PlayerManager player = Evolution.getInstance().getPlayer(sender.getName());
 
 		if(args.length == 0)
 		{
@@ -55,7 +55,7 @@ public class ComandoTell extends Comando
 			return;
 		}
 		
-		PlayerManager target = EvolutionAPI.getPlayer(alvo.getName());
+		PlayerManager target = Evolution.getInstance().getPlayer(alvo.getName());
 		
 		if(!target.getTellEnabled())
 		{

@@ -9,7 +9,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.manager.PlayerManager;
 
 public class ListenerSigns implements Listener 
@@ -19,7 +19,7 @@ public class ListenerSigns implements Listener
 	{
 		if((event.getLine(0).toLowerCase().contains("[evolution]")))
 		{
-			if(!EvolutionAPI.getPlayer(event.getPlayer().getName()).isAdmin())
+			if(!Evolution.getInstance().getPlayer(event.getPlayer().getName()).isAdmin())
 			{
 				event.setCancelled(true);
 				event.getPlayer().sendMessage("§cSem permissao para isso");
@@ -45,11 +45,12 @@ public class ListenerSigns implements Listener
 		if(!(block.getType() == Material.BIRCH_WALL_SIGN)) return;
 
 		Sign sign = (Sign) block.getState();
-		PlayerManager player = EvolutionAPI.getPlayer(event.getPlayer().getName());
+		PlayerManager player = Evolution.getInstance().getPlayer(event.getPlayer().getName());
 
 		if(!(sign.getLine(0).contains("§e[Evolution]"))) return;
 		
-		if(sign.getLine(1) == "§e§lSpawn"){
+		if(sign.getLine(1) == "§e§lSpawn")
+		{
 			player.getPlayer().chat("/spawn");
 			return;
 		}
@@ -64,7 +65,7 @@ public class ListenerSigns implements Listener
 
 			if(sign.getLine(0).toLowerCase().contains("[evolution]"))
 			{
-				if(!EvolutionAPI.getPlayer(event.getPlayer().getName()).isAdmin())
+				if(!Evolution.getInstance().getPlayer(event.getPlayer().getName()).isAdmin())
 				{
 					event.setCancelled(true);
 					event.getPlayer().sendMessage("§cSem permissão para isso");

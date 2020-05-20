@@ -3,7 +3,7 @@ package me.giverplay.evolution.api.manager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.Variaveis;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.Rank;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
@@ -15,14 +15,17 @@ public class PlayerManager
 	private boolean tell;
 	private long loginTime, rankupTime;
 	private Rank rank;
-
+	private Evolution plugin;
+	
 	public PlayerManager(String name)
 	{
-		this.rank = Variaveis.rankups.get(Variaveis.playersyaml.getString(name + ".niveis.rank"));
+		plugin = Evolution.getInstance();
+		
+		this.rank = plugin.getRanks().get(plugin.getPlayersConfig().getString(name + ".niveis.rank"));
 		this.name = name;
 		this.player = Bukkit.getPlayer(name);
-		this.level = Variaveis.playersyaml.getInt(name + ".niveis.nivel");
-		this.xp = Variaveis.playersyaml.getInt(name + ".niveis.xp");
+		this.level = plugin.getPlayersConfig().getInt(name + ".niveis.nivel");
+		this.xp = plugin.getPlayersConfig().getInt(name + ".niveis.xp");
 		this.reply = null;
 		this.tell = true;
 		this.rankupTime = System.currentTimeMillis();
@@ -51,7 +54,7 @@ public class PlayerManager
 	public void setLevel(int level)
 	{
 		this.level = level;
-		Variaveis.playersyaml.set(name + ".niveis.nivel", this.level);
+		plugin.getPlayersConfig().set(name + ".niveis.nivel", this.level);
 	}
 
 	public int getXp()
@@ -62,22 +65,22 @@ public class PlayerManager
 	public void setXp(int xp)
 	{
 		this.xp = xp;
-		Variaveis.playersyaml.set(name + ".niveis.xp", this.xp);
+		plugin.getPlayersConfig().set(name + ".niveis.xp", this.xp);
 	}
 
 	public double getMoney()
 	{
-		return Variaveis.economy.getBalance(this.player);
+		return plugin.getEconomy().getBalance(this.player);
 	}
 
 	public void giveMoney(double quantia)
 	{
-		Variaveis.economy.depositPlayer(this.player, quantia);
+		plugin.getEconomy().depositPlayer(this.player, quantia);
 	}
 
 	public void takeMoney(double quantia)
 	{
-		Variaveis.economy.withdrawPlayer(this.player, quantia);
+		plugin.getEconomy().withdrawPlayer(this.player, quantia);
 	}
 
 	public boolean isDeveloper()
@@ -123,7 +126,8 @@ public class PlayerManager
 		return this.loginTime;
 	}
 	
-	public long getRankupTime(){
+	public long getRankupTime()
+	{
 		return this.rankupTime;
 	}
 	
@@ -132,18 +136,21 @@ public class PlayerManager
 		this.loginTime = login;
 	}
 	
-	public Rank getRank(){
+	public Rank getRank()
+	{
 		return this.rank;
 	}
 	
-	public void setRank(Rank rank){
-		if(rank.getMinLevel() % 5 == 0){
+	public void setRank(Rank rank)
+	{
+		if(rank.getMinLevel() % 5 == 0)
+		{
 			PermissionsEx.getUser(player).removeGroup(this.rank.getName().replace(String.valueOf(this.rank.getName().charAt(this.rank.getName().length() - 1)), "").trim());
 			PermissionsEx.getUser(player).addGroup(rank.getName().replace(String.valueOf(rank.getName().charAt(rank.getName().length() - 1)), "").trim());
 		}
 
 		this.rank = rank;
 		this.rankupTime = System.currentTimeMillis();
-		Variaveis.playersyaml.set(name + ".niveis.rank", rank.getName());
+		plugin.getPlayersConfig().set(name + ".niveis.rank", rank.getName());
 	}
 }

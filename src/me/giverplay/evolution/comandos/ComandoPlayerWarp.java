@@ -2,8 +2,7 @@ package me.giverplay.evolution.comandos;
 
 import org.bukkit.command.CommandSender;
 
-import me.giverplay.evolution.Variaveis;
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.Menus;
 import me.giverplay.evolution.api.PlayerWarp;
 import me.giverplay.evolution.api.comando.Comando;
@@ -21,26 +20,30 @@ public class ComandoPlayerWarp extends Comando
 	@Override
 	public void execute(CommandSender sender, String[] args)
 	{
-		PlayerManager player = EvolutionAPI.getPlayer(sender.getName());
+		PlayerManager player = Evolution.getInstance().getPlayer(sender.getName());
 		
-		if(args.length == 0){
+		if(args.length == 0)
+		{
 			player.sendMessage(getUsage());
 			return;
 		}
 		
-		if(!Variaveis.warps.getConfig().isSet(args[0])){
+		if(!Evolution.getInstance().getWarpsConfig().getConfig().isSet(args[0]))
+		{
 			player.sendMessage("§cEste jogador não possui warps");
 			return;
 		}
 		
-		if(args.length == 1){
+		if(args.length == 1)
+		{
 			player.getPlayer().openInventory(Menus.playerWarps(args[0]));
 			return;
 		}
 
-		PlayerWarp warp = EvolutionAPI.getPlayerWarp(player.getName(), args[1]);
+		PlayerWarp warp = Evolution.getInstance().getPlayerWarp(player.getName(), args[1]);
 		
-		if(warp == null){
+		if(warp == null)
+		{
 			player.sendMessage("§cO jogador §f" + args[0] + " §cnão possui a warp §f" + args[1]);
 			return;
 		}

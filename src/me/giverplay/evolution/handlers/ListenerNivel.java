@@ -15,24 +15,23 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-import me.giverplay.evolution.Variaveis;
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.manager.PlayerManager;
 
 public class ListenerNivel implements Listener
 {
 	public static void xpCheck(String playerName)
 	{
-		PlayerManager player = EvolutionAPI.getPlayer(playerName);
+		PlayerManager player = Evolution.getInstance().getPlayer(playerName);
 		
-		if(player.getLevel() >= Variaveis.niveis.getInt("nivel_maximo"))
+		if(player.getLevel() >= Evolution.getInstance().getLevelConfig().getInt("nivel_maximo"))
 		{
 			return;
 		}
 		
 		int nivel = player.getLevel(); 	
 		int exp = player.getXp();
-		int xpNeeded = Variaveis.niveis.getInt("niveis." + (nivel + 1) + ".xp");
+		int xpNeeded =  Evolution.getInstance().getLevelConfig().getInt("niveis." + (nivel + 1) + ".xp");
 		
 		if(exp >= xpNeeded)
 		{
@@ -43,7 +42,7 @@ public class ListenerNivel implements Listener
 			(ChatColor.GREEN + playerName + ChatColor.AQUA + " passou para o nível " +
 					ChatColor.WHITE + (nivel + 1));
 			
-			EvolutionAPI.saveAllConfigs();
+			Evolution.getInstance().saveAllConfigs();
 			
 			if(player.getLevel() % 5 == 0)
 			{
@@ -214,7 +213,7 @@ public class ListenerNivel implements Listener
 	@EventHandler(ignoreCancelled=true)
 	public void quandoQuebrarBloco(BlockBreakEvent e)
 	{
-		PlayerManager player = Variaveis.playersHashMap.get(e.getPlayer().getName());
+		PlayerManager player = Evolution.getInstance().getPlayer(e.getPlayer().getName());
 		Block quebrado = e.getBlock();
 		Material block = quebrado.getType();
 		
@@ -339,8 +338,10 @@ public class ListenerNivel implements Listener
 	{
 		EntityType mob = event.getEntity().getType();
 		Player player = event.getEntity().getKiller();
+		
 		if(player == null) return;
-		PlayerManager pm = EvolutionAPI.getPlayer(player.getName());
+		
+		PlayerManager pm = Evolution.getInstance().getPlayer(player.getName());
 		
 		if(mob == EntityType.COW)
 		{

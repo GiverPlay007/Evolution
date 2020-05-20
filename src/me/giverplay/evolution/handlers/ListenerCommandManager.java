@@ -6,8 +6,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-import me.giverplay.evolution.Variaveis;
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.manager.PlayerManager;
 
 public class ListenerCommandManager implements Listener
@@ -16,19 +15,23 @@ public class ListenerCommandManager implements Listener
 	public void onPlayerCommand(PlayerCommandPreprocessEvent event)
 	{
 		String[] input = event.getMessage().split(" ");
-		PlayerManager player = EvolutionAPI.getPlayer(event.getPlayer().getName());
+		PlayerManager player = Evolution.getInstance().getPlayer(event.getPlayer().getName());
 		
-		if(input[0].equalsIgnoreCase("/pex")){
-			if(!player.isDeveloper()){
+		if(input[0].equalsIgnoreCase("/pex"))
+		{
+			if(!player.isDeveloper())
+			{
 				event.setCancelled(true);
 				player.sendMessage("§cSem permissão para executar este comando (O comando foi desabilitado para usuários in-game, exceto o desenvolvedor deste servidor)");
 			}
+			
 			return;
 		}
 		
-		if(input[0].equalsIgnoreCase("/plugins") || input[0].equalsIgnoreCase("/pl")){
+		if(input[0].equalsIgnoreCase("/plugins") || input[0].equalsIgnoreCase("/pl"))
+		{
 			event.setCancelled(true);
-			Variaveis.comandos.get("plugins").execute(player.getPlayer(), input);
+			Evolution.getInstance().getRegisteredCommands().get("plugins").execute(player.getPlayer(), input);
 			return;
 		}
 		
@@ -47,7 +50,7 @@ public class ListenerCommandManager implements Listener
 		{
 			event.setCancelled(true);
 			
-			Variaveis.comandos.get("reply").execute((CommandSender) event.getPlayer(), args);
+			Evolution.getInstance().getRegisteredCommands().get("reply").execute((CommandSender) event.getPlayer(), args);
 		}
 	}
 }

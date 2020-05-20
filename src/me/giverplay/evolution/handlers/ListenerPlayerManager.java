@@ -1,38 +1,46 @@
 package me.giverplay.evolution.handlers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import me.giverplay.evolution.Variaveis;
-import me.giverplay.evolution.api.EvolutionAPI;
+
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.manager.ScoreboardManager;
 
 public class ListenerPlayerManager implements Listener
 {
+	private Evolution plugin;
+	
+	public ListenerPlayerManager()
+	{
+		this.plugin = Evolution.getInstance();
+	}
+	
 	@EventHandler
 	public void onLogin(PlayerJoinEvent event)
 	{
 		String name = event.getPlayer().getName();
 		
-		if(!Variaveis.playersyaml.getConfig().isSet(name))
+		if(!plugin.getPlayersConfig().getConfig().isSet(name))
 		{
-			Variaveis.playersyaml.set(name + ".niveis.xp", 0);
-			Variaveis.playersyaml.set(name + ".niveis.nivel", 0);
-			Variaveis.playersyaml.set(name + ".niveis.rank", Variaveis.ranks.getString("ranks.0.nome"));
+			plugin.getPlayersConfig().set(name + ".niveis.xp", 0);
+			plugin.getPlayersConfig().set(name + ".niveis.nivel", 0);
+			plugin.getPlayersConfig().set(name + ".niveis.rank", plugin.getRanksConfig().getString("ranks.0.nome"));
 			
 			event.getPlayer().sendMessage("§aBem-vindo, seu novo nível é §f0");
 			
-			Variaveis.console.sendMessage(name + " cadastrado.");
-			Variaveis.playersyaml.saveConfig();
+			Bukkit.getConsoleSender().sendMessage(name + " cadastrado.");
+			plugin.getPlayersConfig().saveConfig();
 		}
 		
-		EvolutionAPI.addPlayer(name);
-		EvolutionAPI.getPlayer(name).setLoginTime(System.currentTimeMillis());
-		ScoreboardManager.build(EvolutionAPI.getPlayer(name));
+		plugin.addPlayer(name);
+		plugin.getPlayer(name).setLoginTime(System.currentTimeMillis());
+		ScoreboardManager.build(plugin.getPlayer(name));
 		
 		event.setJoinMessage("§a" + name + " entrou no servidor.");
-		EvolutionAPI.setHeaderAndFooter(event.getPlayer());
+		plugin.setHeaderAndFooter(event.getPlayer());
 		
 	}
 	
@@ -40,7 +48,7 @@ public class ListenerPlayerManager implements Listener
 	public void onLogout(PlayerQuitEvent event)
 	{
 		String name = event.getPlayer().getName();
-		EvolutionAPI.removePlayer(name);
+		plugin.removePlayer(name);
 		event.setQuitMessage("§c" + name + " saiu do servidor.");
 	}
 }

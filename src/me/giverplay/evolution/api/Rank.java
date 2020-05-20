@@ -18,27 +18,33 @@ public class Rank
 	private boolean ultimo;
 	private double money;
 	
-	public String getName(){
+	public String getName()
+	{
 		return this.nome;
 	}
 	
-	public String getPrefix(){
+	public String getPrefix()
+	{
 		return this.prefixo;
 	}
 	
-	public boolean isLastRank(){
+	public boolean isLastRank()
+	{
 		return this.ultimo;
 	}
 	
-	public double getCost(){
+	public double getCost()
+	{
 		return this.money;
 	}
 	
-	public int getMinLevel(){
+	public int getMinLevel()
+	{
 		return this.min_level;
 	}
 	
-	public String getNextRank(){
+	public String getNextRank()
+	{
 		return this.proximo;
 	}
 }

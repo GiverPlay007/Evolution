@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
 
@@ -20,7 +20,8 @@ public class ComandoDelHomeOf extends Comando
 	{
 		Player player = (Player) sender;
 
-		if(!player.hasPermission("evolution.homeof")){
+		if(!player.hasPermission("evolution.homeof"))
+		{
 			player.sendMessage("§cSem permissão");
 			return;
 		}
@@ -43,13 +44,13 @@ public class ComandoDelHomeOf extends Comando
 
 		if(args.length == 1)
 		{
-			if(!EvolutionAPI.hasUnknownHomes(uuid))
+			if(!Evolution.getInstance().hasUnknownHomes(uuid))
 			{
 				player.sendMessage("§cO jogador especificado não possui uma casa padrão");
 				return;
 			}
 
-			EvolutionAPI.deleteUnknownHome(uuid);
+			Evolution.getInstance().deleteUnknownHome(uuid);
 			player.sendMessage("§cCasa padrão de §f" + target.getName() + " §afoi apagada com sucesso");
 			target.sendMessage("§cSua casa padrão foi deletada por um Admin");
 
@@ -58,13 +59,13 @@ public class ComandoDelHomeOf extends Comando
 		
 		String homeName = args[1];
 		
-		if(!(EvolutionAPI.hasNamedHomes(uuid)) || !(EvolutionAPI.getPlayersNamedHomes(uuid).containsKey(homeName)))
+		if(!(Evolution.getInstance().hasNamedHomes(uuid)) || !(Evolution.getInstance().getPlayersNamedHomes(uuid).containsKey(homeName)))
 		{
 			player.sendMessage("§cO jogador §f" + target.getName() + " §cnão possui a casa §f" + homeName);
 			return;
 		}
 		
-		EvolutionAPI.deleteNamedHome(uuid, homeName);
+		Evolution.getInstance().deleteNamedHome(uuid, homeName);
 		player.sendMessage("§cCasa §f" + homeName + " §c de §f" + target.getName() + " §cfoi deletada");
 		target.sendMessage("§cSua casa §f" + homeName + " §cfoi deletada por um Admin");
 		

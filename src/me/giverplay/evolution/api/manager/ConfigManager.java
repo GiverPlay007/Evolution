@@ -7,33 +7,24 @@ import java.util.Map;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
 
 import me.giverplay.evolution.Evolution;
 
 public class ConfigManager
 {
   public static ConfigManager cnf = new ConfigManager("configuracao");
-  private Plugin plugin = Evolution.getPlugin(Evolution.class);
+  private Evolution plugin;
   private String name;
   private File file;
   private YamlConfiguration config;
   
   public ConfigManager(String nome)
   {
+  	plugin = Evolution.getInstance();
+  	
     setName(nome + ".yml");
     reloadConfig();
-  }
-	  
-  public Plugin getPlugin()
-  {
-    return this.plugin;
-  }
-	  
-  public void setPlugin(Plugin plugin)
-  {
-    this.plugin = plugin;
-  }
+  }	  
 	  
   public String getName()
   {
@@ -76,14 +67,14 @@ public class ConfigManager
   {
     if (!existeConfig())
     {
-      getPlugin().saveResource(getName(), false);
+      plugin.saveResource(getName(), false);
       reloadConfig();
     }
   }
 	  
   public void reloadConfig()
   {
-    this.file = new File(((Evolution) plugin).getDataFolder(), getName());
+    this.file = new File(plugin.getDataFolder(), getName());
     this.config = YamlConfiguration.loadConfiguration(getFile());
   }
 	  
@@ -169,29 +160,10 @@ public class ConfigManager
   public void setLocation(String path, Location loc)
   {
   	config.set(path, loc);
-  	/*
-  	getConfig().set(path + ".world", loc.getWorld().getName());
-  	getConfig().set(path + ".x", loc.getX());
-  	getConfig().set(path + ".y", loc.getY());
-  	getConfig().set(path + ".z", loc.getZ());
-  	getConfig().set(path + ".pitch", String.valueOf(loc.getPitch()));
-  	getConfig().set(path + ".yaw", String.valueOf(loc.getYaw()));
-  	*/
   }
   
   public Location getLocation(String path)
   {
-  	/*
-  	String w = getConfig().getString(path + ".world");
-  	double x = getConfig().getDouble(path + ".x");
-  	double y = getConfig().getDouble(path + ".y");
-  	double z = getConfig().getDouble(path + ".z");
-  	float pitch = Float.valueOf(getConfig().getString(path + ".pitch"));
-  	float yaw = Float.valueOf(getConfig().getString(path + ".yaw"));
-
-  	return new Location(Bukkit.getWorld(w), x, y, z, yaw, pitch);
-  	*/
-  	
   	return config.getLocation(path);
   }
 }

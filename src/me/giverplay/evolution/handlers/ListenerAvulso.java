@@ -7,12 +7,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 
 import br.net.fabiozumbi12.RedProtect.Bukkit.Region;
 import br.net.fabiozumbi12.RedProtect.Bukkit.API.events.EnterExitRegionEvent;
-import me.giverplay.evolution.Variaveis;
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.manager.PlayerManager;
 
 public class ListenerAvulso implements Listener
@@ -37,7 +35,7 @@ public class ListenerAvulso implements Listener
 	{ 
 		Player player = e.getPlayer();
 
-		if(Variaveis.deitar.contains(player.getName()))
+		if(Evolution.getInstance().getBedCooldownList().contains(player.getName()))
 		{
 			player.sendMessage("§cVocê não pode mudar o tempo agora...");
 			return;
@@ -47,42 +45,44 @@ public class ListenerAvulso implements Listener
 
 		Bukkit.broadcastMessage("§a" + player.getName() + " §adormiu, agora é dia no mundo §f" 
 				+ e.getPlayer().getWorld().getName());
-		Variaveis.deitar.add(player.getName());
+		Evolution.getInstance().getBedCooldownList().add(player.getName());
 
-		Bukkit.getServer().getScheduler().runTaskLater(Variaveis.plugin, new Runnable()
+		Bukkit.getServer().getScheduler().runTaskLater(Evolution.getInstance(), new Runnable()
 		{
-			public void run() {
-				Variaveis.deitar.remove(player.getName());
+			@Override
+			public void run() 
+			{
+				Evolution.getInstance().getBedCooldownList().remove(player.getName());
 			}
 		}, 30 * 20);
 	}
 	
 	@EventHandler
-	public void onRPEnter(EnterExitRegionEvent event){ // Quando entrar ou sair de um RP
-		PlayerManager player = EvolutionAPI.getPlayer(event.getPlayer().getName());
+	public void onRPEnter(EnterExitRegionEvent event)
+	{ // Quando entrar ou sair de um RP
+		PlayerManager player = Evolution.getInstance().getPlayer(event.getPlayer().getName());
 		
 		if(!player.isVip()) return; // Se o jogador for vip...
 		
 		Region enter = event.getEnteredRegion();
 		Region exit = event.getExitedRegion();
 		
-		if(enter != null){
-			if(enter.isLeader(player.getPlayer())) {
+		if(enter != null)
+		{
+			if(enter.isLeader(player.getPlayer())) 
+			{
 				player.getPlayer().setFlying(true);
 				player.sendMessage("§aModo voar ativado!");
 			}
 		}
 		
-		if(exit != null){
-			if(exit.isLeader(player.getPlayer())) {
+		if(exit != null)
+		{
+			if(exit.isLeader(player.getPlayer())) 
+			{
 				player.getPlayer().setFlying(false);
 				player.sendMessage("§cModo voar desativado!");
 			}
 		}
-	}
-	
-	@EventHandler
-	public void onInteract(PlayerInteractEvent event){
-		
 	}
 }

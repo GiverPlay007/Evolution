@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.command.CommandSender;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.PlayerWarp;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
@@ -20,36 +20,43 @@ public class ComandoCreatePlayerWarp extends Comando
 	@Override
 	public void execute(CommandSender sender, String[] args)
 	{
-		PlayerManager player = EvolutionAPI.getPlayer(sender.getName());
+		PlayerManager player = Evolution.getInstance().getPlayer(sender.getName());
     
-		if(!player.isVip()){
+		if(!player.isVip())
+		{
 			player.sendMessage("§eEste é um recurso VIP! Compre qualquer grupo VIP para ter acesso a esse comando =D");
 			return;
 		}
 		
-		if(args.length == 0){
+		if(args.length == 0)
+		{
 			player.sendMessage(getUsage());
 			return;
 		}
 		
 		int limite = 0;
 		
-		if(player.getPlayer().hasPermission("evolution.vip.prata")){
+		if(player.getPlayer().hasPermission("evolution.vip.prata"))
+		{
 			limite = 1;
 		}
 		
-		if(player.getPlayer().hasPermission("evolution.vip.ouro")){
+		if(player.getPlayer().hasPermission("evolution.vip.ouro"))
+		{
 			limite = 2;
 		}
 		
-		if(player.getPlayer().hasPermission("evolution.vip.platina")){
+		if(player.getPlayer().hasPermission("evolution.vip.platina"))
+		{
 			limite = 3;
 		}
 		
-		ArrayList<PlayerWarp> list = EvolutionAPI.getWarps(player.getName());
+		ArrayList<PlayerWarp> list = Evolution.getInstance().getWarps(player.getName());
 		
-		if(!(list == null)){
-			if(list.size() >= limite){
+		if(!(list == null))
+		{
+			if(list.size() >= limite)
+			{
 				player.sendMessage("§cVocê já tem todas as warps de seu limite...");
 				return;
 			}
@@ -59,6 +66,5 @@ public class ComandoCreatePlayerWarp extends Comando
 		warp.saveWarp();
 		
 		player.sendMessage("§aWarp criada com sucesso: §f" + warp.getWarpName());
-		
 	}
 }

@@ -6,7 +6,7 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 @SuppressWarnings("deprecation")
@@ -46,14 +46,15 @@ public class ScoreboardManager
 		update(player);
 	}
 	
-	public static void update(PlayerManager player){
+	public static void update(PlayerManager player)
+	{
 		player.getPlayer().setPlayerListName(PermissionsEx.getUser(player.getPlayer()).getPrefix().replace("&", "§") + player.getName());
 		Scoreboard sb = player.getPlayer().getScoreboard();
 		
 		sb.getTeam("rank").setSuffix(player.getRank().getName());
 		sb.getTeam("proximo").setSuffix((player.getRank().isLastRank() ? "Nenhum =D" : player.getRank().getNextRank()));
-		sb.getTeam("progresso").setSuffix(player.getRank().isLastRank() ? "100%" :(EvolutionAPI.getProgress(player)));
+		sb.getTeam("progresso").setSuffix(player.getRank().isLastRank() ? "100%" :(Evolution.getInstance().getProgress(player)));
 		sb.getTeam("nivel").setSuffix(String.valueOf(player.getLevel()));
-		sb.getTeam("money").setSuffix(EvolutionAPI.getMoney(player.getPlayer()));
+		sb.getTeam("money").setSuffix(Evolution.getInstance().getMoney(player.getPlayer()));
 	}
 }

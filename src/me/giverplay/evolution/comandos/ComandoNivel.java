@@ -4,8 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.Variaveis;
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
 import me.giverplay.evolution.api.manager.PlayerManager;
@@ -23,9 +22,9 @@ public class ComandoNivel extends Comando
 		
 		if(args.length == 0)
 		{
-			PlayerManager player = EvolutionAPI.getPlayer(sender.getName());
+			PlayerManager player = Evolution.getInstance().getPlayer(sender.getName());
 			
-			int proximo = (Variaveis.niveis.getInt("niveis." + (player.getLevel() + 1) + ".xp")) - player.getXp();
+			int proximo = (Evolution.getInstance().getLevelConfig().getInt("niveis." + (player.getLevel() + 1) + ".xp")) - player.getXp();
 			
 			player.sendMessage(" ");
 			player.sendMessage("§aNivel: §f" + player.getLevel());
@@ -57,8 +56,8 @@ public class ComandoNivel extends Comando
 			return;
 		}
 		
-		PlayerManager targetManager = EvolutionAPI.getPlayer(target.getName());
-		int proximo = (Variaveis.niveis.getInt("niveis." + (targetManager.getLevel() + 1) + ".xp")) - targetManager.getXp();
+		PlayerManager targetManager = Evolution.getInstance().getPlayer(target.getName());
+		int proximo = (Evolution.getInstance().getLevelConfig().getInt("niveis." + (targetManager.getLevel() + 1) + ".xp")) - targetManager.getXp();
 		
 		sender.sendMessage(" ");
 		sender.sendMessage("§aNivel de " + target.getName() +": §f" + targetManager.getLevel());

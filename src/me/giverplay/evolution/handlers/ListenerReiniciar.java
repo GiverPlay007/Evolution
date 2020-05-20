@@ -11,67 +11,90 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import me.giverplay.evolution.Variaveis;
+import me.giverplay.evolution.Evolution;
 
 public class ListenerReiniciar implements Listener
 {
 	// Codigo original por GuiHSilva
 	
+	private String blockmsg = "§c * Você não pode interagir agora, para evitar perda de itens ou progresso, aguarde a reinicialização";
+	private Evolution plugin;
+	
+	public ListenerReiniciar()
+	{
+		plugin = Evolution.getInstance();
+	}
+	
 	@EventHandler
-	private void event1(BlockPlaceEvent e) {
-		if (Variaveis.bloqueartudo) {
-			if (!e.getPlayer().isOp()) {
+	private void event1(BlockPlaceEvent e) 
+	{
+		if (plugin.blockAllRestart()) 
+		{
+			if (!e.getPlayer().hasPermission("evolution.reiniciar.bypass")) 
+			{
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(" ");
-				e.getPlayer().sendMessage(Variaveis.blockmsg);	
+				e.getPlayer().sendMessage(blockmsg);	
 				e.getPlayer().sendMessage(" ");
 			}
 		}
 	}
 	
 	@EventHandler
-	private void event2(PlayerCommandPreprocessEvent e) {
-		if (Variaveis.bloqueartudo) {
-			if (!e.getPlayer().isOp()) {
+	private void event2(PlayerCommandPreprocessEvent e) 
+	{
+		if (plugin.blockAllRestart())
+		{
+			if (!e.getPlayer().hasPermission("evolution.reiniciar.bypass")) 
+			{
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(" ");
-				e.getPlayer().sendMessage(Variaveis.blockmsg);	
+				e.getPlayer().sendMessage(blockmsg);	
 				e.getPlayer().sendMessage(" ");}
 		}
 	}
-
+	
 	@EventHandler
-	private void event3(PlayerInteractEvent e) {
-		if (Variaveis.bloqueartudo) {
-			if (!e.getPlayer().isOp()) {
+	private void event3(PlayerInteractEvent e)
+	{
+		if (plugin.blockAllRestart()) 
+		{
+			if (!e.getPlayer().hasPermission("evolution.reiniciar.bypass")) 
+			{
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(" ");
-				e.getPlayer().sendMessage(Variaveis.blockmsg);	
+				e.getPlayer().sendMessage(blockmsg);	
 				e.getPlayer().sendMessage(" ");
 			}
 		}
 	}
-
+	
 	@EventHandler
-	private void event4(EntityDamageEvent e) {
-		if (Variaveis.bloqueartudo) {
-			if (!e.getEntity().isOp()) {
+	private void event4(EntityDamageEvent e)
+	{
+		if (plugin.blockAllRestart()) 
+		{
+			if (!e.getEntity().hasPermission("evolution.reiniciar.bypass"))
+			{
 				e.setCancelled(true);
 				e.getEntity().sendMessage(" ");
-				e.getEntity().sendMessage(Variaveis.blockmsg);	
+				e.getEntity().sendMessage(blockmsg);	
 				e.getEntity().sendMessage(" ");
-				}
+			}
 		}
 	}
 	
-
+	
 	@EventHandler
-	private void event5(EntityDamageByEntityEvent e) {
-		if (Variaveis.bloqueartudo) {
-			if (!e.getDamager().isOp()) {
+	private void event5(EntityDamageByEntityEvent e) 
+	{
+		if (plugin.blockAllRestart())
+		{
+			if (!e.getDamager().hasPermission("evolution.reiniciar.bypass"))
+			{
 				e.setCancelled(true);
 				e.getDamager().sendMessage(" ");
-				e.getDamager().sendMessage(Variaveis.blockmsg);	
+				e.getDamager().sendMessage(blockmsg);	
 				e.getDamager().sendMessage(" ");
 				
 			}
@@ -79,36 +102,45 @@ public class ListenerReiniciar implements Listener
 	}
 	
 	@EventHandler
-	private void event6(BlockBreakEvent e) {
-		if (Variaveis.bloqueartudo) {
-			if (!e.getPlayer().isOp()) {
+	private void event6(BlockBreakEvent e) 
+	{
+		if (plugin.blockAllRestart()) 
+		{
+			if (!e.getPlayer().hasPermission("evolution.reiniciar.bypass")) 
+			{
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(" ");
-				e.getPlayer().sendMessage(Variaveis.blockmsg);	
+				e.getPlayer().sendMessage(blockmsg);	
 				e.getPlayer().sendMessage(" ");
 			}
 		}
 	}
 	
 	@EventHandler
-	private void event7(PlayerDropItemEvent e) {
-		if (Variaveis.bloqueartudo) {
-			if (!e.getPlayer().isOp()) {
+	private void event7(PlayerDropItemEvent e) 
+	{
+		if (plugin.blockAllRestart()) 
+		{
+			if (!e.getPlayer().hasPermission("evolution.reiniciar.bypass")) 
+			{
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(" ");
-				e.getPlayer().sendMessage(Variaveis.blockmsg);	
+				e.getPlayer().sendMessage(blockmsg);	
 				e.getPlayer().sendMessage(" ");
 			}
 		}
 	}
-
+	
 	@EventHandler
-	private void event8(InventoryInteractEvent e) {
-		if (Variaveis.bloqueartudo) {
-			if (!e.getWhoClicked().isOp()) {
+	private void event8(InventoryInteractEvent e) 
+	{
+		if (plugin.blockAllRestart()) 
+		{
+			if (!e.getWhoClicked().hasPermission("evolution.reiniciar.bypass")) 
+			{
 				e.setCancelled(true);
 				e.getWhoClicked().sendMessage(" ");
-				e.getWhoClicked().sendMessage(Variaveis.blockmsg);	
+				e.getWhoClicked().sendMessage(blockmsg);	
 				e.getWhoClicked().sendMessage(" ");
 			}
 		}

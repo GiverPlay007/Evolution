@@ -5,8 +5,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import me.giverplay.evolution.Variaveis;
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.manager.PlayerManager;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
@@ -15,9 +14,9 @@ public class ListenerChat implements Listener
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onChat(AsyncPlayerChatEvent event)
 	{
-		PlayerManager pm = EvolutionAPI.getPlayer(event.getPlayer().getName());
+		PlayerManager pm = Evolution.getInstance().getPlayer(event.getPlayer().getName());
 		
-		int nivel = Variaveis.playersHashMap.get(pm.getName()).getLevel();
+		int nivel = pm.getLevel();
 		
 		String rank = pm.getRank().getPrefix();
 		

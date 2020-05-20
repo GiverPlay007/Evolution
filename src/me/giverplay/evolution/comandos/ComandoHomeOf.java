@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.api.EvolutionAPI;
+import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
 
@@ -39,6 +39,6 @@ public class ComandoHomeOf extends Comando
         player.sendMessage("§CJogador offline ou desconhecido");
     }
 
-    EvolutionAPI.teleportHomeOf(player, target.getUniqueId().toString(), args);
+    Evolution.getInstance().teleportHomeOf(player, target.getUniqueId().toString(), args);
 	}
 }

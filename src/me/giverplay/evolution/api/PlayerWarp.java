@@ -6,7 +6,7 @@ import org.bukkit.Note;
 import org.bukkit.Note.Tone;
 import org.bukkit.entity.Player;
 
-import me.giverplay.evolution.Variaveis;
+import me.giverplay.evolution.Evolution;
 
 public class PlayerWarp
 {
@@ -26,25 +26,30 @@ public class PlayerWarp
 		return warpname;
 	}
 	
-	public String getOwner(){
+	public String getOwner()
+	{
 		return owner;
 	}
 	
-	public Location getLocation(){
+	public Location getLocation()
+	{
 		return loc;
 	}
 	
-	public void saveWarp(){
-		Variaveis.warps.getConfig().set(owner + "." + warpname + ".loc", loc);
-		Variaveis.warps.saveConfig();
+	public void saveWarp()
+	{
+		Evolution.getInstance().getWarpsConfig().getConfig().set(owner + "." + warpname + ".loc", loc);
+		Evolution.getInstance().getWarpsConfig().saveConfig();
 	}
 	
-	public void deleteWarp(){
-		Variaveis.warps.set(owner + "." + warpname, null);
-		Variaveis.warps.saveConfig();
+	public void deleteWarp()
+	{
+		Evolution.getInstance().getWarpsConfig().set(owner + "." + warpname, null);
+		Evolution.getInstance().getWarpsConfig().saveConfig();
 	}
 	
-	public void teleportWarp(Player player){
+	public void teleportWarp(Player player)
+	{
 		player.teleport(loc);
 		player.playNote(loc, Instrument.FLUTE, Note.natural(1, Tone.D));
 		player.sendMessage("§eTeleportado com sucesso!");

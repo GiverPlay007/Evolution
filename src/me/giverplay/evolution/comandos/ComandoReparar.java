@@ -23,12 +23,14 @@ public class ComandoReparar extends Comando
 		Player player = (Player) sender;
 		ItemStack item = player.getInventory().getItemInMainHand();
 		
-		if(item.getType() == Material.AIR){
+		if(item.getType() == Material.AIR)
+		{
 			player.sendMessage("ßc… necess·rio colocar o item que deseja reparar em sua m„o!");
 			return;
 		}
 		
-		if(item.getDurability() == 0){
+		if(item.getDurability() == 0)
+		{
 			player.sendMessage("ßcEste item n„o precisa ser reparado!");
 			return;
 		}
