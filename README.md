@@ -5,7 +5,7 @@ Plugin base do servidor Evolution.
 
 ## Referências
 
-Plugin SetHomes -> <https://github.com/Xquiset/SetHomes>
+Plugin SetHomes -> <https://github.com/Xquiset/SetHomes>  
 Plugin RRTPA -> Não encontrei o autor (Rafa) :(
 
 ## Changelogs
