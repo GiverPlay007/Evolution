@@ -75,7 +75,7 @@ public class ComandoTell extends Comando
 		{
 			sb.append(" ");
 			sb.append(args[i]);
-		}
+		} 
 
 		String msg = sb.toString();
 
