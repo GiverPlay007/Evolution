@@ -29,7 +29,7 @@ public class ListenerPlayerManager implements Listener
 			plugin.getPlayersConfig().set(name + ".niveis.nivel", 0);
 			plugin.getPlayersConfig().set(name + ".niveis.rank", plugin.getRanksConfig().getString("ranks.0.nome"));
 			
-			event.getPlayer().sendMessage("§aBem-vindo, seu novo nível é §f0");
+			event.getPlayer().sendMessage("Â§aBem-vindo, seu novo nÃ©vel Ã© Â§f0");
 			
 			Bukkit.getConsoleSender().sendMessage(name + " cadastrado.");
 			plugin.getPlayersConfig().saveConfig();
@@ -39,7 +39,7 @@ public class ListenerPlayerManager implements Listener
 		plugin.getPlayer(name).setLoginTime(System.currentTimeMillis());
 		ScoreboardManager.build(plugin.getPlayer(name));
 		
-		event.setJoinMessage("§a" + name + " entrou no servidor.");
+		event.setJoinMessage("Â§a" + name + " entrou no servidor.");
 		plugin.setHeaderAndFooter(event.getPlayer());
 		
 	}
@@ -49,6 +49,6 @@ public class ListenerPlayerManager implements Listener
 	{
 		String name = event.getPlayer().getName();
 		plugin.removePlayer(name);
-		event.setQuitMessage("§c" + name + " saiu do servidor.");
+		event.setQuitMessage("Â§c" + name + " saiu do servidor.");
 	}
 }

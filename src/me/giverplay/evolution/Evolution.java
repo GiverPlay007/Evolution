@@ -1,16 +1,19 @@
 package me.giverplay.evolution;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import me.giverplay.evolution.api.*;
+import me.giverplay.evolution.api.comando.Comando;
+import me.giverplay.evolution.api.manager.CommandManager;
+import me.giverplay.evolution.api.manager.ConfigManager;
+import me.giverplay.evolution.api.manager.PlayerManager;
+import me.giverplay.evolution.api.manager.ScoreboardManager;
+import me.giverplay.evolution.comandos.*;
+import me.giverplay.evolution.handlers.*;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.milkbowl.vault.economy.Economy;
+import net.minecraft.server.v1_15_R1.MinecraftServer;
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Instrument;
-import org.bukkit.Location;
-import org.bukkit.Note;
-import org.bukkit.Particle;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -19,53 +22,8 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.giverplay.evolution.api.Formater;
-import me.giverplay.evolution.api.Home;
-import me.giverplay.evolution.api.PBar;
-import me.giverplay.evolution.api.PlayerWarp;
-import me.giverplay.evolution.api.Rank;
-import me.giverplay.evolution.api.comando.Comando;
-import me.giverplay.evolution.api.manager.CommandManager;
-import me.giverplay.evolution.api.manager.ConfigManager;
-import me.giverplay.evolution.api.manager.PlayerManager;
-import me.giverplay.evolution.api.manager.ScoreboardManager;
-import me.giverplay.evolution.comandos.ComandoCreatePlayerWarp;
-import me.giverplay.evolution.comandos.ComandoDelHome;
-import me.giverplay.evolution.comandos.ComandoDelHomeOf;
-import me.giverplay.evolution.comandos.ComandoDeop;
-import me.giverplay.evolution.comandos.ComandoEvolution;
-import me.giverplay.evolution.comandos.ComandoHome;
-import me.giverplay.evolution.comandos.ComandoHomeOf;
-import me.giverplay.evolution.comandos.ComandoHomes;
-import me.giverplay.evolution.comandos.ComandoLixeira;
-import me.giverplay.evolution.comandos.ComandoMyWarp;
-import me.giverplay.evolution.comandos.ComandoNivel;
-import me.giverplay.evolution.comandos.ComandoOp;
-import me.giverplay.evolution.comandos.ComandoPlayerWarp;
-import me.giverplay.evolution.comandos.ComandoPlugins;
-import me.giverplay.evolution.comandos.ComandoRankup;
-import me.giverplay.evolution.comandos.ComandoReiniciar;
-import me.giverplay.evolution.comandos.ComandoRemovePlayerWarp;
-import me.giverplay.evolution.comandos.ComandoReparar;
-import me.giverplay.evolution.comandos.ComandoReply;
-import me.giverplay.evolution.comandos.ComandoSetHome;
-import me.giverplay.evolution.comandos.ComandoTell;
-import me.giverplay.evolution.comandos.ComandoTokenReparo;
-import me.giverplay.evolution.handlers.ListenerAvulso;
-import me.giverplay.evolution.handlers.ListenerChat;
-import me.giverplay.evolution.handlers.ListenerCommandManager;
-import me.giverplay.evolution.handlers.ListenerEntityDeathBroadcast;
-import me.giverplay.evolution.handlers.ListenerMenuReparar;
-import me.giverplay.evolution.handlers.ListenerNivel;
-import me.giverplay.evolution.handlers.ListenerPlayerManager;
-import me.giverplay.evolution.handlers.ListenerPlayerWarpMenu;
-import me.giverplay.evolution.handlers.ListenerPluginsMenu;
-import me.giverplay.evolution.handlers.ListenerReiniciar;
-import me.giverplay.evolution.handlers.ListenerSigns;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.milkbowl.vault.economy.Economy;
-import net.minecraft.server.v1_15_R1.MinecraftServer;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Evolution extends JavaPlugin 
 {
@@ -155,8 +113,8 @@ public class Evolution extends JavaPlugin
 	
 	public void setHeaderAndFooter(Player player) 
 	{
-		player.setPlayerListHeaderFooter("§a§lEvolution§f§lCity\n\n§7----------",
-				"§7----------\n\n§eBom jogo!");
+		player.setPlayerListHeaderFooter("Â§aÂ§lEvolutionÂ§fÂ§lCity\n\nÂ§7----------",
+				"Â§7----------\n\nÂ§eBom jogo!");
 	}
 	
 	public String getProgress(PlayerManager player)
@@ -166,13 +124,13 @@ public class Evolution extends JavaPlugin
 		
 		if(money >= custo)
 		{
-			return "§8[§a" + StringUtils.repeat("|", 15) + "§8]";
+			return "Â§8[Â§a" + StringUtils.repeat("|", 15) + "Â§8]";
 		}
 		
-		return PBar.getProgressBarScore(money, custo, 15, "|", "§a", "§7", "§8[", "§8]");
+		return PBar.getProgressBarScore(money, custo, 15, "|", "Â§a", "Â§7", "Â§8[", "Â§8]");
 	}
 	
-	// TODO Funções relacionadas ao plugin/servidor
+	// TODO FunÃ§Ãµes relacionadas ao plugin/servidor
 	
 	public Economy getEconomy()
 	{
@@ -238,7 +196,7 @@ public class Evolution extends JavaPlugin
 		return Formater.format((long) economy.getBalance(p));
 	}
 	
-	// TODO Getters - Coleções
+	// TODO Getters - ColeÃ§Ãµes
 	
 	public HashMap<String, Comando> getRegisteredCommands()
 	{
@@ -280,7 +238,7 @@ public class Evolution extends JavaPlugin
 			}
 			catch(NullPointerException e)
 			{
-				Bukkit.getConsoleSender().sendMessage("§c[Evolution] Erro em uma warp............");
+				Bukkit.getConsoleSender().sendMessage("Â§c[Evolution] Erro em uma warp............");
 			}
 		}
 		
@@ -423,28 +381,28 @@ public class Evolution extends JavaPlugin
 		{
 			if (!(hasUnknownHomes(uuid)))
 			{
-				player.sendMessage("§cNenhuma casa padrão definida");
+				player.sendMessage("Â§cNenhuma casa padrÃ£o definida");
 				return;
 			}
 			
 			player.teleport(getPlayersUnnamedHome(uuid));
 			player.spawnParticle(Particle.PORTAL, player.getLocation(), 100);
 			player.playNote(player.getLocation(), Instrument.BELL, Note.sharp(2, Note.Tone.F));
-			player.sendMessage("§aTeleportado com sucesso");
+			player.sendMessage("Â§aTeleportado com sucesso");
 			
 		} 
 		else
 		{
 			if ( !(hasNamedHomes(uuid)) || !(getPlayersNamedHomes(uuid).containsKey(args[0])) )
 			{
-				player.sendMessage("§cNenhuma casa com esse nome: §f" + args[0]);
+				player.sendMessage("Â§cNenhuma casa com esse nome: Â§f" + args[0]);
 				return;
 			}
 			
 			player.teleport(getNamedHomeLocal(uuid, args[0]));
 			player.spawnParticle(Particle.PORTAL, player.getLocation(), 100);
 			player.playNote(player.getLocation(), Instrument.BELL, Note.sharp(2, Note.Tone.F));
-			player.sendMessage("§aTeleportado com sucesso");
+			player.sendMessage("Â§aTeleportado com sucesso");
 		}
 	}
 	
@@ -454,14 +412,14 @@ public class Evolution extends JavaPlugin
 		{
 			if(!hasUnknownHomes(uuid))
 			{
-				player.sendMessage("§cEste jogador não possui uma casa padrão");
+				player.sendMessage("Â§cEste jogador nÃ£o possui uma casa padrÃ£o");
 				return;
 			}
 			
 			player.teleport(getPlayersUnnamedHome(uuid));
 			player.spawnParticle(Particle.PORTAL, player.getLocation(), 100);
 			player.playNote(player.getLocation(), Instrument.BELL, Note.sharp(2, Note.Tone.F));
-			player.sendMessage("§aTeleportado com sucesso");
+			player.sendMessage("Â§aTeleportado com sucesso");
 			
 			return;
 		}
@@ -470,30 +428,30 @@ public class Evolution extends JavaPlugin
 		
 		if (!(hasNamedHomes(uuid)) || !(getPlayersNamedHomes(uuid).containsKey(homeName)))
 		{
-			player.sendMessage("§cEste jogador não possui a casa §f" + homeName);
+			player.sendMessage("Â§cEste jogador nÃ£o possui a casa Â§f" + homeName);
 			return;
 		}
 		
 		player.teleport(getNamedHomeLocal(uuid, homeName));
 		player.spawnParticle(Particle.PORTAL, player.getLocation(), 100);
 		player.playNote(player.getLocation(), Instrument.BELL, Note.sharp(2, Note.Tone.F));
-		player.sendMessage("§cTeleportado com sucesso");
+		player.sendMessage("Â§cTeleportado com sucesso");
 	}
 	
 	public void listHomes(Player player)
 	{
 		String uuid = player.getUniqueId().toString();
-		String filler = StringUtils.repeat("§f-", 40);
+		String filler = StringUtils.repeat("Â§f-", 40);
 		
 		player.sendMessage(" ");
-		player.sendMessage("§b§lSuas Casas");
+		player.sendMessage("Â§bÂ§lSuas Casas");
 		player.sendMessage(filler);
 		player.sendMessage(" ");
 		
 		if(hasUnknownHomes(uuid))
 		{
 			String world = getPlayersUnnamedHome(uuid).getWorld().getName();
-			player.sendMessage("§bCasa Padrão: §fNo mundo " + world);
+			player.sendMessage("Â§bCasa PadrÃ£o: Â§fNo mundo " + world);
 		}
 		
 		player.sendMessage(" ");
@@ -504,8 +462,8 @@ public class Evolution extends JavaPlugin
 			{
 				String world = getPlayersNamedHomes(uuid).get(id).getWorld();
 				
-				player.sendMessage("§bCasa: §f" + id);
-				player.sendMessage("§bMundo: §f" + world);
+				player.sendMessage("Â§bCasa: Â§f" + id);
+				player.sendMessage("Â§bMundo: Â§f" + world);
 				
 				player.sendMessage(" ");
 			}
@@ -516,17 +474,17 @@ public class Evolution extends JavaPlugin
 	public void listHomes(Player alvo, Player player)
 	{
 		String uuid = alvo.getUniqueId().toString();
-		String filler = StringUtils.repeat("§f-", 40);
+		String filler = StringUtils.repeat("Â§f-", 40);
 		
 		player.sendMessage(" ");
-		player.sendMessage("§b§lCasas de " + alvo.getName());
+		player.sendMessage("Â§bÂ§lCasas de " + alvo.getName());
 		player.sendMessage(filler);
 		player.sendMessage(" ");
 		
 		if(hasUnknownHomes(uuid))
 		{
 			String world = getPlayersUnnamedHome(uuid).getWorld().getName();
-			player.sendMessage("§bCasa Padrão: §fNo mundo " + world);
+			player.sendMessage("Â§bCasa PadrÃ£o: Â§fNo mundo " + world);
 		}
 		
 		player.sendMessage(" ");
@@ -537,8 +495,8 @@ public class Evolution extends JavaPlugin
 			{
 				String world = getPlayersNamedHomes(uuid).get(id).getWorld();
 				
-				player.sendMessage("§bCasa: §f" + id);
-				player.sendMessage("§bMundo: §f" + world);
+				player.sendMessage("Â§bCasa: Â§f" + id);
+				player.sendMessage("Â§bMundo: Â§f" + world);
 				
 				player.sendMessage(" ");
 			}
@@ -712,7 +670,7 @@ public class Evolution extends JavaPlugin
 			ConfigManager cf = ranks;
 			
 			String nome = cf.getString(path + ".nome");
-			String prefixo = cf.getString(path + ".prefixo").replace("&", "§");
+			String prefixo = cf.getString(path + ".prefixo").replace("&", "Â§");
 			double custo = cf.getDouble(path + ".custo");
 			boolean ultimo = cf.getBoolean(path + ".ultimo");
 			String proximo = cf.getString(path + ".proximo");

@@ -36,7 +36,7 @@ public class ConfigManager
     this.name = name;
   }
 	  
-  public File getFile()
+  private File getFile()
   {
     return this.file;
   }
@@ -83,7 +83,7 @@ public class ConfigManager
     getFile().delete();
   }
   
-  public boolean existeConfig()
+  private boolean existeConfig()
   {
     return getFile().exists();
   }

@@ -18,7 +18,7 @@ public class ScoreboardManager
 		Objective obj = scoreboard.registerNewObjective("OBJ", "dummy");
 		
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);;
-		obj.setDisplayName("§6§lEvolution");
+		obj.setDisplayName("Â§6Â§lEvolution");
 		
 		Team rank = scoreboard.registerNewTeam("rank");
 		Team proximo = scoreboard.registerNewTeam("proximo");
@@ -26,21 +26,21 @@ public class ScoreboardManager
 		Team nivel = scoreboard.registerNewTeam("nivel");
 		Team money = scoreboard.registerNewTeam("money");
 		
-		rank.addEntry("§e Rank: §f");
-		proximo.addEntry("§e Proximo: §f");
-		progresso.addEntry("§e Progresso: §f");
-		nivel.addEntry("§e Nivel: §f");
-		money.addEntry("§e Money: §f");
+		rank.addEntry("Â§e Rank: Â§f");
+		proximo.addEntry("Â§e Proximo: Â§f");
+		progresso.addEntry("Â§e Progresso: Â§f");
+		nivel.addEntry("Â§e Nivel: Â§f");
+		money.addEntry("Â§e Money: Â§f");
 		
 		obj.getScore("").setScore(8);
-		obj.getScore("§e Rank: §f").setScore(7);
-		obj.getScore("§e Proximo: §f").setScore(6);
-		obj.getScore("§e Progresso: §f").setScore(5);
+		obj.getScore("Â§e Rank: Â§f").setScore(7);
+		obj.getScore("Â§e Proximo: Â§f").setScore(6);
+		obj.getScore("Â§e Progresso: Â§f").setScore(5);
 		obj.getScore(" ").setScore(4);
-		obj.getScore("§e Nivel: §f").setScore(3);
-		obj.getScore("§e Money: §f").setScore(2);
+		obj.getScore("Â§e Nivel: Â§f").setScore(3);
+		obj.getScore("Â§e Money: Â§f").setScore(2);
 		obj.getScore("  ").setScore(1);
-		obj.getScore("§cloja.exemplo.kkkkkk/").setScore(0);
+		obj.getScore("Â§cloja.exemplo.kkkkkk/").setScore(0);
 		
 		player.getPlayer().setScoreboard(scoreboard);
 		update(player);
@@ -48,7 +48,7 @@ public class ScoreboardManager
 	
 	public static void update(PlayerManager player)
 	{
-		player.getPlayer().setPlayerListName(PermissionsEx.getUser(player.getPlayer()).getPrefix().replace("&", "§") + player.getName());
+		player.getPlayer().setPlayerListName(PermissionsEx.getUser(player.getPlayer()).getPrefix().replace("&", "Â§") + player.getName());
 		Scoreboard sb = player.getPlayer().getScoreboard();
 		
 		sb.getTeam("rank").setSuffix(player.getRank().getName());

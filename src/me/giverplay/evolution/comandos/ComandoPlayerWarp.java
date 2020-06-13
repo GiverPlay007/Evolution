@@ -30,7 +30,7 @@ public class ComandoPlayerWarp extends Comando
 		
 		if(!Evolution.getInstance().getWarpsConfig().getConfig().isSet(args[0]))
 		{
-			player.sendMessage("§cEste jogador não possui warps");
+			player.sendMessage("Â§cEste jogador nÃ£o possui warps");
 			return;
 		}
 		
@@ -44,7 +44,7 @@ public class ComandoPlayerWarp extends Comando
 		
 		if(warp == null)
 		{
-			player.sendMessage("§cO jogador §f" + args[0] + " §cnão possui a warp §f" + args[1]);
+			player.sendMessage("Â§cO jogador Â§f" + args[0] + " Â§cnÃ£o possui a warp Â§f" + args[1]);
 			return;
 		}
 		

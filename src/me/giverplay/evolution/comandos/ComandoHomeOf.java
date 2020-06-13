@@ -22,7 +22,7 @@ public class ComandoHomeOf extends Comando
     
     if (!player.hasPermission("evolution.homeof"))
     {
-        player.sendMessage("§cSem permissão");
+        player.sendMessage("Â§cSem permissÃ£o");
         return;
     }
 
@@ -36,7 +36,7 @@ public class ComandoHomeOf extends Comando
 
     if(target == null)
     {
-        player.sendMessage("§CJogador offline ou desconhecido");
+        player.sendMessage("Â§cJogador offline ou desconhecido");
     }
 
     Evolution.getInstance().teleportHomeOf(player, target.getUniqueId().toString(), args);

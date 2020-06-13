@@ -22,15 +22,15 @@ public class ListenerSigns implements Listener
 			if(!Evolution.getInstance().getPlayer(event.getPlayer().getName()).isAdmin())
 			{
 				event.setCancelled(true);
-				event.getPlayer().sendMessage("§cSem permissao para isso");
+				event.getPlayer().sendMessage("Â§cSem permissao para isso");
 				return;
 			}
 			
 			if(event.getLine(1).toLowerCase().contains("spawn")){
-				event.setLine(0, "§e[Evolution]");
-				event.setLine(1, "§e§lSpawn");
+				event.setLine(0, "Â§e[Evolution]");
+				event.setLine(1, "Â§eÂ§lSpawn");
 				event.setLine(2, " ");
-				event.setLine(3, "§aTeleportar");
+				event.setLine(3, "Â§aTeleportar");
 			}
 		}
 	}
@@ -47,12 +47,11 @@ public class ListenerSigns implements Listener
 		Sign sign = (Sign) block.getState();
 		PlayerManager player = Evolution.getInstance().getPlayer(event.getPlayer().getName());
 
-		if(!(sign.getLine(0).contains("§e[Evolution]"))) return;
+		if(!(sign.getLine(0).contains("Â§e[Evolution]"))) return;
 		
-		if(sign.getLine(1) == "§e§lSpawn")
+		if(sign.getLine(1).equals("Â§eÂ§lSpawn"))
 		{
 			player.getPlayer().chat("/spawn");
-			return;
 		}
 	}
 
@@ -68,7 +67,7 @@ public class ListenerSigns implements Listener
 				if(!Evolution.getInstance().getPlayer(event.getPlayer().getName()).isAdmin())
 				{
 					event.setCancelled(true);
-					event.getPlayer().sendMessage("§cSem permissão para isso");
+					event.getPlayer().sendMessage("Â§cSem permissÃ£o para isso");
 				}
 			}
 		}
@@ -79,6 +78,6 @@ public class ListenerSigns implements Listener
 	{
 		if(!event.getPlayer().hasPermission("evolution.placacolorida")) return;
 		
-		for(int i = 0; i < event.getLines().length; i++) event.setLine(i, event.getLine(i).replace("&", "§"));
+		for(int i = 0; i < event.getLines().length; i++) event.setLine(i, event.getLine(i).replace("&", "Â§"));
 	}
 }

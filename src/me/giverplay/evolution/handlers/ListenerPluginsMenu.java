@@ -9,6 +9,6 @@ public class ListenerPluginsMenu implements Listener
 	@EventHandler
 	public void onClick(InventoryClickEvent event)
 	{
-		if(event.getWhoClicked().getOpenInventory().getTitle().startsWith("§0§lPlugins")) event.setCancelled(true);
+		if(event.getWhoClicked().getOpenInventory().getTitle().startsWith("Â§0Â§lPlugins")) event.setCancelled(true);
 	}
 }

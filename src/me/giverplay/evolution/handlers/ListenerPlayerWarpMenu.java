@@ -29,7 +29,7 @@ public class ListenerPlayerWarpMenu implements Listener
 			
 			if(item == null || !item.hasItemMeta()) return;
 			
-			String warpName = item.getItemMeta().getDisplayName().replace("§b", "").trim();
+			String warpName = item.getItemMeta().getDisplayName().replace("Â§b", "").trim();
 			
 			player.closeInventory();
 			Evolution.getInstance().getPlayerWarp(vip.getName(), warpName).teleportWarp(player);;

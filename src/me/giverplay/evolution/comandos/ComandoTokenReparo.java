@@ -20,7 +20,7 @@ public class ComandoTokenReparo extends Comando
 	{
 		if(!sender.hasPermission("evolution.tokens"))
 		{
-			sender.sendMessage("§cSem permissão");
+			sender.sendMessage("Â§cSem permissÃ£o");
 			return;
 		}
 		
@@ -34,7 +34,7 @@ public class ComandoTokenReparo extends Comando
 		
 		if(target == null)
 		{
-			sender.sendMessage("§cJogador não encontrado");
+			sender.sendMessage("Â§cJogador nÃ£o encontrado");
 			return;
 		}
 		
@@ -46,18 +46,18 @@ public class ComandoTokenReparo extends Comando
 		}
 		catch (NumberFormatException e)
 		{
-			sender.sendMessage("§cInsira um numero inteiro");
+			sender.sendMessage("Â§cInsira um numero inteiro");
 			return;
 		}
 		
 		if(quantidade <= 0)
 		{
-			sender.sendMessage("§cInsira um numero maior que zero");
+			sender.sendMessage("Â§cInsira um numero maior que zero");
 			return;
 		}
 		
-		sender.sendMessage("§aDando Token de Reparo para " + target.getName());
-		target.sendMessage("§aRecebendo Token de Reparo >> por " + sender.getName());
+		sender.sendMessage("Â§aDando Token de Reparo para " + target.getName());
+		target.sendMessage("Â§aRecebendo Token de Reparo >> por " + sender.getName());
 		
 		target.getInventory().addItem(Stacks.getTokenReparo(quantidade));
 	}

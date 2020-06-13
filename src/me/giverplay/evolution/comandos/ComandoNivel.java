@@ -27,9 +27,9 @@ public class ComandoNivel extends Comando
 			int proximo = (Evolution.getInstance().getLevelConfig().getInt("niveis." + (player.getLevel() + 1) + ".xp")) - player.getXp();
 			
 			player.sendMessage(" ");
-			player.sendMessage("§aNivel: §f" + player.getLevel());
-			player.sendMessage("§aXP: §f" + player.getXp());
-			player.sendMessage("§aProximo nivel: +§f" + proximo + " EXP");
+			player.sendMessage("Â§aNivel: Â§f" + player.getLevel());
+			player.sendMessage("Â§aXP: Â§f" + player.getXp());
+			player.sendMessage("Â§aProximo nivel: +Â§f" + proximo + " EXP");
 			player.sendMessage(" ");
 			
 			return;
@@ -52,7 +52,7 @@ public class ComandoNivel extends Comando
 		
 		if(target == null)
 		{
-			sender.sendMessage("§cJogador desconhecido ou offline");
+			sender.sendMessage("Â§cJogador desconhecido ou offline");
 			return;
 		}
 		
@@ -60,9 +60,9 @@ public class ComandoNivel extends Comando
 		int proximo = (Evolution.getInstance().getLevelConfig().getInt("niveis." + (targetManager.getLevel() + 1) + ".xp")) - targetManager.getXp();
 		
 		sender.sendMessage(" ");
-		sender.sendMessage("§aNivel de " + target.getName() +": §f" + targetManager.getLevel());
-		sender.sendMessage("§aXP de " + target.getName() +": §f" + targetManager.getXp());
-		sender.sendMessage("§aProximo nivel: +§f" + proximo + " EXP");
+		sender.sendMessage("Â§aNivel de " + target.getName() +": Â§f" + targetManager.getLevel());
+		sender.sendMessage("Â§aXP de " + target.getName() +": Â§f" + targetManager.getXp());
+		sender.sendMessage("Â§aProximo nivel: +Â§f" + proximo + " EXP");
 		sender.sendMessage(" ");
 	}
 }

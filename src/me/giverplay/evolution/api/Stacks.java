@@ -36,7 +36,7 @@ public class Stacks
 	{
 		for(int i = 0; i < lore.size(); i++)
 		{
-			lore.set(i, lore.get(i).replace("&", "§"));
+			lore.set(i, lore.get(i).replace("&", "Â§"));
 		}
 		
 		ItemStack item = new ItemStack(m, quantia);
@@ -53,7 +53,7 @@ public class Stacks
 	{
 		for(int i = 0; i < lore.size(); i++)
 		{
-			lore.set(i, lore.get(i).replace("&", "§"));
+			lore.set(i, lore.get(i).replace("&", "Â§"));
 		}
 		
 		ItemStack item = new ItemStack(m);
@@ -270,7 +270,7 @@ public class Stacks
 		item.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 		LeatherArmorMeta meta = (LeatherArmorMeta)item.getItemMeta();
 		meta.setColor(Color.BLUE);
-		meta.setDisplayName("ï¿½bArmadura de Couro");
+		meta.setDisplayName("Â§bArmadura de Couro");
 		item.setItemMeta(meta);
 		return item;
 	}
@@ -339,8 +339,8 @@ public class Stacks
 	
 	public static ItemStack getTokenReparo(int quantidade)
 	{
-		return add(Material.NAME_TAG, "§bToken de Reparo", 
-				Arrays.asList("§f ", "§aUtilize em /reparar", "§a "), quantidade);
+		return add(Material.NAME_TAG, "Â§bToken de Reparo",
+				Arrays.asList("Â§f ", "Â§aUtilize em /reparar", "Â§a "), quantidade);
 	}
 	
 	public static Material getMaterial(Material item)

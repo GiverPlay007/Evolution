@@ -26,7 +26,7 @@ public abstract class Comando
 	
 	public String getUsage()
 	{
-		return "§cUtilize " + this.usage;
+		return "Â§cUtilize " + this.usage;
 	}
 	
 	public abstract void execute(CommandSender sender, String[] args);

@@ -19,13 +19,13 @@ public class CommandManager implements CommandExecutor
 		
 		if((comando.getType() == ComandoType.CONSOLE) && (sender instanceof Player))
 		{
-			sender.sendMessage("§cEste comando só pode ser executado no Console");
+			sender.sendMessage("Â§cEste comando sÃ³ pode ser executado no Console");
 			return true;
 		}
 		
 		if((comando.getType() == ComandoType.PLAYER) && (!(sender instanceof Player)))
 		{
-			sender.sendMessage("§cEste comando só pode ser executado por Jogadores");
+			sender.sendMessage("Â§cEste comando sÃ³ pode ser executado por Jogadores");
 			return true;
 		}
 		

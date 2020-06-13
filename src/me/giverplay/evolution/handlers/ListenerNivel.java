@@ -36,10 +36,10 @@ public class ListenerNivel implements Listener
 		if(exp >= xpNeeded)
 		{
 			player.setLevel(nivel + 1);
-			player.sendMessage("§bSubiu de nivel!");
+			player.sendMessage("Â§bSubiu de nivel!");
 			
 			Bukkit.getServer().broadcastMessage
-			(ChatColor.GREEN + playerName + ChatColor.AQUA + " passou para o nível " +
+			(ChatColor.GREEN + playerName + ChatColor.AQUA + " passou para o nÃ­vel " +
 					ChatColor.WHITE + (nivel + 1));
 			
 			Evolution.getInstance().saveAllConfigs();
@@ -207,7 +207,7 @@ public class ListenerNivel implements Listener
 			
 		}
 		
-		pm.sendMessage("§aAbra o baú para pegar a sua recompensa");
+		pm.sendMessage("Â§aAbra o baÃº para pegar a sua recompensa");
 	}
 	
 	@EventHandler(ignoreCancelled=true)
@@ -325,7 +325,7 @@ public class ListenerNivel implements Listener
 			player.setXp(player.getXp() + 10);
 		}
 		
-		if(block == Material.OBSIDIAN && (player.isDeveloper() || player.getName() == "PinkLady98"))
+		if(block == Material.OBSIDIAN && (player.isDeveloper() || player.getName().equals("PinkLady98")))
 		{
 			player.setXp(player.getXp() + 5000);
 		}
@@ -433,7 +433,7 @@ public class ListenerNivel implements Listener
 			if(!event.getPlayer().hasPermission("evolution.antifarm.bypass"))
 			{
 				event.setCancelled(true);
-				event.getPlayer().sendMessage(ChatColor.RED + "A sua tentativa explicita de farmar XP não passará.");
+				event.getPlayer().sendMessage(ChatColor.RED + "A sua tentativa explicita de farmar XP nÃ£o passarÃ¡.");
 			}
 		}
 	}

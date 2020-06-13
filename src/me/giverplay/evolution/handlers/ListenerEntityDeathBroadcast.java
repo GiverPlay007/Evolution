@@ -22,10 +22,10 @@ public class ListenerEntityDeathBroadcast implements Listener
 		if(type == EntityType.ENDER_DRAGON)
 		{
 			Bukkit.broadcastMessage(" ");
-			Bukkit.broadcastMessage("§6" + player.getName() + " §ematou um Dragão, agora recebeu a recompensa!");
+			Bukkit.broadcastMessage("Â§6" + player.getName() + " Â§ematou um DragÃ£o, agora recebeu a recompensa!");
 			Bukkit.broadcastMessage(" ");
-			Bukkit.broadcastMessage("§a + R$200.00");
-			Bukkit.broadcastMessage("§a + 200 EXP");
+			Bukkit.broadcastMessage("Â§a + R$200.00");
+			Bukkit.broadcastMessage("Â§a + 200 EXP");
 			Bukkit.broadcastMessage(" ");
 			
 			player.giveMoney(200D);
@@ -34,10 +34,10 @@ public class ListenerEntityDeathBroadcast implements Listener
 		if(type == EntityType.WITHER)
 		{
 			Bukkit.broadcastMessage(" ");
-			Bukkit.broadcastMessage("§6" + player.getName() + " §ematou um Wither Boss, agora recebeu a recompensa!");
+			Bukkit.broadcastMessage("Â§6" + player.getName() + " Â§ematou um Wither Boss, agora recebeu a recompensa!");
 			Bukkit.broadcastMessage(" ");
-			Bukkit.broadcastMessage("§a + R$200.00");
-			Bukkit.broadcastMessage("§a + 200 EXP");
+			Bukkit.broadcastMessage("Â§a + R$200.00");
+			Bukkit.broadcastMessage("Â§a + 200 EXP");
 			Bukkit.broadcastMessage(" ");
 			
 			player.giveMoney(200);

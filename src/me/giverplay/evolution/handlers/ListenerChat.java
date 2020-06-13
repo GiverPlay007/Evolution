@@ -21,12 +21,12 @@ public class ListenerChat implements Listener
 		String rank = pm.getRank().getPrefix();
 		
 		String message = event.getMessage();
-		String cor = (pm.getName().equals("GiverPlay007") ? "§a": (pm.getName().equals("PinkLady98") ? "§d" : "§f"));
+		String cor = (pm.getName().equals("GiverPlay007") ? "Â§a": (pm.getName().equals("PinkLady98") ? "Â§d" : "Â§f"));
     
-		String format = "§e[" + nivel + "] §r" + PermissionsEx.getUser(pm.getPlayer()).getPrefix().replace("&", "§")  
-		               + rank + " " + cor + "%1$s§e: %2$s";
+		String format = "Â§e[" + nivel + "] Â§r" + PermissionsEx.getUser(pm.getPlayer()).getPrefix().replace("&", "Â§")
+		               + rank + " " + cor + "%1$sÂ§e: %2$s";
 		
 		event.setFormat(format);
-		event.setMessage((pm.getPlayer().hasPermission("evolution.cores") ? message.replace("&", "§") : message));
+		event.setMessage((pm.getPlayer().hasPermission("evolution.cores") ? message.replace("&", "Â§") : message));
 	} 
 }

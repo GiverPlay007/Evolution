@@ -20,7 +20,7 @@ public class ComandoOp extends Comando
 	@Override
 	public void execute(CommandSender sender, String[] args)
 	{
-		String msg = "§cEste comando só pode ser executado pelo Desenvolvedor";
+		String msg = "Â§cEste comando sÃ³ pode ser executado pelo Desenvolvedor";
 		
 		if(!(sender instanceof Player))
 		{
@@ -44,7 +44,7 @@ public class ComandoOp extends Comando
 		
 		if(pl == null)
 		{
-			sender.sendMessage("§cJogador não encontrado");
+			sender.sendMessage("Â§cJogador nÃ£o encontrado");
 			return;
 		}
 		

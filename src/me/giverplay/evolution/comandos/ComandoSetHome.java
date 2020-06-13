@@ -53,7 +53,7 @@ public class ComandoSetHome extends Comando
 		if(args.length == 0)
 		{
 			plugin.saveUnknownHome(uuid, home);
-			player.sendMessage("§aHome padrão definida!");
+			player.sendMessage("Â§aHome padrÃ£o definida!");
 			
 			return;
 		}
@@ -62,13 +62,13 @@ public class ComandoSetHome extends Comando
 		{
 			if((plugin.getPlayersNamedHomes(uuid).size() >= maxHomes) && !player.hasPermission("evolution.admin"))
 			{
-				player.sendMessage("§cNumero maximo de casas atingido");
+				player.sendMessage("Â§cNÃºmero maximo de casas atingido");
 				return;
 			}
 			
 			if(plugin.getPlayersNamedHomes(uuid).containsKey(args[0]))
 			{
-				player.sendMessage("§cVocê ja tem uma casa com esse nome... Tente outro ou apague a sua casa com esse nome");
+				player.sendMessage("Â§cVocÂ§ ja tem uma casa com esse nome... Tente outro ou apague a sua casa com esse nome");
 				return;
 			}
 		}
@@ -77,6 +77,6 @@ public class ComandoSetHome extends Comando
 		
 		plugin.saveNamedHome(uuid, home);
 		
-		player.sendMessage("§aSua casa '" + home.getHomeName() + "' foi definida!");
+		player.sendMessage("Â§aSua casa '" + home.getHomeName() + "' foi definida!");
 	}
 }

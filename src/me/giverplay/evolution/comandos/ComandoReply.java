@@ -24,7 +24,7 @@ public class ComandoReply extends Comando
 		
 		if(alvo == null)
 		{
-			player.sendMessage("§cNinguém para responder");
+			player.sendMessage("Â§cNinguÃ©m para responder");
 			return;
 		}
 		
@@ -32,13 +32,13 @@ public class ComandoReply extends Comando
 		
 		if(!target.getTellEnabled())
 		{
-			player.sendMessage("§cJogador com tell desativado!");
+			player.sendMessage("Â§cJogador com tell desativado!");
 			return;
 		}
 		
 		if(!player.getTellEnabled())
 		{
-			player.sendMessage("§aTell ativado novamente!");
+			player.sendMessage("Â§aTell ativado novamente!");
 		}
 		
 		StringBuilder sb = new StringBuilder();
@@ -51,8 +51,8 @@ public class ComandoReply extends Comando
 
 		String msg = sb.toString();
 
-		sender.sendMessage("§6[§eMensagem para " + target.getName() + "§6]§f" + msg);
-		target.sendMessage("§6[§eMensagem de " + sender.getName() + "§6]§f" + msg);
+		sender.sendMessage("Â§6[Â§eMensagem para " + target.getName() + "Â§6]Â§f" + msg);
+		target.sendMessage("Â§6[Â§eMensagem de " + sender.getName() + "Â§6]Â§f" + msg);
 
 		target.setReply(player.getPlayer());
 		player.setReply(target.getPlayer());

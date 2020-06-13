@@ -22,7 +22,7 @@ public class ListenerCommandManager implements Listener
 			if(!player.isDeveloper())
 			{
 				event.setCancelled(true);
-				player.sendMessage("§cSem permissão para executar este comando (O comando foi desabilitado para usuários in-game, exceto o desenvolvedor deste servidor)");
+				player.sendMessage("Â§cSem permissÃ£o para executar este comando (O comando foi desabilitado para usuÃ¡rios in-game, exceto o desenvolvedor deste servidor)");
 			}
 			
 			return;

@@ -47,21 +47,20 @@ public class Formater
 		PermissionUser user = PermissionsEx.getUser(p);
 		PermissionGroup group = user.getGroups()[0];
 		String prefix = group.getPrefix();
-		String chatcolor = ChatColor.getLastColors(prefix.replace("&", "§")).toString().replace("§", "");
+		String chatcolor = ChatColor.getLastColors(prefix.replace("&", "Â§")).toString().replace("Â§", "");
 		return ChatColor.getByChar(chatcolor);
 	}
 	
 	public static ChatColor getColorFromPlayer(String p)
 	{
 		String prefix = getPrefix(p);
-		String chatcolor = ChatColor.getLastColors(prefix.replace("&", "§")).toString().replace("§", "");
+		String chatcolor = ChatColor.getLastColors(prefix.replace("&", "Â§")).toString().replace("Â§", "");
 		return ChatColor.getByChar(chatcolor);
 	}
 	
-	public static ChatColor getColorFromString(String s) 
+	public static ChatColor getColorFromString(String prefix)
 	{
-		String prefix = s;
-		String chatcolor = ChatColor.getLastColors(prefix.replace("&", "§")).toString().replace("§", "");
+		String chatcolor = ChatColor.getLastColors(prefix.replace("&", "Â§")).toString().replace("Â§", "");
 		return ChatColor.getByChar(chatcolor);
 	}
 	
@@ -237,7 +236,7 @@ public class Formater
 				public void run()
 				{
 					p.getWorld().dropItemNaturally(p.getLocation(), item);
-					p.sendMessage("§cSeu inventário está cheio, o item caiu no chão.");					
+					p.sendMessage("Â§cSeu inventÃ¡rio estÃ¡ cheio, o item caiu no chÃ£o.");
 				}
 			}.runTask(Evolution.getInstance());
 		}
@@ -262,7 +261,7 @@ public class Formater
 				{
 					try 
 					{
-						prefix = chat.getPlayerPrefix("world", player).replace("&", "§");
+						prefix = chat.getPlayerPrefix("world", player).replace("&", "Â§");
 					}
 					catch (Exception e)
 					{

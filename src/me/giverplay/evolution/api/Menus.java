@@ -16,23 +16,23 @@ public class Menus
 {
 	public static Inventory lixeira()
 	{
-		return Bukkit.createInventory(null, 54, "§4Lixeira");
+		return Bukkit.createInventory(null, 54, "Â§4Lixeira");
 	}
 	
 	public static Inventory repararMenu(Player player)
 	{
-		Inventory inv = Bukkit.createInventory(null, 27, "§0§lReparar");
+		Inventory inv = Bukkit.createInventory(null, 27, "Â§0Â§lReparar");
 		
 		ItemStack item = player.getInventory().getItemInMainHand();
 		
-		List<String> lore = Arrays.asList("§f -", 
-				"§aCusto: §f1 Ticket de reparo", "§f -");
+		List<String> lore = Arrays.asList("Â§f -",
+				"Â§aCusto: Â§f1 Ticket de reparo", "Â§f -");
 		
-		ItemStack anvil = Stacks.add(Material.ANVIL, "§a§lReparar Item", lore);
+		ItemStack anvil = Stacks.add(Material.ANVIL, "Â§aÂ§lReparar Item", lore);
 		
 		inv.setItem(10, item);
 		inv.setItem(14, anvil);
-		inv.setItem(16, Stacks.add(Material.BARRIER, "§c§lCancelar"));
+		inv.setItem(16, Stacks.add(Material.BARRIER, "Â§cÂ§lCancelar"));
 		
 		return inv;
 	}
@@ -49,7 +49,7 @@ public class Menus
 		{
 			for(PlayerWarp warp : warps)
 			{
-				inv.setItem(count, Stacks.add(Material.WRITABLE_BOOK, "§b" + warp.getWarpName(), Arrays.asList("§aClick para teleportar")));
+				inv.setItem(count, Stacks.add(Material.WRITABLE_BOOK, "Â§b" + warp.getWarpName(), Arrays.asList("Â§aClick para teleportar")));
 				count++;
 			}
 		}

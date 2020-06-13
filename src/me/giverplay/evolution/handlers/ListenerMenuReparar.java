@@ -20,7 +20,7 @@ public class ListenerMenuReparar implements Listener
 		InventoryView inv = player.getOpenInventory();
 		ItemStack item = event.getCurrentItem();
 		
-		if((inv.getTitle() == "§0§lReparar") && (item != null))
+		if((inv.getTitle() == "Â§0Â§lReparar") && (item != null))
 		{
 			event.setCancelled(true);
 			
@@ -34,7 +34,7 @@ public class ListenerMenuReparar implements Listener
 			{
 				if(!player.getInventory().containsAtLeast(Stacks.getTokenReparo(1), 1))
 				{
-					player.sendMessage("§cVocê não tem Tokens de Reparo. Compre com um(a) §f§nFerreiro(a)");
+					player.sendMessage("Â§cVocÃª nÃ£o tem Tokens de Reparo. Compre com um(a) Â§fÂ§nFerreiro(a)");
 					return;
 				}
 				
@@ -42,7 +42,7 @@ public class ListenerMenuReparar implements Listener
 				
 				player.closeInventory();
 				player.getInventory().getItemInMainHand().setDurability((short) 0);
-				player.sendMessage("§aItem reparado");
+				player.sendMessage("Â§aItem reparado");
 			}
 		}
 	}

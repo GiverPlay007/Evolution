@@ -52,6 +52,6 @@ public class PlayerWarp
 	{
 		player.teleport(loc);
 		player.playNote(loc, Instrument.FLUTE, Note.natural(1, Tone.D));
-		player.sendMessage("§eTeleportado com sucesso!");
+		player.sendMessage("Â§eTeleportado com sucesso!");
 	}
 }

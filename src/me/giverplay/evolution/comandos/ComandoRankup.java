@@ -27,7 +27,7 @@ public class ComandoRankup extends Comando
 		
 		if(player.getRank().isLastRank())
 		{
-			player.sendMessage("§eVocê já está no último rank, meu consagrado");
+			player.sendMessage("Â§eVocÃª jÃ¡ estÃ¡ no Ãºltimo rank, meu consagrado");
 			return;
 		}
 		
@@ -35,13 +35,13 @@ public class ComandoRankup extends Comando
 		
 		if(player.getLevel() < proximo.getMinLevel())
 		{
-			player.sendMessage("\n§cVocê não possui o seguinte requisito: §fNível " + proximo.getMinLevel() + "\n");
+			player.sendMessage("\nÂ§cVocÃª nÃ£o possui o seguinte requisito: Â§fNÃ­vel " + proximo.getMinLevel() + "\n");
 			return;
 		}
 		
 		if(plugin.getEconomy().getBalance(player.getPlayer()) < proximo.getCost())
 		{
-			player.sendMessage("\n§cVocê não possui o seguinte requisito: §f" + plugin.getRanks().get(player.getRank().getNextRank()).getCost() + " de money\n");
+			player.sendMessage("\nÂ§cVocÃª nÃ£o possui o seguinte requisito: Â§f" + plugin.getRanks().get(player.getRank().getNextRank()).getCost() + " de money\n");
 			return;
 		}
 		
@@ -55,8 +55,8 @@ public class ComandoRankup extends Comando
 			
 			if(tempo < (cooldown))
 			{
-				player.sendMessage("§cAguarde mais alguns segundos antes de upar...");
-				player.sendMessage("§cMais §f" + String.valueOf((tempo - cooldown ) / 1000) + " segundos");
+				player.sendMessage("Â§cAguarde mais alguns segundos antes de upar...");
+				player.sendMessage("Â§cMais Â§f" + String.valueOf((tempo - cooldown ) / 1000) + " segundos");
 				return;
 			}
 		}
@@ -66,7 +66,7 @@ public class ComandoRankup extends Comando
 		
 		for(Player p : Bukkit.getOnlinePlayers())
 		{
-			plugin.sendAction(p, "§6" + p.getName() + " §eupou para " + proximo.getPrefix());
+			plugin.sendAction(p, "Â§6" + p.getName() + " Â§eupou para " + proximo.getPrefix());
 		}
 	}
 }

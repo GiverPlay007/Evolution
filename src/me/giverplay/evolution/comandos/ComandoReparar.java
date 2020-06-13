@@ -25,13 +25,13 @@ public class ComandoReparar extends Comando
 		
 		if(item.getType() == Material.AIR)
 		{
-			player.sendMessage("§cÉ necessário colocar o item que deseja reparar em sua mão!");
+			player.sendMessage("Â§cÃ‰ necessÃ¡rio colocar o item que deseja reparar em sua mÃ£o!");
 			return;
 		}
 		
 		if(item.getDurability() == 0)
 		{
-			player.sendMessage("§cEste item não precisa ser reparado!");
+			player.sendMessage("Â§cEste item nÃ£o precisa ser reparado!");
 			return;
 		}
 		

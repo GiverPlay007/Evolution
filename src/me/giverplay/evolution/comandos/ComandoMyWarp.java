@@ -23,7 +23,7 @@ public class ComandoMyWarp extends Comando
 		
 		if(!player.isVip())
 		{
-			player.sendMessage("§cVocê não possui nenhum grupo VIP");
+			player.sendMessage("Â§cVocÃª nÃ£o possui nenhum grupo VIP");
 			return;
 		}
 		
@@ -37,7 +37,7 @@ public class ComandoMyWarp extends Comando
 		
 		if(warp == null)
 		{
-			player.sendMessage("§cNenhuma warp com este nome...");
+			player.sendMessage("Â§cNenhuma warp com este nome...");
 			return;
 		}
 		

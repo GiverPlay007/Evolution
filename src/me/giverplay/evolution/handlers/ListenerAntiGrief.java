@@ -21,7 +21,7 @@ public class ListenerAntiGrief implements Listener
 	{
 		Block block = event.getBlock();
 		
-		if(block.getWorld().getName() != "world") return; // Só o mundo de terrenos que é limitado
+		if(block.getWorld().getName() != "world") return;
 		
 		Player player = event.getPlayer();
 		PlayerManager pm = Evolution.getInstance().getPlayer(player.getName());
@@ -30,14 +30,14 @@ public class ListenerAntiGrief implements Listener
 		if(r == null && !pm.isAdmin() && !pm.isDeveloper())
 		{
 			event.setCancelled(true);
-			player.sendMessage("§aVocê não pode alterar o ambiente fora de seu terreno neste mundo");
+			player.sendMessage("ï¿½aVocÃª nÃ£o pode alterar o ambiente fora de seu terreno neste mundo");
 			return;
 		}
 		
 		if(block.getY() < 64)
 		{
 			event.setCancelled(true);
-			player.sendMessage("§aVocê não pode alterar abaixo da camada <camadaQueVaiSerLimitada>");
+			player.sendMessage("Â§aVocÃª nÃ£o pode alterar abaixo da camada <camadaQueVaiSerLimitada>");
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class ListenerAntiGrief implements Listener
 		if(!isPlaca(block))
 		{ // Se o bloco que colocou for diferente de placa (pra criar RP)
 			event.setCancelled(true);
-			player.sendMessage("§aVocê está fora de seu terreno");
+			player.sendMessage("Â§aVocÃª estÃ¡ fora de seu terreno");
 			return;
 		}
 		
@@ -66,7 +66,7 @@ public class ListenerAntiGrief implements Listener
 		if(!sign.getLine(0).toLowerCase().contains("[rp]"))
 		{
 			event.setCancelled(true);
-			player.sendMessage("§cAltere somente o seu terreno, amigo");
+			player.sendMessage("Â§cAltere somente o seu terreno, amigo");
 		}
 	}
 	

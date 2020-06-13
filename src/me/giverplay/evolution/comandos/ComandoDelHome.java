@@ -29,17 +29,17 @@ public class ComandoDelHome extends Comando
 			}
 
 			Evolution.getInstance().deleteUnknownHome(uuid);
-			player.sendMessage("§aCasa padrão deletada");
+			player.sendMessage("Â§aCasa padrÃ£o deletada");
 			return;
 		}
 		
 		if(!(Evolution.getInstance().hasNamedHomes(uuid)) || !(Evolution.getInstance().getPlayersNamedHomes(uuid).containsKey(args[0])))
 		{
-			player.sendMessage("§cVocê não possui uma casa com esse nome");
+			player.sendMessage("Â§cVocÃª nÃ£o possui uma casa com esse nome");
 			return;
 		}
 		
 		Evolution.getInstance().deleteNamedHome(uuid, args[0]);
-		player.sendMessage("§aCasa §f" + args[0] + " §adeletada com sucesso");
+		player.sendMessage("Â§aCasa Â§f" + args[0] + " Â§adeletada com sucesso");
 	}
 }

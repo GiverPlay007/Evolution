@@ -23,10 +23,10 @@ public class ComandoEvolution extends Comando
 
 		if(args.length == 0)
 		{
-			player.sendMessage("\n§e§l- Evolution -\n\n");
-			player.sendMessage("§eServidor fundado por §f§nBocão§e, administrado por §f§nKunno_Mahou§e e §f§nPinkLady98§e, e desenvolvido por §f§l§nGiverPlay007§e =D\n\n");
-			player.sendMessage("§c§lObs: §cEste servidor conta com recursos disponíveis gratuitamente em §c§lSpigotMC§c, e alguns recursos próprios, parte baseada em projetos encontrados no §c§lGitHub\n\n");
-			player.sendMessage("§eBom jogo §c<3\n");
+			player.sendMessage("\nÂ§eÂ§l- Evolution -\n\n");
+			player.sendMessage("Â§eServidor fundado por Â§fÂ§nBocÃ£oÂ§e, administrado por Â§fÂ§nKunno_MahouÂ§e e Â§fÂ§nPinkLady98Â§e, e desenvolvido por Â§fÂ§lÂ§nGiverPlay007Â§e =D\n\n");
+			player.sendMessage("Â§cÂ§lObs: Â§cEste servidor conta com recursos disponÃ­veis gratuitamente em Â§cÂ§lSpigotMCÂ§c, e alguns recursos prÃ³prios, parte baseada em projetos encontrados no Â§cÂ§lGitHub\n\n");
+			player.sendMessage("Â§eBom jogo Â§c<3\n");
 		}
 		else
 		{
@@ -38,7 +38,7 @@ public class ComandoEvolution extends Comando
 		  if(args[0].equalsIgnoreCase("reload"))
 			{
 			  Evolution.getInstance().reloadConfig();
-			  player.sendMessage("§aConfigs recarregadas");
+			  player.sendMessage("Â§aConfigs recarregadas");
 			}
 			else if(args[0].equalsIgnoreCase("ram"))
 			{

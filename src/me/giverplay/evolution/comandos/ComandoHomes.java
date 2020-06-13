@@ -29,7 +29,7 @@ public class ComandoHomes extends Comando
 		
 		if(!player.hasPermission("evolution.homeof"))
 		{
-			player.sendMessage("§cSem permissão para listar casas de outras pessoas");
+			player.sendMessage("Â§cSem permissÃ£o para listar casas de outras pessoas");
 			return;
 		}
 		
@@ -37,7 +37,7 @@ public class ComandoHomes extends Comando
 		
 		if(target == null)
 		{
-			player.sendMessage("§cJogador offline ou desconhecio");
+			player.sendMessage("Â§cJogador offline ou desconhecido");
 			return;
 		}
 		

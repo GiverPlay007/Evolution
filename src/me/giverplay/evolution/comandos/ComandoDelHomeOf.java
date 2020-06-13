@@ -22,7 +22,7 @@ public class ComandoDelHomeOf extends Comando
 
 		if(!player.hasPermission("evolution.homeof"))
 		{
-			player.sendMessage("§cSem permissão");
+			player.sendMessage("Â§cSem permissÃ£o");
 			return;
 		}
 
@@ -36,7 +36,7 @@ public class ComandoDelHomeOf extends Comando
 
 		if(target == null)
 		{
-			player.sendMessage("§cJogador desconhecido ou offline");
+			player.sendMessage("Â§cJogador desconhecido ou offline");
 			return;
 		}
 
@@ -46,13 +46,13 @@ public class ComandoDelHomeOf extends Comando
 		{
 			if(!Evolution.getInstance().hasUnknownHomes(uuid))
 			{
-				player.sendMessage("§cO jogador especificado não possui uma casa padrão");
+				player.sendMessage("Â§cO jogador especificado nÃ£o possui uma casa padrÃ£o");
 				return;
 			}
 
 			Evolution.getInstance().deleteUnknownHome(uuid);
-			player.sendMessage("§cCasa padrão de §f" + target.getName() + " §afoi apagada com sucesso");
-			target.sendMessage("§cSua casa padrão foi deletada por um Admin");
+			player.sendMessage("Â§cCasa padrÃ£o de Â§f" + target.getName() + " Â§afoi apagada com sucesso");
+			target.sendMessage("Â§cSua casa padrÃ£o foi deletada por um Admin");
 
 			return;
 		}
@@ -61,13 +61,13 @@ public class ComandoDelHomeOf extends Comando
 		
 		if(!(Evolution.getInstance().hasNamedHomes(uuid)) || !(Evolution.getInstance().getPlayersNamedHomes(uuid).containsKey(homeName)))
 		{
-			player.sendMessage("§cO jogador §f" + target.getName() + " §cnão possui a casa §f" + homeName);
+			player.sendMessage("Â§cO jogador Â§f" + target.getName() + " Â§cnÃ£o possui a casa Â§f" + homeName);
 			return;
 		}
 		
 		Evolution.getInstance().deleteNamedHome(uuid, homeName);
-		player.sendMessage("§cCasa §f" + homeName + " §c de §f" + target.getName() + " §cfoi deletada");
-		target.sendMessage("§cSua casa §f" + homeName + " §cfoi deletada por um Admin");
+		player.sendMessage("Â§cCasa Â§f" + homeName + " Â§c de Â§f" + target.getName() + " Â§cfoi deletada");
+		target.sendMessage("Â§cSua casa Â§f" + homeName + " Â§cfoi deletada por um Admin");
 		
 	}
 }

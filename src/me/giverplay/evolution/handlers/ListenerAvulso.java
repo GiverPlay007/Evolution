@@ -37,13 +37,13 @@ public class ListenerAvulso implements Listener
 
 		if(Evolution.getInstance().getBedCooldownList().contains(player.getName()))
 		{
-			player.sendMessage("§cVocê não pode mudar o tempo agora...");
+			player.sendMessage("Â§cVocÃª nÃ£o pode mudar o tempo agora...");
 			return;
 		}
 
 		player.getWorld().setTime(0L);
 
-		Bukkit.broadcastMessage("§a" + player.getName() + " §adormiu, agora é dia no mundo §f" 
+		Bukkit.broadcastMessage("Â§a" + player.getName() + " Â§adormiu, agora Ã© dia no mundo Â§f"
 				+ e.getPlayer().getWorld().getName());
 		Evolution.getInstance().getBedCooldownList().add(player.getName());
 
@@ -72,7 +72,7 @@ public class ListenerAvulso implements Listener
 			if(enter.isLeader(player.getPlayer())) 
 			{
 				player.getPlayer().setFlying(true);
-				player.sendMessage("§aModo voar ativado!");
+				player.sendMessage("Â§aModo voar ativado!");
 			}
 		}
 		
@@ -81,7 +81,7 @@ public class ListenerAvulso implements Listener
 			if(exit.isLeader(player.getPlayer())) 
 			{
 				player.getPlayer().setFlying(false);
-				player.sendMessage("§cModo voar desativado!");
+				player.sendMessage("Â§cModo voar desativado!");
 			}
 		}
 	}

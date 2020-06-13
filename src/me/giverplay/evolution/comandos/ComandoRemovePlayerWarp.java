@@ -23,7 +23,7 @@ public class ComandoRemovePlayerWarp extends Comando
 		
 		if(!player.isVip())
 		{
-			player.sendMessage("§eEste é um recurso VIP! Compre qualquer grupo VIP para ter acesso a esse comando =D");
+			player.sendMessage("Â§eEste Ã© um recurso VIP! Compre qualquer grupo VIP para ter acesso a esse comando =D");
 			return;
 		}
 		
@@ -37,11 +37,11 @@ public class ComandoRemovePlayerWarp extends Comando
 		
 		if(warp == null)
 		{
-			player.sendMessage("§cVocê não possui esta warp");
+			player.sendMessage("Â§cVocÃª nÃ£o possui esta warp");
 			return;
 		}
 		
 		warp.deleteWarp();
-		player.sendMessage("§cWarp deletada: §f" + warp.getWarpName());
+		player.sendMessage("Â§cWarp deletada: Â§f" + warp.getWarpName());
 	}
 }

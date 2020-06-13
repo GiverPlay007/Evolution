@@ -45,10 +45,12 @@ public class ComandoPlugins extends Comando
 			sender.sendMessage("(" + plugins.length + "): " + pluginList.toString());
 			return;
 		}
-		
+
+		// Entendo que esta forma nÃ£o Ã© otimizada, portanto, serÃ¡ melhorada em alguma atualizaÃ§Ã£o futura
+
 		Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
 		
-		Inventory inv = Bukkit.createInventory(null, 54, "§0§lPlugins (" + plugins.length + ")");
+		Inventory inv = Bukkit.createInventory(null, 54, "Â§0Â§lPlugins (" + plugins.length + ")");
 		
 		for(int i = 0; i < plugins.length; i++){
 			PluginDescriptionFile desc = plugins[i].getDescription();
@@ -59,20 +61,20 @@ public class ComandoPlugins extends Comando
 			List<String> authors = desc.getAuthors();
 			ItemStack book = new ItemStack(Material.BOOK);
 			ItemMeta meta = book.getItemMeta();
-			meta.setDisplayName("§a§l" + name);
+			meta.setDisplayName("Â§aÂ§l" + name);
 			
 			ArrayList<String> lore = new ArrayList<>();
 			List<String> ndesc = new ArrayList<String>();
 			
 			if(d != null){
 				int cont = 0;
-				String line = "§f  ";
+				String line = "Â§f  ";
 				
 				for(int n = 0; n <d.split("").length; n++){
 					if(cont == 45){
 						cont = 0;
 						ndesc.add(line);
-						line = "§f  ";
+						line = "Â§f  ";
 					}
 					cont++;
 					line += d.charAt(n);
@@ -81,25 +83,25 @@ public class ComandoPlugins extends Comando
 				ndesc.add(line);
 			}
 			
-			lore.add("§7----------------");
+			lore.add("Â§7----------------");
 			
 			if(d == null){
-				lore.add("§cDescrição: §fIndisponível");
+				lore.add("Â§cDescriÃ§Ã£o: Â§fIndisponÃ­vel");
 			} else{
-				lore.add("§cDescrição:");
+				lore.add("Â§cDescriÃ§Ã£o:");
 				
 				for(String line : ndesc){
 					lore.add(line);
 				}
 			}
 			
-			lore.add("§cWebsite: §f" + (w != null ? w : "Indisponível"));
-			lore.add("§cAutores:");
+			lore.add("Â§cWebsite: Â§f" + (w != null ? w : "IndisponÃ­vel"));
+			lore.add("Â§cAutores:");
 			for(String s : authors){
-				lore.add(" §f- " + s);
+				lore.add(" Â§f- " + s);
 			}
 			
-			lore.add("§7----------------");
+			lore.add("Â§7----------------");
 			
 			meta.setLore(lore);
 			book.setItemMeta(meta);

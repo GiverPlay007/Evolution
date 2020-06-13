@@ -26,12 +26,12 @@ public class ComandoTell extends Comando
 			if(player.getTellEnabled())
 			{
 				player.setTellEnabled(false);
-				player.sendMessage("§cTell desativado");
+				player.sendMessage("Â§cTell desativado");
 				return;
 			}
 
 			player.setTellEnabled(true);
-			player.sendMessage("§aTell ativado novamente");
+			player.sendMessage("Â§aTell ativado novamente");
 			return;
 		}
 		
@@ -45,13 +45,13 @@ public class ComandoTell extends Comando
 
 		if(alvo == null)
 		{
-			player.sendMessage("§cJogador não encontrado!");
+			player.sendMessage("Â§cJogador nÃ£o encontrado!");
 			return;
 		}
 
 		if(alvo == player.getPlayer())
 		{
-			sender.sendMessage("§cVocê não pode mandar um tell para você mesmo");
+			sender.sendMessage("Â§cVocÃª nÃ£o pode mandar um tell para vocÃª mesmo");
 			return;
 		}
 		
@@ -59,14 +59,14 @@ public class ComandoTell extends Comando
 		
 		if(!target.getTellEnabled())
 		{
-			sender.sendMessage("§cJogador com tell desativado!");
+			sender.sendMessage("Â§cJogador com tell desativado!");
 			return;
 		}
 
 		if(!player.getTellEnabled())
 		{
 			player.setTellEnabled(true);
-			sender.sendMessage("§aTell ativado novamente");
+			sender.sendMessage("Â§aTell ativado novamente");
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -79,8 +79,8 @@ public class ComandoTell extends Comando
 
 		String msg = sb.toString();
 
-		sender.sendMessage("§6[§eMensagem para " + target.getName() + "§6]§f" + msg);
-		target.sendMessage("§6[§eMensagem de " + sender.getName() + "§6]§f" + msg);
+		sender.sendMessage("Â§6[Â§eMensagem para " + target.getName() + "Â§6]Â§f" + msg);
+		target.sendMessage("Â§6[Â§eMensagem de " + sender.getName() + "Â§6]Â§f" + msg);
 
 		target.setReply(player.getPlayer());
 		player.setReply(target.getPlayer());

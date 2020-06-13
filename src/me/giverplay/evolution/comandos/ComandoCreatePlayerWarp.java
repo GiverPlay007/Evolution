@@ -24,7 +24,7 @@ public class ComandoCreatePlayerWarp extends Comando
     
 		if(!player.isVip())
 		{
-			player.sendMessage("§eEste é um recurso VIP! Compre qualquer grupo VIP para ter acesso a esse comando =D");
+			player.sendMessage("Â§eEste Ã© um recurso VIP! Compre qualquer grupo VIP para ter acesso a esse comando =D");
 			return;
 		}
 		
@@ -57,7 +57,7 @@ public class ComandoCreatePlayerWarp extends Comando
 		{
 			if(list.size() >= limite)
 			{
-				player.sendMessage("§cVocê já tem todas as warps de seu limite...");
+				player.sendMessage("Â§cVocÃª jÃ¡ tem todas as warps de seu limite...");
 				return;
 			}
 		}
@@ -65,6 +65,6 @@ public class ComandoCreatePlayerWarp extends Comando
 		PlayerWarp warp = new PlayerWarp(player.getPlayer().getLocation(), args[0], player.getName());
 		warp.saveWarp();
 		
-		player.sendMessage("§aWarp criada com sucesso: §f" + warp.getWarpName());
+		player.sendMessage("Â§aWarp criada com sucesso: Â§f" + warp.getWarpName());
 	}
 }

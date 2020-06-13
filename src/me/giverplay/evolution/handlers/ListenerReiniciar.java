@@ -17,7 +17,7 @@ public class ListenerReiniciar implements Listener
 {
 	// Codigo original por GuiHSilva
 	
-	private String blockmsg = "§c * Você não pode interagir agora, para evitar perda de itens ou progresso, aguarde a reinicialização";
+	private String blockmsg = "Â§c * VocÃª nÃ£o pode interagir agora, para evitar perda de itens ou progresso, aguarde a reinicializaÃ§Ã£o";
 	private Evolution plugin;
 	
 	public ListenerReiniciar()
