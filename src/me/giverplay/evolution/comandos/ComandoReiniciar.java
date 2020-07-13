@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.PBar;
+import me.giverplay.evolution.api.Title;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.comando.ComandoType;
 
@@ -259,11 +260,9 @@ public class ComandoReiniciar extends Comando
           if (percent==10 || percent==5 || percent==4 || percent==3 || percent==2 || percent==1
                   || percent==30)
           {
-            Title t = new Title(" ", "§aReiniciando em " + percent + " segundos", 0, 2, 2);
-
             for (Player p : Bukkit.getOnlinePlayers())
             {
-              t.send(p);
+              Title.sendTitle(p, " ", "§aReiniciando em " + percent + " segundos", 0, 2, 2);
               p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 10, -0);
             }
 

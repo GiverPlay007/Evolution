@@ -182,7 +182,7 @@ public class Evolution extends JavaPlugin
 		this.bloqueartudo = toSet;
 	}
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "resource" })
 	public String getTPS()
 	{
 		double tps = MinecraftServer.getServer().recentTps[0]; 
