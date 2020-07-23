@@ -62,6 +62,12 @@ public class ScoreboardManager
 		
 		Scoreboard sb = player.getPlayer().getScoreboard();
 		
+		if(sb.getTeam("rank") == null && player.isScoreboardEnabled())
+		{
+			build(player);
+			return;
+		}
+		
 		sb.getTeam("rank").setSuffix(player.getRank().getName());
 		sb.getTeam("proximo").setSuffix((player.getRank().isLastRank() ? "Nenhum =D" : player.getRank().getNextRank()));
 		sb.getTeam("progresso").setSuffix(player.getRank().isLastRank() ? "100%" :(Evolution.getInstance().getProgress(player)));
