@@ -23,15 +23,7 @@ public class ComandoTell extends Comando
 
 		if(args.length == 0)
 		{
-			if(player.getTellEnabled())
-			{
-				player.setTellEnabled(false);
-				player.sendMessage("§cTell desativado");
-				return;
-			}
-
-			player.setTellEnabled(true);
-			player.sendMessage("§aTell ativado novamente");
+			player.setTellEnabled(!player.getTellEnabled());
 			return;
 		}
 		
@@ -66,7 +58,6 @@ public class ComandoTell extends Comando
 		if(!player.getTellEnabled())
 		{
 			player.setTellEnabled(true);
-			sender.sendMessage("§aTell ativado novamente");
 		}
 
 		StringBuilder sb = new StringBuilder();

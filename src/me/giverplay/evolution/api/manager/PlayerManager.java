@@ -13,6 +13,8 @@ public class PlayerManager
 	private Player player, reply;
 	private int level, xp;
 	private boolean tell;
+	private boolean scoreboardEnable;
+	private boolean tpaEnabled;
 	private long loginTime, rankupTime;
 	private Rank rank;
 	private Evolution plugin;
@@ -29,6 +31,8 @@ public class PlayerManager
 		this.reply = null;
 		this.tell = true;
 		this.rankupTime = System.currentTimeMillis();
+		this.scoreboardEnable = true;
+		this.tpaEnabled = true;
 	}
 
 	public String getName()
@@ -88,9 +92,25 @@ public class PlayerManager
 		return name.equals("GiverPlay007");
 	}
 	
+	public boolean isTPAEnabled()
+	{
+		return this.tpaEnabled;
+	}
+	
+	public void setTPAEnabled(boolean set)
+	{
+		this.tpaEnabled = set;
+		player.sendMessage((set ? "§aHabilitando" : "§cDesabilitando") + " recebimento de TPA");
+	}
+	
 	public boolean isAdmin()
 	{
-		return name.equals("GiverPlay007") || name.equals("PinkLady98") || name.equals("Kunno_Mahou");
+		return name.equals("GiverPlay007");
+	}
+	
+	public boolean isScoreboardEnabled()
+	{
+		return this.scoreboardEnable;
 	}
 	
 	public boolean isMod(){
@@ -119,6 +139,8 @@ public class PlayerManager
 	public void setTellEnabled(boolean newTell)
 	{
 		this.tell = newTell;
+		
+		player.sendMessage((newTell ? "§aHabilitando" : "§cDesabilitando") + " recebimento de mensagem privada");
 	}
 	
 	public long getLoginTime()
@@ -139,6 +161,13 @@ public class PlayerManager
 	public Rank getRank()
 	{
 		return this.rank;
+	}
+	
+	public void setScoreboardEnable(boolean set)
+	{
+		this.scoreboardEnable = set;
+		
+		player.sendMessage((set ? "§aHabilitando" : "§cDesabilitando") + " visualização de Scoreboard");
 	}
 	
 	public void setRank(Rank rank)

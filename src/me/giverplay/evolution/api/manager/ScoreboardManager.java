@@ -15,6 +15,10 @@ public class ScoreboardManager
 	public static void build(PlayerManager player)
 	{
 		Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+		
+		if(!player.isScoreboardEnabled())
+			return;
+		
 		Objective obj = scoreboard.registerNewObjective("OBJ", "dummy");
 		
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);;
@@ -49,6 +53,13 @@ public class ScoreboardManager
 	public static void update(PlayerManager player)
 	{
 		player.getPlayer().setPlayerListName(PermissionsEx.getUser(player.getPlayer()).getPrefix().replace("&", "§") + player.getName());
+		
+		if(!player.isScoreboardEnabled())
+		{
+			player.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+			return;
+		}
+		
 		Scoreboard sb = player.getPlayer().getScoreboard();
 		
 		sb.getTeam("rank").setSuffix(player.getRank().getName());

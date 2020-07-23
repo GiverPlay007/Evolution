@@ -1,6 +1,6 @@
 name: Evolution
 version: 3.3.0
-api-version: 1.15
+api-version: 1.16
 author: GiverPlay007
 description: 'Plugin elaborado para EvolutionCity, da rede Evolution'
 softdepend: [Vault, PermissionsEx, RedProtect]
@@ -68,3 +68,13 @@ commands:
   rankup:
     description: 'Upar de Rank'
     aliases: [rup, upar]
+  toggle:
+    description: 'Ativa e desativa algumas coisas'
+  tpa:
+    description: 'Pedir para teleportar'
+  tpaceitar: 
+    description: 'Aceitar pedido de TPA'
+    aliases: [tpaccept, tpyes]
+  tpnegar: 
+    description: 'Negar pedido de TPA'
+    aliases: [tpdeny, tpno]

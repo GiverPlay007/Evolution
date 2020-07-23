@@ -1,19 +1,16 @@
 package me.giverplay.evolution;
 
-import me.giverplay.evolution.api.*;
-import me.giverplay.evolution.api.comando.Comando;
-import me.giverplay.evolution.api.manager.CommandManager;
-import me.giverplay.evolution.api.manager.ConfigManager;
-import me.giverplay.evolution.api.manager.PlayerManager;
-import me.giverplay.evolution.api.manager.ScoreboardManager;
-import me.giverplay.evolution.comandos.*;
-import me.giverplay.evolution.handlers.*;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.milkbowl.vault.economy.Economy;
-import net.minecraft.server.v1_15_R1.MinecraftServer;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Instrument;
+import org.bukkit.Location;
+import org.bukkit.Note;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -22,8 +19,58 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import me.giverplay.evolution.api.Formater;
+import me.giverplay.evolution.api.Home;
+import me.giverplay.evolution.api.PBar;
+import me.giverplay.evolution.api.PlayerWarp;
+import me.giverplay.evolution.api.Rank;
+import me.giverplay.evolution.api.comando.Comando;
+import me.giverplay.evolution.api.manager.CommandManager;
+import me.giverplay.evolution.api.manager.ConfigManager;
+import me.giverplay.evolution.api.manager.PlayerManager;
+import me.giverplay.evolution.api.manager.ScoreboardManager;
+import me.giverplay.evolution.comandos.ComandoCreatePlayerWarp;
+import me.giverplay.evolution.comandos.ComandoDelHome;
+import me.giverplay.evolution.comandos.ComandoDelHomeOf;
+import me.giverplay.evolution.comandos.ComandoDeop;
+import me.giverplay.evolution.comandos.ComandoEvolution;
+import me.giverplay.evolution.comandos.ComandoHome;
+import me.giverplay.evolution.comandos.ComandoHomeOf;
+import me.giverplay.evolution.comandos.ComandoHomes;
+import me.giverplay.evolution.comandos.ComandoLixeira;
+import me.giverplay.evolution.comandos.ComandoMyWarp;
+import me.giverplay.evolution.comandos.ComandoNivel;
+import me.giverplay.evolution.comandos.ComandoOp;
+import me.giverplay.evolution.comandos.ComandoPlayerWarp;
+import me.giverplay.evolution.comandos.ComandoPlugins;
+import me.giverplay.evolution.comandos.ComandoRankup;
+import me.giverplay.evolution.comandos.ComandoReiniciar;
+import me.giverplay.evolution.comandos.ComandoRemovePlayerWarp;
+import me.giverplay.evolution.comandos.ComandoReparar;
+import me.giverplay.evolution.comandos.ComandoReply;
+import me.giverplay.evolution.comandos.ComandoSetHome;
+import me.giverplay.evolution.comandos.ComandoTPA;
+import me.giverplay.evolution.comandos.ComandoTPAceitar;
+import me.giverplay.evolution.comandos.ComandoTPNegar;
+import me.giverplay.evolution.comandos.ComandoTell;
+import me.giverplay.evolution.comandos.ComandoToggle;
+import me.giverplay.evolution.comandos.ComandoTokenReparo;
+import me.giverplay.evolution.handlers.ListenerAvulso;
+import me.giverplay.evolution.handlers.ListenerChat;
+import me.giverplay.evolution.handlers.ListenerCommandManager;
+import me.giverplay.evolution.handlers.ListenerEntityDeathBroadcast;
+import me.giverplay.evolution.handlers.ListenerMenuReparar;
+import me.giverplay.evolution.handlers.ListenerNivel;
+import me.giverplay.evolution.handlers.ListenerPlayerManager;
+import me.giverplay.evolution.handlers.ListenerPlayerWarpMenu;
+import me.giverplay.evolution.handlers.ListenerPluginsMenu;
+import me.giverplay.evolution.handlers.ListenerReiniciar;
+import me.giverplay.evolution.handlers.ListenerSigns;
+import me.giverplay.evolution.handlers.ListenerToggle;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.milkbowl.vault.economy.Economy;
+import net.minecraft.server.v1_16_R1.MinecraftServer;
 
 public class Evolution extends JavaPlugin 
 {
@@ -79,9 +126,7 @@ public class Evolution extends JavaPlugin
 			tempo.append(segundos + " segundos");
 		}
 		
-		String concatenacaoDosMinutosComOsSegundosParaRetornarOResultadoDeFormaLiteralStringBuilder = tempo.toString();
-		
-		return concatenacaoDosMinutosComOsSegundosParaRetornarOResultadoDeFormaLiteralStringBuilder;
+		return tempo.toString();
 	}
 	
 	public String createTimerLabel(int segundos)
@@ -614,6 +659,10 @@ public class Evolution extends JavaPlugin
 		addComando("createplayerwarp", new ComandoCreatePlayerWarp());
 		addComando("removeplayerwarp", new ComandoRemovePlayerWarp());
 		addComando("mywarp", new ComandoMyWarp());
+		addComando("toggle", new ComandoToggle());
+		addComando("tpa", new ComandoTPA());
+		addComando("tpaceitar", new ComandoTPAceitar());
+		addComando("tpnegar", new ComandoTPNegar());
 		
 		CommandExecutor exe = new CommandManager();
 		
@@ -635,6 +684,7 @@ public class Evolution extends JavaPlugin
 		registerEvents(new ListenerSigns());
 		registerEvents(new ListenerReiniciar());
 		registerEvents(new ListenerPluginsMenu());
+		registerEvents(new ListenerToggle());	
 		//registerEvents(new ListenerAntiGrief());
 		registerEvents(new ListenerPlayerWarpMenu());
 	}

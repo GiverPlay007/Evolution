@@ -38,7 +38,7 @@ public class ComandoReply extends Comando
 		
 		if(!player.getTellEnabled())
 		{
-			player.sendMessage("§aTell ativado novamente!");
+			player.setTellEnabled(true);;
 		}
 		
 		StringBuilder sb = new StringBuilder();

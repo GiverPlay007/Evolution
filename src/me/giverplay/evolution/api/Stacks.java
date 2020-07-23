@@ -6,8 +6,8 @@ import java.util.List;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
-import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -15,9 +15,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
-import net.minecraft.server.v1_15_R1.NBTTagList;
 
 @SuppressWarnings("deprecation")
 public class Stacks
@@ -32,35 +29,35 @@ public class Stacks
 		return new ItemStack(m, quantidade);
 	}
 	
-	public static ItemStack addIcon(Material m, int quantia, String name, List<String> lore)
+	public static ItemStack addIcon(Material m, int quantia, String name, String... lore)
 	{
-		for(int i = 0; i < lore.size(); i++)
+		for(int i = 0; i < lore.length; i++)
 		{
-			lore.set(i, lore.get(i).replace("&", "§"));
+			lore[i] = lore[i].replace("&", "§");
 		}
 		
 		ItemStack item = new ItemStack(m, quantia);
 		item = addGlow(item);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(name);
-		meta.setLore(lore);
+		meta.setLore(Arrays.asList(lore));
 		item.setItemMeta(meta);
 		
 		return item;
 	}
 	
-	public static ItemStack addIcon(Material m, String name, List<String> lore)
+	public static ItemStack addIcon(Material m, String name, String... lore)
 	{
-		for(int i = 0; i < lore.size(); i++)
+		for(int i = 0; i < lore.length; i++)
 		{
-			lore.set(i, lore.get(i).replace("&", "§"));
+			lore[i] = lore[i].replace("&", "§");
 		}
 		
 		ItemStack item = new ItemStack(m);
 		item = addGlow(item);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(name);
-		meta.setLore(lore);
+		meta.setLore(Arrays.asList(lore));
 		item.setItemMeta(meta);
 		
 		return item;
@@ -68,12 +65,11 @@ public class Stacks
 	
 	public static ItemStack addGlow(ItemStack i)
 	{
-		net.minecraft.server.v1_15_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(i);
-		NBTTagCompound nbt = nmsItem.getTag() == null ? new NBTTagCompound() : nmsItem.getTag();
-		NBTTagList ench = new NBTTagList();
-		nbt.set("ench", ench);
-		nmsItem.setTag(nbt);
-		return CraftItemStack.asBukkitCopy(nmsItem);
+		i.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 1);
+		i.getItemMeta().addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		i.getItemMeta().addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		
+		return i;
 	}
 	
 	public static ItemStack add(Material m, int quantidade, int durabilidade)
