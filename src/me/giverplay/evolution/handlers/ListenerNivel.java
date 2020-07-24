@@ -44,10 +44,12 @@ public class ListenerNivel implements Listener
 			
 			Evolution.getInstance().saveAllConfigs();
 			
+			/*
 			if(player.getLevel() % 5 == 0)
 			{
 				rewardChecker(player);
 			}
+			*/
 		}
 	}
 	

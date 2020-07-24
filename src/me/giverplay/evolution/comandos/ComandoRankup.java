@@ -66,7 +66,7 @@ public class ComandoRankup extends Comando
 		
 		for(Player p : Bukkit.getOnlinePlayers())
 		{
-			plugin.sendAction(p, "§6" + p.getName() + " §eupou para " + proximo.getPrefix());
+			plugin.sendAction(p, "§6" + player.getName() + " §eupou para " + proximo.getPrefix());
 		}
 	}
 }
