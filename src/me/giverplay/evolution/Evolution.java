@@ -37,6 +37,7 @@ import me.giverplay.evolution.comandos.ComandoEvolution;
 import me.giverplay.evolution.comandos.ComandoHome;
 import me.giverplay.evolution.comandos.ComandoHomeOf;
 import me.giverplay.evolution.comandos.ComandoHomes;
+import me.giverplay.evolution.comandos.ComandoItemRaro;
 import me.giverplay.evolution.comandos.ComandoLixeira;
 import me.giverplay.evolution.comandos.ComandoMyWarp;
 import me.giverplay.evolution.comandos.ComandoNivel;
@@ -663,6 +664,7 @@ public class Evolution extends JavaPlugin
 		addComando("tpa", new ComandoTPA());
 		addComando("tpaceitar", new ComandoTPAceitar());
 		addComando("tpnegar", new ComandoTPNegar());
+		addComando("itemraro", new ComandoItemRaro());
 		
 		CommandExecutor exe = new CommandManager();
 		
