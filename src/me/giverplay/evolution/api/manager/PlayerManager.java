@@ -166,8 +166,16 @@ public class PlayerManager
 	public void setScoreboardEnable(boolean set)
 	{
 		this.scoreboardEnable = set;
-		
 		player.sendMessage((set ? "§aHabilitando" : "§cDesabilitando") + " visualização de Scoreboard");
+		
+		if(set)
+		{
+			ScoreboardManager.build(this);
+		}
+		else
+		{
+			this.player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+		}
 	}
 	
 	public void setRank(RankNovo rank)

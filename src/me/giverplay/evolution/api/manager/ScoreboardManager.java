@@ -56,16 +56,17 @@ public class ScoreboardManager
 		
 		if(!player.isScoreboardEnabled())
 		{
-			player.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 			return;
 		}
 		
 		Scoreboard sb = player.getPlayer().getScoreboard();
 		
-		if(sb.getTeam("rank") == null && player.isScoreboardEnabled())
+		if(sb.getTeam("rank") == null)
 		{
-			build(player);
-			return;
+			if(player.isScoreboardEnabled())
+				build(player);
+			else
+				return;
 		}
 		
 		sb.getTeam("rank").setSuffix(player.getRank().getName());

@@ -28,16 +28,19 @@ public class ListenerToggle implements Listener
 			if(item.getType() == Material.WRITABLE_BOOK)
 			{
 				manager.setScoreboardEnable(!manager.isScoreboardEnabled());
+				player.closeInventory();
 			}
 			
 			if(item.getType() == Material.ENDER_PEARL)
 			{
 				manager.setTPAEnabled(!manager.isTPAEnabled());
+				player.closeInventory();
 			}
 			
 			if(item.getType() == Material.BOOK)
 			{
 				manager.setTellEnabled(!manager.getTellEnabled());
+				player.closeInventory();
 			}
 		}
 	}
