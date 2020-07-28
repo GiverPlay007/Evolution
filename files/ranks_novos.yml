@@ -1,0 +1,708 @@
+ranks:
+  0:
+    nome: Regressado5
+    prefixo: '&f[RegressadoV]'
+    custo: 0.00
+    ultimo: false
+    proximo: Regressado4
+    nivel: 0
+  1:
+    nome: Regressado4
+    prefixo: '&f[RegressadoIV]'
+    custo: 0.00
+    ultimo: false
+    proximo: Regressado3
+    nivel: 1
+  2:
+    nome: Regressado3
+    prefixo: '&f[RegressadoIII]'
+    custo: 0.00
+    ultimo: false
+    proximo: Regressado2
+    nivel: 2
+  3:
+    nome: Regressado2
+    prefixo: '&f[RegressadoII]'
+    custo: 0.00
+    ultimo: false
+    proximo: Regressado1
+    nivel: 3
+  4:
+    nome: Regressado1
+    prefixo: '&f[RegressadoI]'
+    custo: 0.00
+    ultimo: false
+    proximo: Retrogrado5
+    nivel: 4
+  5:
+    nome: Retrogrado5
+    prefixo: '&7[RetrogradoV]'
+    custo: 11000.00
+    ultimo: false
+    proximo: Retrogrado4
+    nivel: 5
+  6:
+    nome: Retrogrado4
+    prefixo: '&7[RetrogradoIV]'
+    custo: 12000.00
+    ultimo: false
+    proximo: Retrogrado3
+    nivel: 6
+  7:
+    nome: Retrogrado3
+    prefixo: '&7[RetrogradoIII]'
+    custo: 13000.00
+    ultimo: false
+    proximo: Retrogrado2
+    nivel: 7
+  8:
+    nome: Retrogrado2
+    prefixo: '&7[RetrogradoII]'
+    custo: 14000.00
+    ultimo: false
+    proximo: Retrogrado1
+    nivel: 8
+  9:
+    nome: Retrogrado1
+    prefixo: '&7[RetrogradoI]'
+    custo: 15000.00
+    ultimo: false
+    proximo: Involuido5
+    nivel: 9
+  10:
+    nome: Involuido5
+    prefixo: '&8[InvoluidoV]'
+    custo: 33000.00
+    ultimo: false
+    proximo: Involuido4
+    nivel: 10
+  11:
+    nome: Involuido4
+    prefixo: '&8[InvoluidoIV]'
+    custo: 36000.00
+    ultimo: false
+    proximo: Involuido3
+    nivel: 11
+  12:
+    nome: Involuido3
+    prefixo: '&8[InvoluidoIII]'
+    custo: 39000.00
+    ultimo: false
+    proximo: Involuido2
+    nivel: 12
+  13:
+    nome: Involuido2
+    prefixo: '&8[InvoluidoII]'
+    custo: 42000.00
+    ultimo: false
+    proximo: Involuido1
+    nivel: 13
+  14:
+    nome: Involuido1
+    prefixo: '&8[InvoluidoI]'
+    custo: 45000.00
+    ultimo: false
+    proximo: Caminhante5
+    nivel: 14
+  15:
+    nome: Caminhante5
+    prefixo: '&9[CaminhanteV]'
+    custo: 55000.00
+    ultimo: false
+    proximo: Caminhante4
+    nivel: 15
+  16:
+    nome: Caminhante4
+    prefixo: '&9[CaminhanteIV]'
+    custo: 60000.00
+    ultimo: false
+    proximo: Caminhante3
+    nivel: 16
+  17:
+    nome: Caminhante3
+    prefixo: '&9[CaminhanteIII]'
+    custo: 65000.00
+    ultimo: false
+    proximo: Caminhante2
+    nivel: 17
+  18:
+    nome: Caminhante2
+    prefixo: '&9[CaminhanteII]'
+    custo: 70000.00
+    ultimo: false
+    proximo: Caminhante1
+    nivel: 18
+  19:
+    nome: Caminhante1
+    prefixo: '&9[CaminhanteI]'
+    custo: 75000.00
+    ultimo: false
+    proximo: Prospero5
+    nivel: 19
+  20:
+    nome: Prospero5
+    prefixo: '&a[ProsperoV]'
+    custo: 110000.00
+    ultimo: false
+    proximo: Prospero4
+    nivel: 20
+  21:
+    nome: Prospero4
+    prefixo: '&a[ProsperoIV]'
+    custo: 120000.00
+    ultimo: false
+    proximo: Prospero3
+    nivel: 21
+  22:
+    nome: Prospero3
+    prefixo: '&a[ProsperoIII]'
+    custo: 130000.00
+    ultimo: false
+    proximo: Prospero2
+    nivel: 22
+  23:
+    nome: Prospero2
+    prefixo: '&a[ProsperoII]'
+    custo: 140000.00
+    ultimo: false
+    proximo: Prospero1
+    nivel: 23
+  24:
+    nome: Prospero1
+    prefixo: '&a[ProsperoI]'
+    custo: 150000.00
+    ultimo: false
+    proximo: Estudioso5
+    nivel: 24
+  25:
+    nome: Estudioso5
+    prefixo: '&b[EstudiosoV]'
+    custo: 330000.00
+    ultimo: false
+    proximo: Estudioso4
+    nivel: 25
+  26:
+    nome: Estudioso4
+    prefixo: '&b[EstudiosoIV]'
+    custo: 360000.00
+    ultimo: false
+    proximo: Estudioso3
+    nivel: 26
+  27:
+    nome: Estudioso3
+    prefixo: '&b[EstudiosoIII]'
+    custo: 39000.00
+    ultimo: false
+    proximo: Estudioso2
+    nivel: 27
+  28:
+    nome: Estudioso2
+    prefixo: '&b[EstudiosoII]'
+    custo: 420000.00
+    ultimo: false
+    proximo: Estudioso1
+    nivel: 28
+  29:
+    nome: Estudioso1
+    prefixo: '&b[EstudiosoI]'
+    custo: 450000.00
+    ultimo: false
+    proximo: Professor5
+    nivel: 29
+  30:
+    nome: Professor5
+    prefixo: '&c[ProfessorV]'
+    custo: 550000.00
+    ultimo: false
+    proximo: Professor4
+    nivel: 30
+  31:
+    nome: Professor4
+    prefixo: '&c[ProfessorIV]'
+    custo: 600000.00
+    ultimo: false
+    proximo: Professor3
+    nivel: 31
+  32:
+    nome: Professor3
+    prefixo: '&c[ProfessorIII]'
+    custo: 650000.00
+    ultimo: false
+    proximo: Professor2
+    nivel: 32
+  33:
+    nome: Professor2
+    prefixo: '&c[ProfessorII]'
+    custo: 700000.00
+    ultimo: false
+    proximo: Professor1
+    nivel: 33
+  34:
+    nome: Professor1
+    prefixo: '&c[ProfessorI]'
+    custo: 750000.00
+    ultimo: false
+    proximo: Progressista5
+    nivel: 34
+  35:
+    nome: Progressista5
+    prefixo: '&d[ProgressistaV]'
+    custo: 1100000.00
+    ultimo: false
+    proximo: Progressista4
+    nivel: 35
+  36:
+    nome: Progressista4
+    prefixo: '&d[ProgressistaIV]'
+    custo: 1200000.00
+    ultimo: false
+    proximo: Progressista3
+    nivel: 36
+  37:
+    nome: Progressista3
+    prefixo: '&d[ProgressistaIII]'
+    custo: 1300000.00
+    ultimo: false
+    proximo: Progressista2
+    nivel: 37
+  38:
+    nome: Progressista2
+    prefixo: '&d[ProgressistaII]'
+    custo: 1400000.00
+    ultimo: false
+    proximo: Progressista1
+    nivel: 38
+  39:
+    nome: Progressista1
+    prefixo: '&d[ProgressistaI]'
+    custo: 1500000.00
+    ultimo: false
+    proximo: Vanguardista5
+    nivel: 39
+  40:
+    nome: Vanguardista5
+    prefixo: '&e[VanguardistaV]'
+    custo: 3300000.00
+    ultimo: false
+    proximo: Vanguardista4
+    nivel: 40
+  41:
+    nome: Vanguardista4
+    prefixo: '&e[VanguardistaIV]'
+    custo: 3600000.00
+    ultimo: false
+    proximo: Vanguardista3
+    nivel: 41
+  42:
+    nome: Vanguardista3
+    prefixo: '&e[VanguardistaIII]'
+    custo: 3900000.00
+    ultimo: false
+    proximo: Vanguardista2
+    nivel: 42
+  43:
+    nome: Vanguardista2
+    prefixo: '&e[VanguardistaII]'
+    custo: 4200000.00
+    ultimo: false
+    proximo: Vanguardista1
+    nivel: 43
+  44:
+    nome: Vanguardista1
+    prefixo: '&e[VanguardistaI]'
+    custo: 4500000.00
+    ultimo: false
+    proximo: Eremita5
+    nivel: 44
+  45:
+    nome: Eremita5
+    prefixo: '&f[EremitaV]'
+    custo: 5500000.00
+    ultimo: false
+    proximo: Eremita4
+    nivel: 45
+  46:
+    nome: Eremita4
+    prefixo: '&f[EremitaIV]'
+    custo: 6000000.00
+    ultimo: false
+    proximo: Eremita3
+    nivel: 46
+  47:
+    nome: Eremita3
+    prefixo: '&f[EremitaIII]'
+    custo: 6500000.00
+    ultimo: false
+    proximo: Eremita2
+    nivel: 47
+  48:
+    nome: Eremita2
+    prefixo: '&f[EremitaII]'
+    custo: 7000000.00
+    ultimo: false
+    proximo: Eremita1
+    nivel: 48
+  49:
+    nome: Eremita1
+    prefixo: '&f[EremitaI]'
+    custo: 7500000.00
+    ultimo: false
+    proximo: Abrilhantado5
+    nivel: 49
+  50:
+    nome: Abrilhantado5
+    prefixo: '&1&l[AbrilhantadoV]'
+    custo: 11000000.00
+    ultimo: false
+    proximo: Abrilhantado4
+    nivel: 50
+  51:
+    nome: Abrilhantado4
+    prefixo: '&1&l[AbrilhantadoIV]'
+    custo: 12000000.00
+    ultimo: false
+    proximo: Abrilhantado3
+    nivel: 51
+  52:
+    nome: Abrilhantado3
+    prefixo: '&1&l[AbrilhantadoIII]'
+    custo: 13000000.00
+    ultimo: false
+    proximo: Abrilhantado2
+    nivel: 52
+  53:
+    nome: Abrilhantado2
+    prefixo: '&1&l[AbrilhantadoII]'
+    custo: 14000000.00
+    ultimo: false
+    proximo: Abrilhantado1
+    nivel: 53
+  54:
+    nome: Abrilhantado1
+    prefixo: '&1&l[AbrilhantadoI]'
+    custo: 15000000.00
+    ultimo: false
+    proximo: Iluminado5
+    nivel: 54
+  55:
+    nome: Iluminado5
+    prefixo: '&e&l[IluminadoV]'
+    custo: 33000000.00
+    ultimo: false
+    proximo: Iluminado4
+    nivel: 55
+  56:
+    nome: Iluminado4
+    prefixo: '&e&l[IluminadoIV]'
+    custo: 36000000.00
+    ultimo: false
+    proximo: Iluminado3
+    nivel: 56
+  57:
+    nome: Iluminado3
+    prefixo: '&e&l[IluminadoIII]'
+    custo: 39000000.00
+    ultimo: false
+    proximo: Iluminado2
+    nivel: 57
+  58:
+    nome: Iluminado2
+    prefixo: '&e&l[IluminadoII]'
+    custo: 42000000.00
+    ultimo: false
+    proximo: Iluminado1
+    nivel: 58
+  59:
+    nome: Iluminado1
+    prefixo: '&e&l[IluminadoI]'
+    custo: 45000000.00
+    ultimo: false
+    proximo: Evolto5
+    nivel: 59
+  60:
+    nome: Evolto5
+    prefixo: '&f&l[EvoltoV]'
+    custo: 55000000.00
+    ultimo: false
+    proximo: Evolto4
+    nivel: 60
+  61:
+    nome: Evolto4
+    prefixo: '&f&l[EvoltoIV]'
+    custo: 60000000.00
+    ultimo: false
+    proximo: Evolto3
+    nivel: 61
+  62:
+    nome: Evolto3
+    prefixo: '&f&l[EvoltoIII]'
+    custo: 65000000.00
+    ultimo: false
+    proximo: Evolto2
+    nivel: 62
+  63:
+    nome: Evolto2
+    prefixo: '&f&l[EvoltoII]'
+    custo: 70000000.00
+    ultimo: false
+    proximo: Evolto1
+    nivel: 63
+  64:
+    nome: Evolto1
+    prefixo: '&f&l[EvoltoI]'
+    custo: 75000000.00
+    ultimo: false
+    proximo: Imaculado5
+    nivel: 64
+  65:
+    nome: Imaculado5
+    prefixo: '&4&l[ImaculadoV]'
+    custo: 110000000.00
+    ultimo: false
+    proximo: Imaculado4
+    nivel: 65
+  66:
+    nome: Imaculado4
+    prefixo: '&4&l[ImaculadoIV]'
+    custo: 120000000.00
+    ultimo: false
+    proximo: Imaculado3
+    nivel: 66
+  67:
+    nome: Imaculado3
+    prefixo: '&4&l[ImaculadoIII]'
+    custo: 130000000.00
+    ultimo: false
+    proximo: Imaculado2
+    nivel: 67
+  68:
+    nome: Imaculado2
+    prefixo: '&4&l[ImaculadoII]'
+    custo: 140000000.00
+    ultimo: false
+    proximo: Imaculado1
+    nivel: 68
+  69:
+    nome: Imaculado1
+    prefixo: '&4&l[ImaculadoI]'
+    custo: 150000000.00
+    ultimo: false
+    proximo: Evoluido5
+    nivel: 69
+  70:
+    nome: Evoluido5
+    prefixo: '&6&l[EvoluidoV]'
+    custo: 330000000.00
+    ultimo: false
+    proximo: Evoluido4
+    nivel: 70
+  71:
+    nome: Evoluido4
+    prefixo: '&6&l[EvoluidoIV]'
+    custo: 360000000.00
+    ultimo: false
+    proximo: Evoluido3
+    nivel: 71
+  72:
+    nome: Evoluido3
+    prefixo: '&6&l[EvoluidoIII]'
+    custo: 390000000.00
+    ultimo: false
+    proximo: Evoluido2
+    nivel: 72
+  73:
+    nome: Evoluido2
+    prefixo: '&6&l[EvoluidoII]'
+    custo: 420000000.00
+    ultimo: false
+    proximo: Evoluido1
+    nivel: 73
+  74:
+    nome: Evoluido1
+    prefixo: '&6&l[EvoluidoI]'
+    custo: 450000000.00
+    ultimo: false
+    proximo: Paradoxal5
+    nivel: 74
+  75:
+    nome: Paradoxal5
+    prefixo: '&b&l[ParadoxalV]'
+    custo: 550000000.00
+    ultimo: false
+    proximo: Paradoxal4
+    nivel: 75
+  76:
+    nome: Paradoxal4
+    prefixo: '&b&l[ParadoxalIV]'
+    custo: 600000000.00
+    ultimo: false
+    proximo: Paradoxal3
+    nivel: 76
+  77:
+    nome: Paradoxal3
+    prefixo: '&b&l[ParadoxalIII]'
+    custo: 650000000.00
+    ultimo: false
+    proximo: Paradoxal2
+    nivel: 77
+  78:
+    nome: Paradoxal2
+    prefixo: '&b&l[ParadoxalII]'
+    custo: 700000000.00
+    ultimo: false
+    proximo: Paradoxal1
+    nivel: 78
+  79:
+    nome: Paradoxal1
+    prefixo: '&b&l[ParadoxalI]'
+    custo: 750000000.00
+    ultimo: false
+    proximo: Interdimensional5
+    nivel: 79
+  80:
+    nome: Interdimensional5
+    prefixo: '&4&l[&c&lInterdimensionalV&4&l]'
+    custo: 1100000000.00
+    ultimo: false
+    proximo: Interdimensional4
+    nivel: 80
+  81:
+    nome: Interdimensional4
+    prefixo: '&4&l[&c&lInterdimensionalIV&4&l]'
+    custo: 1200000000.00
+    ultimo: false
+    proximo: Interdimensional3
+    nivel: 81
+  82:
+    nome: Interdimensional3
+    prefixo: '&4&l[&c&lInterdimensionalIII&4&l]'
+    custo: 1300000000.00
+    ultimo: false
+    proximo: Interdimensional2
+    nivel: 82
+  83:
+    nome: Interdimensional2
+    prefixo: '&4&l[&c&lInterdimensionalII&4&l]'
+    custo: 1400000000.00
+    ultimo: false
+    proximo: Interdimensional1
+    nivel: 83
+  84:
+    nome: Interdimensional1
+    prefixo: '&4&l[&c&lInterdimensionalI&4&l]'
+    custo: 1500000000.00
+    ultimo: false
+    proximo: Divindade5
+    nivel: 84
+  85:
+    nome: Divindade5
+    prefixo: '&1&l[&9&lDivindadeV&1&l]'
+    custo: 3300000000.00
+    ultimo: false
+    proximo: Divindade4
+    nivel: 85
+  86:
+    nome: Divindade4
+    prefixo: '&1&l[&9&lDivindadeIV&1&l]'
+    custo: 3600000000.00
+    ultimo: false
+    proximo: Divindade3
+    nivel: 86
+  87:
+    nome: Divindade3
+    prefixo: '&1&l[&9&lDivindadeIII&1&l]'
+    custo: 3900000000.00
+    ultimo: false
+    proximo: Divindade2
+    nivel: 87
+  88:
+    nome: Divindade2
+    prefixo: '&1&l[&9&lDivindadeII&1&l]'
+    custo: 4200000000.00
+    ultimo: false
+    proximo: Divindade1
+    nivel: 88
+  89:
+    nome: Divindade1
+    prefixo: '&1&l[&9&lDivindadeI&1&l]'
+    custo: 4500000000.00
+    ultimo: false
+    proximo: Etereo5
+    nivel: 89
+  90:
+    nome: Etereo5
+    prefixo: '&6&l[&e&lEtereoV&6&l]'
+    custo: 3300000000.00
+    ultimo: false
+    proximo: Etereo4
+    nivel: 90
+  91:
+    nome: Etereo4
+    prefixo: '&6&l[&e&lEtereoIV&6&l]'
+    custo: 3600000000.00
+    ultimo: false
+    proximo: Etereo3
+    nivel: 91
+  92:
+    nome: Etereo3
+    prefixo: '&6&l[&e&lEtereoIII&6&l]'
+    custo: 3900000000.00
+    ultimo: false
+    proximo: Etereo2
+    nivel: 92
+  93:
+    nome: Etereo2
+    prefixo: '&6&l[&e&lEtereoII&6&l]'
+    custo: 4200000000.00
+    ultimo: false
+    proximo: Etereo1
+    nivel: 93
+  94:
+    nome: Etereo1
+    prefixo: '&6&l[&e&lEtereoI&6&l]'
+    custo: 4500000000.00
+    ultimo: false
+    proximo: Cosmos5
+    nivel: 94
+  95:
+    nome: Cosmos5
+    prefixo: '&0&l[&8&lCosmosV&0&l]'
+    custo: 3300000000.00
+    ultimo: false
+    proximo: Cosmos4
+    nivel: 95
+  96:
+    nome: Cosmos4
+    prefixo: '&0&l[&8&lCosmosIV&0&l]'
+    custo: 3600000000.00
+    ultimo: false
+    proximo: Cosmos3
+    nivel: 96
+  97:
+    nome: Cosmos3
+    prefixo: '&0&l[&8&lCosmosIII&0&l]'
+    custo: 3900000000.00
+    ultimo: false
+    proximo: Cosmos2
+    nivel: 97
+  98:
+    nome: Cosmos2
+    prefixo: '&0&l[&8&lCosmosII&0&l]'
+    custo: 4200000000.00
+    ultimo: false
+    proximo: Cosmos1
+    nivel: 98
+  99:
+    nome: Cosmos1
+    prefixo: '&0&l[&8&lCosmosI&0&l]'
+    custo: 4500000000.00
+    ultimo: false
+    proximo: Chaos
+    nivel: 99
+  100:
+    nome: Chaos
+    prefixo: '&5&l[&d&k!i&r &5&l&nChaos&r &d&k!i&5&l]'
+    custo: 3300000000.00
+    ultimo: true
+    proximo: Nenhum
+    nivel: 100

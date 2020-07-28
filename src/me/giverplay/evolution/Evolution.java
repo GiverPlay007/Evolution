@@ -2,12 +2,14 @@ package me.giverplay.evolution;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -15,6 +17,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -23,7 +26,7 @@ import me.giverplay.evolution.api.Formater;
 import me.giverplay.evolution.api.Home;
 import me.giverplay.evolution.api.PBar;
 import me.giverplay.evolution.api.PlayerWarp;
-import me.giverplay.evolution.api.Rank;
+import me.giverplay.evolution.api.RankNovo;
 import me.giverplay.evolution.api.comando.Comando;
 import me.giverplay.evolution.api.manager.CommandManager;
 import me.giverplay.evolution.api.manager.ConfigManager;
@@ -44,7 +47,7 @@ import me.giverplay.evolution.comandos.ComandoNivel;
 import me.giverplay.evolution.comandos.ComandoOp;
 import me.giverplay.evolution.comandos.ComandoPlayerWarp;
 import me.giverplay.evolution.comandos.ComandoPlugins;
-import me.giverplay.evolution.comandos.ComandoRankup;
+import me.giverplay.evolution.comandos.ComandoRankupNovo;
 import me.giverplay.evolution.comandos.ComandoReiniciar;
 import me.giverplay.evolution.comandos.ComandoRemovePlayerWarp;
 import me.giverplay.evolution.comandos.ComandoReparar;
@@ -77,7 +80,7 @@ public class Evolution extends JavaPlugin
 {
 	private static Evolution instance;
 	
-	private HashMap<String, Rank> rankups = new HashMap<>();
+	private HashMap<String, RankNovo> rankups = new HashMap<>();
 	private HashMap<String, PlayerManager> playersHashMap = new HashMap<>();
 	private HashMap<String, Comando> comandos = new HashMap<>();
 	
@@ -165,15 +168,15 @@ public class Evolution extends JavaPlugin
 	
 	public String getProgress(PlayerManager player)
 	{
-		double custo = rankups.get(player.getRank().getNextRank()).getCost();
-		double money = economy.getBalance(player.getPlayer());
+		double atual = player.getXp();
+		int xpNeeded =  Evolution.getInstance().getLevelConfig().getInt("niveis." + (player.getLevel() + 1) + ".xp");
 		
-		if(money >= custo)
+		if(atual >= xpNeeded)
 		{
 			return "§8[§a" + StringUtils.repeat("|", 15) + "§8]";
 		}
 		
-		return PBar.getProgressBarScore(money, custo, 15, "|", "§a", "§7", "§8[", "§8]");
+		return PBar.getProgressBarScore(atual, xpNeeded, 15, "|", "§a", "§7", "§8[", "§8]");
 	}
 	
 	// TODO Funções relacionadas ao plugin/servidor
@@ -249,7 +252,7 @@ public class Evolution extends JavaPlugin
 		return this.comandos;
 	}
 	
-	public HashMap<String, Rank> getRanks()
+	public HashMap<String, RankNovo> getRanks()
 	{
 		return this.rankups;
 	}
@@ -611,7 +614,7 @@ public class Evolution extends JavaPlugin
 		warps = new ConfigManager("warps");
 		warps.saveDefaultConfig();
 		
-		ranks = new ConfigManager("ranks");
+		ranks = new ConfigManager("ranks_novos");
 		ranks.saveDefaultConfig();
 		
 		if (!(homes.getConfig().isSet("allNamedHomes") || homes.getConfig().isSet("unknownHomes")))
@@ -653,7 +656,6 @@ public class Evolution extends JavaPlugin
 		addComando("delhome-of", new ComandoDelHomeOf());
 		addComando("sethome", new ComandoSetHome());
 		addComando("plugins", new ComandoPlugins());
-		addComando("rankup", new ComandoRankup());
 		addComando("op", new ComandoOp());
 		addComando("deop", new ComandoDeop());
 		addComando("playerwarp", new ComandoPlayerWarp());
@@ -665,6 +667,8 @@ public class Evolution extends JavaPlugin
 		addComando("tpaceitar", new ComandoTPAceitar());
 		addComando("tpnegar", new ComandoTPNegar());
 		addComando("itemraro", new ComandoItemRaro());
+		addComando("rankup", new ComandoRankupNovo());
+		//addComando("rankup", new ComandoRankup());
 		
 		CommandExecutor exe = new CommandManager();
 		
@@ -714,6 +718,45 @@ public class Evolution extends JavaPlugin
 		}
 	}
 	
+	private void setupRankupsNovo()
+	{		
+		ConfigManager cf = ranks;
+		
+		for(int i = 0; i < 101; i++)
+		{
+			String path = "ranks." + String.valueOf(i);
+			String nome = cf.getString(path + ".nome");
+			String prefixo = cf.getString(path + ".prefixo").replace("&", "§");
+			String proximo = cf.getString(path + ".proximo");
+			List<String> needs = cf.getStringList(path + ".requer");
+			List<ItemStack> finalNeed = new ArrayList<>();
+			boolean ultimo = cf.getBoolean(path + ".ultimo");
+			int level = cf.getInt(path + ".nivel");
+			
+			for(String item : needs)
+			{
+				String[] split = item.split(";");
+				Material mat = Material.matchMaterial(split[0], false);
+				
+				if(!(split.length > 1) || mat == null)
+					continue;
+				
+				int amn;
+				
+				try
+				{
+					amn = Integer.parseInt(split[1]);
+				}
+				catch(NumberFormatException e){ continue; }
+				
+				finalNeed.add(new ItemStack(mat, amn));
+			}
+			
+			rankups.put(nome, new RankNovo(nome, prefixo, ultimo, finalNeed, level, proximo));
+		}
+	}
+	
+	@SuppressWarnings("unused")
 	private void setupRankups()
 	{		
 		for(int i = 0; i < 101; i++)
@@ -728,7 +771,7 @@ public class Evolution extends JavaPlugin
 			String proximo = cf.getString(path + ".proximo");
 			int level = cf.getInt(path + ".nivel");
 			
-			rankups.put(nome, new Rank(nome, prefixo, ultimo, custo, level, proximo));
+			//rankups.put(nome, new Rank(nome, prefixo, ultimo, custo, level, proximo));
 		}
 	}
 	
@@ -739,7 +782,8 @@ public class Evolution extends JavaPlugin
 		
 		setupConfig();
 		setupEconomy();
-		setupRankups();
+		//setupRankups();
+		setupRankupsNovo();
 		setupComandos();
 		registerEvents();
 		fixPlayerManager();

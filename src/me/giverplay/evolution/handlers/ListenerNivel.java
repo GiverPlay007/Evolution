@@ -2,6 +2,7 @@ package me.giverplay.evolution.handlers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -49,7 +50,7 @@ public class ListenerNivel implements Listener
 			{
 				rewardChecker(player);
 			}
-			*/
+			 */
 		}
 	}
 	
@@ -212,122 +213,72 @@ public class ListenerNivel implements Listener
 		pm.sendMessage("§aAbra o baú para pegar a sua recompensa");
 	}
 	
-	@EventHandler(ignoreCancelled=true)
+	@EventHandler(ignoreCancelled = true)
 	public void quandoQuebrarBloco(BlockBreakEvent e)
 	{
 		PlayerManager player = Evolution.getInstance().getPlayer(e.getPlayer().getName());
 		Block quebrado = e.getBlock();
 		Material block = quebrado.getType();
 		
-		if(block == Material.STONE)
+		try
 		{
-			player.setXp(player.getXp() + 1);
+			switch (block)
+			{
+				case COAL_ORE:
+					player.setXp(player.getXp() + 3);
+					player.sendMessage(ChatColor.YELLOW + "+3 EXP");
+					break;
+					
+				case IRON_ORE:
+					player.setXp(player.getXp() + 5);
+					player.sendMessage(ChatColor.YELLOW + "+5 EXP");
+					break;
+					
+				case GOLD_ORE:
+					player.setXp(player.getXp() + 10);
+					player.sendMessage(ChatColor.YELLOW + "+10 EXP");
+					break;
+					
+				case LAPIS_ORE:
+					player.setXp(player.getXp() + 10);
+					player.sendMessage(ChatColor.YELLOW + "+10 EXP");
+					break;
+					
+				case REDSTONE_ORE:
+					player.setXp(player.getXp() + 8);
+					player.sendMessage(ChatColor.YELLOW + "+8 EXP");
+					break;
+					
+				case DIAMOND_ORE:
+					player.setXp(player.getXp() + 15);
+					player.sendMessage(ChatColor.YELLOW + "+15 EXP");
+					break;
+					
+				case EMERALD_ORE:
+					player.setXp(player.getXp() + 20);
+					player.sendMessage(ChatColor.YELLOW + "+20 EXP");
+					break;
+					
+				case END_STONE:
+					player.setXp(player.getXp() + 5);
+					break;
+					
+				case ANCIENT_DEBRIS:
+					player.setXp(player.getXp() + 40);
+					player.sendMessage(ChatColor.YELLOW + "+40 EXP");
+					break;
+					
+				default:
+					player.setXp(player.getXp() + 1);
+					break;
+			}
 		}
-		
-		if(block == Material.COAL_ORE)
+		catch(Exception e2)
 		{
-			player.setXp(player.getXp() + 3);
-			player.sendMessage(ChatColor.YELLOW + "+3 EXP");
+			// Prevent legacy constant
 		}
 		
-		if(block == Material.IRON_ORE)
-		{
-			player.setXp(player.getXp() + 5);
-			player.sendMessage(ChatColor.YELLOW + "+5 EXP");
-		}
-		
-		if(block == Material.GOLD_ORE)
-		{
-			player.setXp(player.getXp() + 10);
-			player.sendMessage(ChatColor.YELLOW + "+10 EXP");
-		}
-		
-		if(block == Material.LAPIS_ORE)
-		{
-			player.setXp(player.getXp() + 10);
-			player.sendMessage(ChatColor.YELLOW + "+10 EXP");
-		}
-		
-		if(block == Material.REDSTONE_ORE)
-		{
-			player.setXp(player.getXp() + 8);
-			player.sendMessage(ChatColor.YELLOW + "+8 EXP");
-		}
-		
-		if(block == Material.DIAMOND_ORE)
-		{		
-			player.setXp(player.getXp() + 15);
-			player.sendMessage(ChatColor.YELLOW + "+15 EXP");
-		}
-		
-		if(block == Material.EMERALD_ORE)
-		{
-			player.setXp(player.getXp() + 20);
-			player.sendMessage(ChatColor.YELLOW + "+20 EXP");
-		}
-		
-		if(block == Material.OBSIDIAN)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.ANDESITE)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.DIORITE)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.GRANITE)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.GRAVEL)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.DIRT)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.GRASS)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.SAND)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.NETHERRACK)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.SOUL_SAND)
-		{
-			player.setXp(player.getXp() + 1);
-		}
-		
-		if(block == Material.NETHER_QUARTZ_ORE)
-		{
-			player.setXp(player.getXp() + 10);
-			player.sendMessage(ChatColor.YELLOW + "+10 EXP");
-		}
-		
-		if(block == Material.END_STONE)
-		{
-			player.setXp(player.getXp() + 10);
-		}
-		
-		if(block == Material.OBSIDIAN && (player.isDeveloper() || player.getName().equals("PinkLady98")))
+		if(block == Material.OBSIDIAN && player.getPlayer().getGameMode() == GameMode.CREATIVE && (player.isDeveloper() || player.getName().equals("PinkLady98")))
 		{
 			player.setXp(player.getXp() + 5000);
 		}

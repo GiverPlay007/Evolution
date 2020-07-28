@@ -1,15 +1,6 @@
 package me.giverplay.evolution.comandos;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import me.giverplay.evolution.Evolution;
-import me.giverplay.evolution.api.Rank;
-import me.giverplay.evolution.api.comando.Comando;
-import me.giverplay.evolution.api.comando.ComandoType;
-import me.giverplay.evolution.api.manager.PlayerManager;
-
+/*
 public class ComandoRankup extends Comando
 {
 	private Evolution plugin;
@@ -31,7 +22,7 @@ public class ComandoRankup extends Comando
 			return;
 		}
 		
-		final Rank proximo = plugin.getRanks().get(player.getRank().getNextRank());
+		final RankNovo proximo = plugin.getRanks().get(player.getRank().getNextRank());
 		
 		if(player.getLevel() < proximo.getMinLevel())
 		{
@@ -70,3 +61,4 @@ public class ComandoRankup extends Comando
 		}
 	}
 }
+*/

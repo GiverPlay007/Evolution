@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import me.giverplay.evolution.Evolution;
-import me.giverplay.evolution.api.Rank;
+import me.giverplay.evolution.api.RankNovo;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class PlayerManager
@@ -16,7 +16,7 @@ public class PlayerManager
 	private boolean scoreboardEnable;
 	private boolean tpaEnabled;
 	private long loginTime, rankupTime;
-	private Rank rank;
+	private RankNovo rank;
 	private Evolution plugin;
 	
 	public PlayerManager(String name)
@@ -158,7 +158,7 @@ public class PlayerManager
 		this.loginTime = login;
 	}
 	
-	public Rank getRank()
+	public RankNovo getRank()
 	{
 		return this.rank;
 	}
@@ -170,7 +170,7 @@ public class PlayerManager
 		player.sendMessage((set ? "§aHabilitando" : "§cDesabilitando") + " visualização de Scoreboard");
 	}
 	
-	public void setRank(Rank rank)
+	public void setRank(RankNovo rank)
 	{
 		if(rank.getMinLevel() % 5 == 0)
 		{
