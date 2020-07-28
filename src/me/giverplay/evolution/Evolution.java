@@ -728,7 +728,7 @@ public class Evolution extends JavaPlugin
 			String nome = cf.getString(path + ".nome");
 			String prefixo = cf.getString(path + ".prefixo").replace("&", "§");
 			String proximo = cf.getString(path + ".proximo");
-			List<String> needs = cf.getStringList(path + ".requer");
+			List<String> needs = cf.getStringList(path + ".custo");
 			List<ItemStack> finalNeed = new ArrayList<>();
 			boolean ultimo = cf.getBoolean(path + ".ultimo");
 			int level = cf.getInt(path + ".nivel");

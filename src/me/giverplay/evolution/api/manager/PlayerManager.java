@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 
 import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.RankNovo;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class PlayerManager
 {
@@ -180,12 +179,14 @@ public class PlayerManager
 	
 	public void setRank(RankNovo rank)
 	{
+		/*
 		if(rank.getMinLevel() % 5 == 0)
 		{
 			PermissionsEx.getUser(player).removeGroup(this.rank.getName().replace(String.valueOf(this.rank.getName().charAt(this.rank.getName().length() - 1)), "").trim());
 			PermissionsEx.getUser(player).addGroup(rank.getName().replace(String.valueOf(rank.getName().charAt(rank.getName().length() - 1)), "").trim());
 		}
-
+		*/
+		
 		this.rank = rank;
 		this.rankupTime = System.currentTimeMillis();
 		plugin.getPlayersConfig().set(name + ".niveis.rank", rank.getName());
