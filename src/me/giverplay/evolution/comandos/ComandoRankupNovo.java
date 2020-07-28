@@ -1,8 +1,11 @@
 package me.giverplay.evolution.comandos;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.api.RankNovo;
@@ -39,11 +42,50 @@ public class ComandoRankupNovo extends Comando
 			return;
 		}
 		
+		List<ItemStack> req = proximo.getCost();
+		String erro = null;
+		
+		if(!req.isEmpty())
+		{
+			for(ItemStack stack : req)
+			{
+				if(!player.getPlayer().getInventory().contains(stack, stack.getAmount()))
+				{
+					if(erro == null)
+					{
+						erro = "\n§cVocê não possui o seguinte requisito: ";
+					}
+					
+					erro += format(stack);
+					erro += "; ";
+				}
+			}
+		}
+		
+		if(erro != null)
+		{
+			player.sendMessage(erro);
+			return;
+		}
+		
+		if(!req.isEmpty())
+		{
+			for(ItemStack stack : req)
+			{
+				player.getPlayer().getInventory().removeItem(stack);
+			}
+		}
+		
 		player.setRank(proximo);
 		
 		for(Player p : Bukkit.getOnlinePlayers())
 		{
 			plugin.sendAction(p, "§6" + player.getName() + " §eupou para " + proximo.getPrefix());
 		}
+	}
+	
+	private String format(ItemStack item)
+	{
+		return item.getAmount() + "x " + item.getItemMeta().getLocalizedName();
 	}
 }
