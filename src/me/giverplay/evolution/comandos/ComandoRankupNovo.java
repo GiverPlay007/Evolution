@@ -3,6 +3,7 @@ package me.giverplay.evolution.comandos;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -86,6 +87,6 @@ public class ComandoRankupNovo extends Comando
 	
 	private String format(ItemStack item)
 	{
-		return item.getAmount() + "x " + item.getItemMeta().getLocalizedName();
+		return item.getAmount() + "x " + (item.getType() == Material.DIAMOND ? "diamante" : item.getType() == Material.NETHERITE_INGOT ? "barra de Netherite" : item.getType().name().toLowerCase());
 	}
 }

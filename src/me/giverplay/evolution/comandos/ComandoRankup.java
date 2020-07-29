@@ -1,5 +1,12 @@
 package me.giverplay.evolution.comandos;
 
+public class ComandoRankup
+{
+	public ComandoRankup()
+	{
+	}
+}
+
 /*
 public class ComandoRankup extends Comando
 {
