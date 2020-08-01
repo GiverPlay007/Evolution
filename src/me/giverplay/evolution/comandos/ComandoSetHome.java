@@ -1,6 +1,5 @@
 package me.giverplay.evolution.comandos;
 
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -25,30 +24,9 @@ public class ComandoSetHome extends Comando
 	{
 		Player player = (Player) sender;
 		String uuid = player.getUniqueId().toString();
-		Location loc = player.getLocation();
-		Home home = new Home(loc);
+		Home home = new Home(player.getLocation());
 		PlayerManager pm = plugin.getPlayer(player.getName());
-		int maxHomes = 1;
-		
-		if(pm.getLevel() >= 50)
-		{
-			maxHomes = 2;
-		}
-		
-		if(pm.getLevel() >= 70)
-		{
-			maxHomes = 3;
-		}
-		
-		if(pm.getLevel() >= 85)
-		{
-			maxHomes = 4;
-		}
-		
-		if(pm.getLevel() >= 100)
-		{
-			maxHomes = 5;
-		}
+		int maxHomes = 1 + ((pm.getLevel() - (pm.getLevel() % 5)) / 20);
 		
 		if(args.length == 0)
 		{
