@@ -1,11 +1,9 @@
 package me.giverplay.evolution.handlers;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
 import br.net.fabiozumbi12.RedProtect.Bukkit.Region;
@@ -15,21 +13,6 @@ import me.giverplay.evolution.api.manager.PlayerManager;
 
 public class ListenerAvulso implements Listener
 {
-	@EventHandler
-	public void onEntitySpawn(EntitySpawnEvent event)
-	{
-		EntityType nasceu = event.getEntityType();
-
-		if((event.getEntityType() == EntityType.PHANTOM) 
-				|| (nasceu == EntityType.PILLAGER)
-				|| (nasceu == EntityType.VINDICATOR)
-				|| (nasceu == EntityType.EVOKER)
-				)
-		{
-			event.setCancelled(true);
-		}
-	}
-
 	@EventHandler
 	public void onSleep(PlayerBedEnterEvent e)
 	{ 
@@ -69,7 +52,7 @@ public class ListenerAvulso implements Listener
 		
 		if(enter != null)
 		{
-			if(enter.isLeader(player.getPlayer())) 
+			if(enter.isLeader(player.getPlayer()) && !player.getPlayer().getAllowFlight()) 
 			{
 				player.getPlayer().setFlying(true);
 				player.sendMessage("§aModo voar ativado!");
@@ -78,7 +61,7 @@ public class ListenerAvulso implements Listener
 		
 		if(exit != null)
 		{
-			if(exit.isLeader(player.getPlayer())) 
+			if(exit.isLeader(player.getPlayer()) && player.getPlayer().getAllowFlight()) 
 			{
 				player.getPlayer().setFlying(false);
 				player.sendMessage("§cModo voar desativado!");
