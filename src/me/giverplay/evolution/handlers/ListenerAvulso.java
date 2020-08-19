@@ -4,21 +4,26 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
-import br.net.fabiozumbi12.RedProtect.Bukkit.Region;
-import br.net.fabiozumbi12.RedProtect.Bukkit.API.events.EnterExitRegionEvent;
 import me.giverplay.evolution.Evolution;
-import me.giverplay.evolution.api.manager.PlayerManager;
 
 public class ListenerAvulso implements Listener
 {
+	private Evolution plugin;
+	
+	public ListenerAvulso()
+	{
+		plugin = Evolution.getInstance();
+	}
+	
 	@EventHandler
 	public void onSleep(PlayerBedEnterEvent e)
 	{ 
 		Player player = e.getPlayer();
 
-		if(Evolution.getInstance().getBedCooldownList().contains(player.getName()))
+		if(plugin.getBedCooldownList().contains(player.getName()))
 		{
 			player.sendMessage("§cVocê não pode mudar o tempo agora...");
 			return;
@@ -28,44 +33,23 @@ public class ListenerAvulso implements Listener
 
 		Bukkit.broadcastMessage("§a" + player.getName() + " §adormiu, agora é dia no mundo §f"
 				+ e.getPlayer().getWorld().getName());
-		Evolution.getInstance().getBedCooldownList().add(player.getName());
+		plugin.getBedCooldownList().add(player.getName());
 
-		Bukkit.getServer().getScheduler().runTaskLater(Evolution.getInstance(), new Runnable()
+		Bukkit.getServer().getScheduler().runTaskLater(plugin, new Runnable()
 		{
 			@Override
 			public void run() 
 			{
-				Evolution.getInstance().getBedCooldownList().remove(player.getName());
+				plugin.getBedCooldownList().remove(player.getName());
 			}
 		}, 30 * 20);
 	}
 	
 	@EventHandler
-	public void onRPEnter(EnterExitRegionEvent event)
-	{ // Quando entrar ou sair de um RP
-		PlayerManager player = Evolution.getInstance().getPlayer(event.getPlayer().getName());
+	public void onPlayerDeath(PlayerDeathEvent event)
+	{
+		Player player = event.getEntity();
 		
-		if(!player.isVip()) return; // Se o jogador for vip...
-		
-		Region enter = event.getEnteredRegion();
-		Region exit = event.getExitedRegion();
-		
-		if(enter != null)
-		{
-			if(enter.isLeader(player.getPlayer()) && !player.getPlayer().getAllowFlight()) 
-			{
-				player.getPlayer().setFlying(true);
-				player.sendMessage("§aModo voar ativado!");
-			}
-		}
-		
-		if(exit != null)
-		{
-			if(exit.isLeader(player.getPlayer()) && player.getPlayer().getAllowFlight()) 
-			{
-				player.getPlayer().setFlying(false);
-				player.sendMessage("§cModo voar desativado!");
-			}
-		}
+		plugin.getPlayer(player.getName()).setDeathLocation(player.getLocation().clone());
 	}
 }

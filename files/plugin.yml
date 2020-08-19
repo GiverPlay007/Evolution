@@ -1,5 +1,5 @@
 name: Evolution
-version: 3.3.7
+version: 3.3.8
 api-version: 1.16
 author: GiverPlay007
 description: 'Plugin elaborado para EvolutionCity, da rede Evolution'
@@ -81,3 +81,6 @@ commands:
   itemraro:
     description: 'Easter eggs'
     aliases: [easteregg, raro]
+  voltar:
+    description: 'Voltar para onde morreu'
+    aliases: [back, return, deathlocation]

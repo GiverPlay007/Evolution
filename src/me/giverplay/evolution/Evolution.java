@@ -59,6 +59,7 @@ import me.giverplay.evolution.comandos.ComandoTPNegar;
 import me.giverplay.evolution.comandos.ComandoTell;
 import me.giverplay.evolution.comandos.ComandoToggle;
 import me.giverplay.evolution.comandos.ComandoTokenReparo;
+import me.giverplay.evolution.comandos.ComandoVoltar;
 import me.giverplay.evolution.handlers.ListenerAvulso;
 import me.giverplay.evolution.handlers.ListenerChat;
 import me.giverplay.evolution.handlers.ListenerCommandManager;
@@ -668,6 +669,7 @@ public class Evolution extends JavaPlugin
 		addComando("tpnegar", new ComandoTPNegar());
 		addComando("itemraro", new ComandoItemRaro());
 		addComando("rankup", new ComandoRankupNovo());
+		addComando("voltar", new ComandoVoltar());
 		//addComando("rankup", new ComandoRankup());
 		
 		CommandExecutor exe = new CommandManager();

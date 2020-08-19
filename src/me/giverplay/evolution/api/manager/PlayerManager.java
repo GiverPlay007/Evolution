@@ -1,6 +1,7 @@
 package me.giverplay.evolution.api.manager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import me.giverplay.evolution.Evolution;
@@ -10,11 +11,14 @@ public class PlayerManager
 {
 	private String name;
 	private Player player, reply;
+	private Location deathLocation;
+	
 	private int level, xp;
 	private boolean tell;
 	private boolean scoreboardEnable;
 	private boolean tpaEnabled;
 	private long loginTime, rankupTime;
+	
 	private RankNovo rank;
 	private Evolution plugin;
 	
@@ -32,6 +36,7 @@ public class PlayerManager
 		this.rankupTime = System.currentTimeMillis();
 		this.scoreboardEnable = true;
 		this.tpaEnabled = true;
+		this.deathLocation = null;
 	}
 
 	public String getName()
@@ -190,5 +195,15 @@ public class PlayerManager
 		this.rank = rank;
 		this.rankupTime = System.currentTimeMillis();
 		plugin.getPlayersConfig().set(name + ".niveis.rank", rank.getName());
+	}
+	
+	public void setDeathLocation(Location loc)
+	{
+		this.deathLocation = loc;
+	}
+	
+	public Location getDeathLocation()
+	{
+		return this.deathLocation;
 	}
 }
