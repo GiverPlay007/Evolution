@@ -1,5 +1,5 @@
 ## :desktop_computer: Sobre o projeto
-Plugin [Spigot](https://www.spigotmc.org/) desenvolvido para um servidor chamado Evolution.
+Plugin [Spigot](https://www.spigotmc.org/) desenvolvido para um servidor de Minecraft chamado Evolution.
 
 ## :computer: Bibliotecas
 - [Spigot API](https://hub.spigotmc.org/javadocs/spigot/)
