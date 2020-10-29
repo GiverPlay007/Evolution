@@ -1,4 +1,4 @@
-## :desktop: Sobre o projeto
+## :desktop_computer: Sobre o projeto
 Plugin [Spigot](https://www.spigotmc.org/) desenvolvido para um servidor chamado Evolution.
 
 ## :computer: Bibliotecas
