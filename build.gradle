@@ -18,10 +18,17 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.3-R0.1-SNAPSHOT'
+
+    // Access NMS and CraftBukkit classes
+    compileOnly name: 'spigot-1.16.3'
 }
 
 processResources {
