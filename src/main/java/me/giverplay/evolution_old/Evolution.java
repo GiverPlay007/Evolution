@@ -3,7 +3,31 @@ package me.giverplay.evolution_old;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import me.giverplay.evolution_old.api.Formater;
+import me.giverplay.evolution_old.api.Home;
+import me.giverplay.evolution_old.api.PBar;
+import me.giverplay.evolution_old.api.PlayerWarp;
+import me.giverplay.evolution_old.api.RankNovo;
+import me.giverplay.evolution_old.api.manager.ConfigManager;
+import me.giverplay.evolution_old.api.manager.PlayerManager;
+import me.giverplay.evolution_old.api.manager.ScoreboardManager;
+import me.giverplay.evolution_old.comandos.*;
+import me.giverplay.evolution_old.handlers.ListenerAvulso;
+import me.giverplay.evolution_old.handlers.ListenerChat;
+import me.giverplay.evolution_old.handlers.ListenerCommandManager;
+import me.giverplay.evolution_old.handlers.ListenerEntityDeathBroadcast;
+import me.giverplay.evolution_old.handlers.ListenerMenuReparar;
+import me.giverplay.evolution_old.handlers.ListenerNivel;
+import me.giverplay.evolution_old.handlers.ListenerPlayerManager;
+import me.giverplay.evolution_old.handlers.ListenerPlayerWarpMenu;
+import me.giverplay.evolution_old.handlers.ListenerPluginsMenu;
+import me.giverplay.evolution_old.handlers.ListenerReiniciar;
+import me.giverplay.evolution_old.handlers.ListenerSigns;
+import me.giverplay.evolution_old.handlers.ListenerToggle;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.milkbowl.vault.economy.Economy;
+import net.minecraft.server.v1_16_R2.MinecraftServer;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,68 +46,12 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.giverplay.evolution_old.api.Formater;
-import me.giverplay.evolution_old.api.Home;
-import me.giverplay.evolution_old.api.PBar;
-import me.giverplay.evolution_old.api.PlayerWarp;
-import me.giverplay.evolution_old.api.RankNovo;
-import me.giverplay.evolution_old.api.comando.Comando;
-import me.giverplay.evolution_old.api.manager.CommandManager;
-import me.giverplay.evolution_old.api.manager.ConfigManager;
-import me.giverplay.evolution_old.api.manager.PlayerManager;
-import me.giverplay.evolution_old.api.manager.ScoreboardManager;
-import me.giverplay.evolution_old.comandos.ComandoCreatePlayerWarp;
-import me.giverplay.evolution_old.comandos.ComandoDelHome;
-import me.giverplay.evolution_old.comandos.ComandoDelHomeOf;
-import me.giverplay.evolution_old.comandos.ComandoDeop;
-import me.giverplay.evolution_old.comandos.ComandoEvolution;
-import me.giverplay.evolution_old.comandos.ComandoHome;
-import me.giverplay.evolution_old.comandos.ComandoHomeOf;
-import me.giverplay.evolution_old.comandos.ComandoHomes;
-import me.giverplay.evolution_old.comandos.ComandoItemRaro;
-import me.giverplay.evolution_old.comandos.ComandoLixeira;
-import me.giverplay.evolution_old.comandos.ComandoMyWarp;
-import me.giverplay.evolution_old.comandos.ComandoNivel;
-import me.giverplay.evolution_old.comandos.ComandoOp;
-import me.giverplay.evolution_old.comandos.ComandoPlayerWarp;
-import me.giverplay.evolution_old.comandos.ComandoPlugins;
-import me.giverplay.evolution_old.comandos.ComandoRankupNovo;
-import me.giverplay.evolution_old.comandos.ComandoReiniciar;
-import me.giverplay.evolution_old.comandos.ComandoRemovePlayerWarp;
-import me.giverplay.evolution_old.comandos.ComandoReparar;
-import me.giverplay.evolution_old.comandos.ComandoReply;
-import me.giverplay.evolution_old.comandos.ComandoSetHome;
-import me.giverplay.evolution_old.comandos.ComandoTPA;
-import me.giverplay.evolution_old.comandos.ComandoTPAceitar;
-import me.giverplay.evolution_old.comandos.ComandoTPNegar;
-import me.giverplay.evolution_old.comandos.ComandoTell;
-import me.giverplay.evolution_old.comandos.ComandoToggle;
-import me.giverplay.evolution_old.comandos.ComandoTokenReparo;
-import me.giverplay.evolution_old.comandos.ComandoVoltar;
-import me.giverplay.evolution_old.handlers.ListenerAvulso;
-import me.giverplay.evolution_old.handlers.ListenerChat;
-import me.giverplay.evolution_old.handlers.ListenerCommandManager;
-import me.giverplay.evolution_old.handlers.ListenerEntityDeathBroadcast;
-import me.giverplay.evolution_old.handlers.ListenerMenuReparar;
-import me.giverplay.evolution_old.handlers.ListenerNivel;
-import me.giverplay.evolution_old.handlers.ListenerPlayerManager;
-import me.giverplay.evolution_old.handlers.ListenerPlayerWarpMenu;
-import me.giverplay.evolution_old.handlers.ListenerPluginsMenu;
-import me.giverplay.evolution_old.handlers.ListenerReiniciar;
-import me.giverplay.evolution_old.handlers.ListenerSigns;
-import me.giverplay.evolution_old.handlers.ListenerToggle;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.milkbowl.vault.economy.Economy;
-import net.minecraft.server.v1_16_R1.MinecraftServer;
-
 public class Evolution extends JavaPlugin 
 {
 	private static Evolution instance;
 	
 	private HashMap<String, RankNovo> rankups = new HashMap<>();
 	private HashMap<String, PlayerManager> playersHashMap = new HashMap<>();
-	private HashMap<String, Comando> comandos = new HashMap<>();
 	
 	private ArrayList<String> deitar = new ArrayList<>();
 	
@@ -152,15 +120,6 @@ public class Evolution extends JavaPlugin
 		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
 	}
 	
-	public double calcularSalario(PlayerManager player)
-	{
-		long tempoOnline = (System.currentTimeMillis() - player.getLoginTime()) / 1000;
-		
-		double salario = (tempoOnline * 80) / 1440;
-		
-		return salario;
-	}
-	
 	public void setHeaderAndFooter(Player player) 
 	{
 		player.setPlayerListHeaderFooter("§a§lEvolution§f§lCity\n\n§7----------",
@@ -207,11 +166,6 @@ public class Evolution extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(listener, getInstance());
 	}
 	
-	public void addComando(String nome, Comando comando)
-	{
-		comandos.put(nome, comando);
-	}
-	
 	public boolean isRestarting()
 	{
 		return this.reiniciando;
@@ -232,7 +186,7 @@ public class Evolution extends JavaPlugin
 		this.bloqueartudo = toSet;
 	}
 	
-	@SuppressWarnings({ "deprecation", "resource" })
+	@SuppressWarnings({"resource" })
 	public String getTPS()
 	{
 		double tps = MinecraftServer.getServer().recentTps[0]; 
@@ -247,11 +201,6 @@ public class Evolution extends JavaPlugin
 	}
 	
 	// TODO Getters - Coleções
-	
-	public HashMap<String, Comando> getRegisteredCommands()
-	{
-		return this.comandos;
-	}
 	
 	public HashMap<String, RankNovo> getRanks()
 	{
@@ -758,12 +707,11 @@ public class Evolution extends JavaPlugin
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private void setupRankups()
 	{		
 		for(int i = 0; i < 101; i++)
 		{
-			String path = "ranks." + String.valueOf(i);
+			String path = "ranks." + i;
 			ConfigManager cf = ranks;
 			
 			String nome = cf.getString(path + ".nome");
@@ -795,6 +743,5 @@ public class Evolution extends JavaPlugin
 	public void onDisable()
 	{
 		saveAllConfigs();
-		Bukkit.getScheduler().cancelTasks(this);
 	}
 }

@@ -1,9 +1,9 @@
 package me.giverplay.evolution_old.api;
 
-import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
-import net.minecraft.server.v1_16_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R2.NBTTagCompound;
 
 public class NBTUtils
 {

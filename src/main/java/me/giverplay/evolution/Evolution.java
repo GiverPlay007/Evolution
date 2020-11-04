@@ -27,7 +27,7 @@ public final class Evolution extends JavaPlugin
     evolution = this;
     api = new EvolutionAPI(this);
   
-    getLogger().info(String.format("Enabling Evolution v%s.", version));
+    getLogger().info(String.format("Habilitando Evolution v%s.", version));
     
     try
     {
@@ -35,18 +35,18 @@ public final class Evolution extends JavaPlugin
     }
     catch(Throwable t)
     {
-      getLogger().log(Level.SEVERE, String.format("Unhandled exception while enabling Evolution v%s.", version), t);
+      getLogger().log(Level.SEVERE, String.format("Exceção não tratada enquanto habilitava Evolution v%s.", version), t);
       this.setEnabled(false);
       return;
     }
  
-    getLogger().info(String.format("Evolution v%s was successfully enabled!", version));
+    getLogger().info(String.format("Evolution v%s foi desabilitado com sucesso!", version));
   }
   
   @Override
   public void onDisable()
   {
-    getLogger().info(String.format("Disabling Evolution v%s.", version));
+    getLogger().info(String.format("Desabilitando Evolution v%s.", version));
     
     try
     {
@@ -54,10 +54,10 @@ public final class Evolution extends JavaPlugin
     }
     catch(Throwable t)
     {
-      getLogger().log(Level.SEVERE, String.format("Unhandled exception while disabling Evolution v%s.", version), t);
+      getLogger().log(Level.SEVERE, String.format("Exceção não trata enquanto desabilitava Evolution v%s.", version), t);
       return;
     }
     
-    getLogger().info(String.format("Evolution v%s was successfully disabled!", version));
+    getLogger().info(String.format("Evolution v%s foi desabilitado com sucesso!", version));
   }
 }
