@@ -31,12 +31,7 @@ import net.minecraft.server.v1_16_R2.MinecraftServer;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Instrument;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Note;
-import org.bukkit.Particle;
-import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -58,7 +53,6 @@ public class Evolution extends JavaPlugin
 	private ConfigManager playersyaml;
 	private ConfigManager niveis;
 	private ConfigManager configs;
-	private ConfigManager homes;
 	private ConfigManager warps;
 	private ConfigManager ranks;
 	
@@ -189,10 +183,11 @@ public class Evolution extends JavaPlugin
 	@SuppressWarnings({"resource" })
 	public String getTPS()
 	{
-		double tps = MinecraftServer.getServer().recentTps[0]; 
-		return String.valueOf(((tps > 18.0D) ? ChatColor.GREEN : (
-				(tps > 16.0D) ? ChatColor.YELLOW : ChatColor.RED)).toString()) + (
-						(tps > 20.0D) ? "*" : "") + Math.min(Math.round(tps * 100.0D) / 100.0D, 20.0D);
+		double tps = MinecraftServer.getServer().recentTps[0];
+		
+		return ((tps > 18.0D) ? ChatColor.GREEN : ((tps > 16.0D) ? ChatColor.YELLOW : ChatColor.RED)).toString()
+				+ ((tps > 20.0D) ? "*" : "")
+				+ Math.min(Math.round(tps * 100.0D) / 100.0D, 20.0D);
 	}
 	
 	public String getMoney(Player p)
@@ -267,250 +262,11 @@ public class Evolution extends JavaPlugin
 		}
 	}
 	
-	// TODO Homes - Baseado no plugin SetHomes
-	
-	public HashMap<String, Home> getPlayersNamedHomes(String uuid)
-	{
-		HashMap<String, Home> playersNamedHomes = new HashMap<String, Home>();
-		String homesPath = "allNamedHomes." + uuid;
-		YamlConfiguration homesCfg = homes.getConfig();
-		
-		for (String id : homesCfg.getConfigurationSection(homesPath).getKeys(false))
-		{
-			String path = homesPath + "." + id + ".";
-			World world = Bukkit.getServer().getWorld(homesCfg.getString(path + ".world"));
-			
-			double x = homesCfg.getDouble(path + ".x");
-			double y = homesCfg.getDouble(path + ".y");
-			double z = homesCfg.getDouble(path + ".z");
-			
-			float pitch = Float.parseFloat(homesCfg.getString(path + ".pitch"));
-			float yaw = Float.parseFloat(homesCfg.getString(path + ".yaw"));
-			
-			Location home = new Location(world, x, y, z, yaw, pitch);
-			Home h = new Home(home);
-			
-			playersNamedHomes.put(id, h);
-		}
-		
-		return playersNamedHomes;
-	}
-	
-	public void saveNamedHome(String uuid, Home home)
-	{
-		String path = "allNamedHomes." + uuid + "." + home.getHomeName();
-		ConfigManager homesCfg = homes;
-		
-		homesCfg.set(path + ".world", home.getWorld());
-		homesCfg.set(path + ".x", home.getX());
-		homesCfg.set(path + ".y", home.getY());
-		homesCfg.set(path + ".z", home.getZ());
-		homesCfg.set(path + ".pitch", home.getPitch());
-		homesCfg.set(path + ".yaw", home.getYaw());
-		homesCfg.saveConfig();
-	}
-	
-	public boolean hasNamedHomes(String uuid)
-	{
-		return homes.contains("allNamedHomes." + uuid) && homes.getConfig().isSet("allNamedHomes." + uuid);
-	}
-	
-	public void saveUnknownHome(String uuid, Home home)
-	{
-		String path = "unknownHomes." + uuid;
-		ConfigManager homesCfg = homes;
-		
-		homesCfg.set(path + ".world", home.getWorld());
-		homesCfg.set(path + ".x", home.getX());
-		homesCfg.set(path + ".y", home.getY());
-		homesCfg.set(path + ".z", home.getZ());
-		homesCfg.set(path + ".pitch", home.getPitch());
-		homesCfg.set(path + ".yaw", home.getYaw());
-		homesCfg.saveConfig();
-	}
-	
-	public boolean hasUnknownHomes(String uuid)
-	{
-		return homes.getConfig().contains("unknownHomes." + uuid);
-	}
-	
-	public void deleteUnknownHome(String uuid)
-	{
-		String path = "unknownHomes." + uuid;
-		
-		homes.getConfig().set(path, null);
-		homes.saveConfig();
-	}
-	
-	public Location getNamedHomeLocal(String uuid, String homeName)
-	{
-		Home h = getPlayersNamedHomes(uuid).get(homeName);
-		World world = Bukkit.getWorld(h.getWorld());
-		Location home = new Location(world, h.getX(), h.getY(), h.getZ(), h.getYaw(), h.getPitch());
-		
-		return home;
-	}
-	
-	public Location getPlayersUnnamedHome(String uuid)
-	{
-		String path = "unknownHomes." + uuid;
-		ConfigManager homesCfg = homes;
-		
-		World world = Bukkit.getWorld(homesCfg.getString(path + ".world"));
-		double x = homesCfg.getDouble(path + ".x");
-		double y = homesCfg.getDouble(path + ".y");
-		double z = homesCfg.getDouble(path + ".z");
-		float pitch = Float.parseFloat(homesCfg.getString(path + ".pitch"));
-		float yaw = Float.parseFloat(homesCfg.getString(path + ".yaw"));
-		
-		return new Location(world, x, y, z, yaw, pitch);
-	}
-	
-	public void deleteNamedHome(String uuid, String homeName)
-	{
-		String path = "allNamedHomes." + uuid + "." + homeName;
-		
-		homes.set(path, null);
-		homes.saveConfig();
-	}
-	
-	public void teleportHome(Player player, String uuid, String[] args)
-	{
-		if (args.length < 1)
-		{
-			if (!(hasUnknownHomes(uuid)))
-			{
-				player.sendMessage("§cNenhuma casa padrão definida");
-				return;
-			}
-			
-			player.teleport(getPlayersUnnamedHome(uuid));
-			player.spawnParticle(Particle.PORTAL, player.getLocation(), 100);
-			player.playNote(player.getLocation(), Instrument.BELL, Note.sharp(2, Note.Tone.F));
-			player.sendMessage("§aTeleportado com sucesso");
-			
-		} 
-		else
-		{
-			if ( !(hasNamedHomes(uuid)) || !(getPlayersNamedHomes(uuid).containsKey(args[0])) )
-			{
-				player.sendMessage("§cNenhuma casa com esse nome: §f" + args[0]);
-				return;
-			}
-			
-			player.teleport(getNamedHomeLocal(uuid, args[0]));
-			player.spawnParticle(Particle.PORTAL, player.getLocation(), 100);
-			player.playNote(player.getLocation(), Instrument.BELL, Note.sharp(2, Note.Tone.F));
-			player.sendMessage("§aTeleportado com sucesso");
-		}
-	}
-	
-	public void teleportHomeOf(Player player, String uuid, String[] args)
-	{
-		if(args.length == 1)
-		{
-			if(!hasUnknownHomes(uuid))
-			{
-				player.sendMessage("§cEste jogador não possui uma casa padrão");
-				return;
-			}
-			
-			player.teleport(getPlayersUnnamedHome(uuid));
-			player.spawnParticle(Particle.PORTAL, player.getLocation(), 100);
-			player.playNote(player.getLocation(), Instrument.BELL, Note.sharp(2, Note.Tone.F));
-			player.sendMessage("§aTeleportado com sucesso");
-			
-			return;
-		}
-		
-		String homeName = args[1];
-		
-		if (!(hasNamedHomes(uuid)) || !(getPlayersNamedHomes(uuid).containsKey(homeName)))
-		{
-			player.sendMessage("§cEste jogador não possui a casa §f" + homeName);
-			return;
-		}
-		
-		player.teleport(getNamedHomeLocal(uuid, homeName));
-		player.spawnParticle(Particle.PORTAL, player.getLocation(), 100);
-		player.playNote(player.getLocation(), Instrument.BELL, Note.sharp(2, Note.Tone.F));
-		player.sendMessage("§cTeleportado com sucesso");
-	}
-	
-	public void listHomes(Player player)
-	{
-		String uuid = player.getUniqueId().toString();
-		String filler = StringUtils.repeat("§f-", 40);
-		
-		player.sendMessage(" ");
-		player.sendMessage("§b§lSuas Casas");
-		player.sendMessage(filler);
-		player.sendMessage(" ");
-		
-		if(hasUnknownHomes(uuid))
-		{
-			String world = getPlayersUnnamedHome(uuid).getWorld().getName();
-			player.sendMessage("§bCasa Padrão: §fNo mundo " + world);
-		}
-		
-		player.sendMessage(" ");
-		
-		if(hasNamedHomes(uuid))
-		{
-			for(String id : getPlayersNamedHomes(uuid).keySet())
-			{
-				String world = getPlayersNamedHomes(uuid).get(id).getWorld();
-				
-				player.sendMessage("§bCasa: §f" + id);
-				player.sendMessage("§bMundo: §f" + world);
-				
-				player.sendMessage(" ");
-			}
-		}
-		player.sendMessage(filler);
-	}
-	
-	public void listHomes(Player alvo, Player player)
-	{
-		String uuid = alvo.getUniqueId().toString();
-		String filler = StringUtils.repeat("§f-", 40);
-		
-		player.sendMessage(" ");
-		player.sendMessage("§b§lCasas de " + alvo.getName());
-		player.sendMessage(filler);
-		player.sendMessage(" ");
-		
-		if(hasUnknownHomes(uuid))
-		{
-			String world = getPlayersUnnamedHome(uuid).getWorld().getName();
-			player.sendMessage("§bCasa Padrão: §fNo mundo " + world);
-		}
-		
-		player.sendMessage(" ");
-		
-		if(hasNamedHomes(uuid))
-		{
-			for(String id : getPlayersNamedHomes(uuid).keySet())
-			{
-				String world = getPlayersNamedHomes(uuid).get(id).getWorld();
-				
-				player.sendMessage("§bCasa: §f" + id);
-				player.sendMessage("§bMundo: §f" + world);
-				
-				player.sendMessage(" ");
-			}
-		}
-		player.sendMessage(filler);
-	}
-	
-	// TODO ConfigManagers - Getters
-	
 	public void saveAllConfigs()
 	{
 		playersyaml.saveConfig();
 		niveis.saveConfig();
 		configs.saveConfig();
-		homes.saveConfig();
 		warps.saveConfig();
 		ranks.saveConfig();
 	}
@@ -519,7 +275,6 @@ public class Evolution extends JavaPlugin
 	{
 		configs.reloadConfig();
 		niveis.reloadConfig();
-		homes.reloadConfig();
 		warps.reloadConfig();
 		playersyaml.reloadConfig();
 		ranks.reloadConfig();
