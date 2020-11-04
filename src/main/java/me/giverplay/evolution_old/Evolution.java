@@ -1,73 +1,26 @@
 package me.giverplay.evolution_old;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import me.giverplay.evolution_old.api.Formater;
-import me.giverplay.evolution_old.api.Home;
 import me.giverplay.evolution_old.api.PBar;
-import me.giverplay.evolution_old.api.PlayerWarp;
 import me.giverplay.evolution_old.api.RankNovo;
 import me.giverplay.evolution_old.api.manager.ConfigManager;
 import me.giverplay.evolution_old.api.manager.PlayerManager;
-import me.giverplay.evolution_old.api.manager.ScoreboardManager;
-import me.giverplay.evolution_old.comandos.*;
-import me.giverplay.evolution_old.handlers.ListenerAvulso;
-import me.giverplay.evolution_old.handlers.ListenerChat;
-import me.giverplay.evolution_old.handlers.ListenerCommandManager;
-import me.giverplay.evolution_old.handlers.ListenerEntityDeathBroadcast;
-import me.giverplay.evolution_old.handlers.ListenerMenuReparar;
-import me.giverplay.evolution_old.handlers.ListenerNivel;
-import me.giverplay.evolution_old.handlers.ListenerPlayerManager;
-import me.giverplay.evolution_old.handlers.ListenerPlayerWarpMenu;
-import me.giverplay.evolution_old.handlers.ListenerPluginsMenu;
-import me.giverplay.evolution_old.handlers.ListenerReiniciar;
-import me.giverplay.evolution_old.handlers.ListenerSigns;
-import me.giverplay.evolution_old.handlers.ListenerToggle;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.economy.Economy;
 import net.minecraft.server.v1_16_R2.MinecraftServer;
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class Evolution extends JavaPlugin 
 {
-	private static Evolution instance;
-	
-	private HashMap<String, RankNovo> rankups = new HashMap<>();
-	private HashMap<String, PlayerManager> playersHashMap = new HashMap<>();
-	
-	private ArrayList<String> deitar = new ArrayList<>();
-	
-	private ConfigManager playersyaml;
-	private ConfigManager niveis;
-	private ConfigManager configs;
-	private ConfigManager warps;
-	private ConfigManager ranks;
-	
-	private Economy economy;
-	
-	private boolean reiniciando;
-	private boolean bloqueartudo;
-	
-	public static Evolution getInstance()
-	{
-		return instance;
-	}
-	
-	// TODO Ferramentas
-	
 	public String getTime(int segundos)
 	{
 		StringBuilder tempo = new StringBuilder();
@@ -133,53 +86,6 @@ public class Evolution extends JavaPlugin
 		return PBar.getProgressBarScore(atual, xpNeeded, 15, "|", "§a", "§7", "§8[", "§8]");
 	}
 	
-	// TODO Funções relacionadas ao plugin/servidor
-	
-	public Economy getEconomy()
-	{
-		return this.economy;
-	}
-	
-	public void addPlayer(String name)
-	{
-		playersHashMap.put(name, new PlayerManager(name));
-	}
-	
-	public void removePlayer(String name)
-	{
-		playersHashMap.remove(name);
-	}
-	
-	public PlayerManager getPlayer(String name)
-	{
-		return playersHashMap.get(name);
-	}
-	
-	public void registerEvents(Listener listener)
-	{
-		Bukkit.getPluginManager().registerEvents(listener, getInstance());
-	}
-	
-	public boolean isRestarting()
-	{
-		return this.reiniciando;
-	}
-	
-	public void setRestarting(boolean toSet)
-	{
-		this.reiniciando = toSet;
-	}
-	
-	public boolean blockAllRestart()
-	{
-		return this.bloqueartudo;
-	}
-	
-	public void setBlockAllRestart(boolean toSet)
-	{
-		this.bloqueartudo = toSet;
-	}
-	
 	@SuppressWarnings({"resource" })
 	public String getTPS()
 	{
@@ -195,140 +101,6 @@ public class Evolution extends JavaPlugin
 		return Formater.format((long) economy.getBalance(p));
 	}
 	
-	// TODO Getters - Coleções
-	
-	public HashMap<String, RankNovo> getRanks()
-	{
-		return this.rankups;
-	}
-	
-	public ArrayList<String> getBedCooldownList()
-	{
-		return this.deitar;
-	}
-	
-	// TODO Warps
-	
-	public ArrayList<PlayerWarp> getWarps(String nickname)
-	{
-		YamlConfiguration conf = warps.getConfig();
-		
-		if(!conf.isSet(nickname))
-		{
-			return null;
-		}
-		
-		ArrayList<PlayerWarp> list = new ArrayList<>();
-		
-		for(String key : conf.getConfigurationSection(nickname).getKeys(false))
-		{
-			try
-			{
-				if(!conf.isSet(nickname + "." + key + ".loc")){
-					continue;
-				}
-				
-				list.add(new PlayerWarp(conf.getLocation(nickname + "." + key + ".loc"), key, nickname));
-			}
-			catch(NullPointerException e)
-			{
-				Bukkit.getConsoleSender().sendMessage("§c[Evolution] Erro em uma warp............");
-			}
-		}
-		
-		if(list.isEmpty()){
-			return null;
-		}
-		
-		return list;
-	}
-	
-	public PlayerWarp getPlayerWarp(String nickname, String warp)
-	{
-		try
-		{
-			YamlConfiguration conf = warps.getConfig();
-			
-			if(!conf.isSet(nickname) || !conf.isSet(nickname + "." + warp))
-			{
-				return null;
-			}
-			
-			return new PlayerWarp(conf.getLocation(nickname + "." + warp + ".loc"), warp, nickname);
-		}
-		catch(NullPointerException e)
-		{
-			return null;
-		}
-	}
-	
-	public void saveAllConfigs()
-	{
-		playersyaml.saveConfig();
-		niveis.saveConfig();
-		configs.saveConfig();
-		warps.saveConfig();
-		ranks.saveConfig();
-	}
-	
-	public void reloadConfig()
-	{
-		configs.reloadConfig();
-		niveis.reloadConfig();
-		warps.reloadConfig();
-		playersyaml.reloadConfig();
-		ranks.reloadConfig();
-	}
-	
-	public ConfigManager getWarpsConfig()
-	{
-		return this.warps;
-	}
-	
-	public ConfigManager getRanksConfig()
-	{
-		return this.ranks;
-	}
-	
-	public ConfigManager getLevelConfig()
-	{
-		return this.niveis;
-	}
-	
-	public ConfigManager getPlayersConfig()
-	{
-		return this.playersyaml;
-	}
-	
-	// TODO Metodos Privados - Setups e Registerers
-	
-	private void setupConfig()
-	{
-		playersyaml = new ConfigManager("players");
-		playersyaml.saveDefaultConfig();
-		
-		niveis = new ConfigManager("niveis");
-		niveis.saveDefaultConfig();
-		
-		configs = new ConfigManager("configs");
-		configs.saveDefaultConfig();
-		
-		homes = new ConfigManager("homes");
-		homes.saveDefaultConfig();
-		
-		warps = new ConfigManager("warps");
-		warps.saveDefaultConfig();
-		
-		ranks = new ConfigManager("ranks_novos");
-		ranks.saveDefaultConfig();
-		
-		if (!(homes.getConfig().isSet("allNamedHomes") || homes.getConfig().isSet("unknownHomes")))
-		{
-			homes.getConfig().addDefault("allNamedHomes", new HashMap<String, HashMap<String, Home>>());
-			homes.getConfig().addDefault("unknownHomes", new HashMap<String, Home>());
-		}
-	}
-	
 	private boolean setupEconomy()
 	{
 		RegisteredServiceProvider<Economy> economyProvider = 
@@ -342,86 +114,6 @@ public class Evolution extends JavaPlugin
 		}
 		
 		return(economy != null);
-	}
-	
-	private void setupComandos()
-	{
-		addComando("nivel", new ComandoNivel());
-		addComando("lixeira", new ComandoLixeira());
-		addComando("evolution", new ComandoEvolution());
-		addComando("tell", new ComandoTell());
-		addComando("reply", new ComandoReply());
-		addComando("reiniciar", new ComandoReiniciar());
-		addComando("reparar", new ComandoReparar());
-		addComando("tokenreparo", new ComandoTokenReparo());
-		addComando("home", new ComandoHome());
-		addComando("home-of", new ComandoHomeOf());
-		addComando("homes", new ComandoHomes());
-		addComando("delhome", new ComandoDelHome());
-		addComando("delhome-of", new ComandoDelHomeOf());
-		addComando("sethome", new ComandoSetHome());
-		addComando("plugins", new ComandoPlugins());
-		addComando("op", new ComandoOp());
-		addComando("deop", new ComandoDeop());
-		addComando("playerwarp", new ComandoPlayerWarp());
-		addComando("createplayerwarp", new ComandoCreatePlayerWarp());
-		addComando("removeplayerwarp", new ComandoRemovePlayerWarp());
-		addComando("mywarp", new ComandoMyWarp());
-		addComando("toggle", new ComandoToggle());
-		addComando("tpa", new ComandoTPA());
-		addComando("tpaceitar", new ComandoTPAceitar());
-		addComando("tpnegar", new ComandoTPNegar());
-		addComando("itemraro", new ComandoItemRaro());
-		addComando("rankup", new ComandoRankupNovo());
-		addComando("voltar", new ComandoVoltar());
-		//addComando("rankup", new ComandoRankup());
-		
-		CommandExecutor exe = new CommandManager();
-		
-		for(String cmd: comandos.keySet())
-		{
-			getCommand(cmd).setExecutor(exe);
-		}
-	}
-	
-	private void registerEvents()
-	{
-		registerEvents(new ListenerPlayerManager());
-		registerEvents(new ListenerNivel());
-		registerEvents(new ListenerChat());
-		registerEvents(new ListenerAvulso());
-		registerEvents(new ListenerEntityDeathBroadcast());
-		registerEvents(new ListenerMenuReparar());
-		registerEvents(new ListenerCommandManager());
-		registerEvents(new ListenerSigns());
-		registerEvents(new ListenerReiniciar());
-		registerEvents(new ListenerPluginsMenu());
-		registerEvents(new ListenerToggle());	
-		//registerEvents(new ListenerAntiGrief());
-		registerEvents(new ListenerPlayerWarpMenu());
-	}
-	
-	private void startRunnableCore()
-	{
-		new BukkitRunnable()
-		{
-			@Override
-			public void run()
-			{
-				for(PlayerManager player : playersHashMap.values())
-				{
-					ScoreboardManager.update(player);
-				}
-			}
-		}.runTaskTimer(this, 200, 200);
-	}
-	
-	private void fixPlayerManager()
-	{
-		for(Player p : Bukkit.getOnlinePlayers())
-		{
-			addPlayer(p.getName());
-		}
 	}
 	
 	private void setupRankupsNovo()
@@ -460,43 +152,5 @@ public class Evolution extends JavaPlugin
 			
 			rankups.put(nome, new RankNovo(nome, prefixo, ultimo, finalNeed, level, proximo));
 		}
-	}
-	
-	private void setupRankups()
-	{		
-		for(int i = 0; i < 101; i++)
-		{
-			String path = "ranks." + i;
-			ConfigManager cf = ranks;
-			
-			String nome = cf.getString(path + ".nome");
-			String prefixo = cf.getString(path + ".prefixo").replace("&", "§");
-			double custo = cf.getDouble(path + ".custo");
-			boolean ultimo = cf.getBoolean(path + ".ultimo");
-			String proximo = cf.getString(path + ".proximo");
-			int level = cf.getInt(path + ".nivel");
-			
-			//rankups.put(nome, new Rank(nome, prefixo, ultimo, custo, level, proximo));
-		}
-	}
-	
-	// TODO Metodos JavaPlugin (Enable e Disable)
-	public void onEnable()
-	{
-		instance = this;
-		
-		setupConfig();
-		setupEconomy();
-		//setupRankups();
-		setupRankupsNovo();
-		setupComandos();
-		registerEvents();
-		fixPlayerManager();
-		startRunnableCore();
-	}
-	
-	public void onDisable()
-	{
-		saveAllConfigs();
 	}
 }
