@@ -34,7 +34,7 @@ public final class EvolutionAPI
   private void registerManagers()
   {
     commandManager = new CommandManager(this);
-    homeManager = new HomeManager(this);
+    homeManager = new HomeManager();
   }
   
   private void registerCommands()

@@ -1,63 +1,92 @@
 package me.giverplay.evolution.teleport;
 
 import java.util.HashMap;
-import me.giverplay.evolution.EvolutionAPI;
+import me.giverplay.evolution.data.YamlConfig;
 
 public class HomeManager
 {
-  private final EvolutionAPI plugin;
+  private final YamlConfig config;
   
-  public HomeManager(EvolutionAPI api)
+  public HomeManager()
   {
-    this.plugin = api;
+    this.config = new YamlConfig("homes");
+    
+    config.saveDefault(false);
   }
   
   public Home getHome(String playerName, String homeName)
   {
-    // TODO
-    return null;
+    if(!hasHome(playerName, homeName))
+    {
+      return null;
+    }
+    
+    return new Home(config.getLocation(playerName + "." + homeName), homeName);
   }
   
   public HashMap<String, Home> getHomes(String playerName)
   {
-    // TODO
-    return null;
+    HashMap<String, Home> homes = new HashMap<>();
+    
+    if(config.isConfigurationSection(playerName))
+    {
+      for(String key : config.getConfigurationSection(playerName).getKeys(false))
+      {
+        if(hasHome(playerName, key))
+        {
+          homes.put(key, getHome(playerName, key));
+        }
+      }
+    }
+    
+    return homes;
   }
   
   public void setHome(String playerName, Home home)
   {
-    // TODO
+    config.set(playerName + "." + home.getName(), home.getLocation());
   }
   
   public void deleteHome(String playerName, String homeName)
   {
-    // TODO
+    config.set(playerName + "." + homeName, null);
   }
   
   public void deleteHomes(String playerName)
   {
-    // TODO
+    config.set(playerName, null);
   }
   
   public int homesCount(String playerName)
   {
-    // TODO
-    return 0;
+    int count = 0;
+    
+    if(config.isConfigurationSection(playerName))
+    {
+      for(String key : config.getConfigurationSection(playerName).getKeys(false))
+      {
+        if(hasHome(playerName, key))
+        {
+          count++;
+        }
+      }
+    }
+    
+    return count;
   }
   
   public boolean hasHome(String playerName, String homeName)
   {
-    // TODO
-    return false;
+    return config.isLocation(playerName + "." + homeName);
   }
   
   public void saveHomes()
   {
-    // TODO
+    config.save();
   }
   
   public void reloadHomes()
   {
-    // TODO
+    config.reload();
   }
 }
