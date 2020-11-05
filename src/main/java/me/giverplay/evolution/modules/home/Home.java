@@ -1,4 +1,4 @@
-package me.giverplay.evolution.teleport;
+package me.giverplay.evolution.modules.home;
 
 import org.bukkit.Location;
 import org.bukkit.World;

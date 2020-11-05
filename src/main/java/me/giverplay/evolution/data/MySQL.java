@@ -16,7 +16,7 @@ public class MySQL
   private final String pass;
   private final String url;
   
-  private int port;
+  private final int port;
   
   private Connection connection;
   
@@ -32,18 +32,16 @@ public class MySQL
     this.plugin = Evolution.getInstance();
   }
   
-  public boolean connect()
+  public void connect()
   {
     try
     {
       connection = DriverManager.getConnection(url, user, pass);
-      return true;
     }
     catch(SQLException exception)
     {
       plugin.getLogger().warning("Falha ao conectar com o MySQL: " + url);
       exception.printStackTrace();
-      return false;
     }
   }
   

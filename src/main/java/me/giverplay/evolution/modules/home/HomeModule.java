@@ -1,17 +1,62 @@
-package me.giverplay.evolution.teleport;
+package me.giverplay.evolution.modules.home;
 
 import java.util.HashMap;
+import me.giverplay.evolution.Evolution;
+import me.giverplay.evolution.EvolutionAPI;
 import me.giverplay.evolution.data.YamlConfig;
+import me.giverplay.evolution.modules.Module;
 
-public class HomeManager
+public class HomeModule implements Module
 {
+  private final EvolutionAPI plugin;
   private final YamlConfig config;
+  private boolean enabled;
   
-  public HomeManager()
+  public HomeModule(EvolutionAPI plugin)
   {
+    this.plugin = plugin;
     this.config = new YamlConfig("homes");
+  }
+  
+  @Override
+  public String getName()
+  {
+    return "homes";
+  }
+  
+  @Override
+  public void enable()
+  {
+    if(enabled) return;
     
+    if(!plugin.getConfig().getBoolean("modules.home"))
+    {
+      plugin.getLogger().info("Módulo Homes está desativado, ignorando registro.");
+      return;
+    }
+    
+    enabled = true;
+    config.reload();
     config.saveDefault(false);
+    
+    plugin.getLogger().info("Módulo Homes habilitado.");
+  }
+  
+  @Override
+  public void disable()
+  {
+    if(!enabled) return;
+    
+    enabled = false;
+    config.save();
+    
+    plugin.getLogger().info("Módulo Homes desabilitado.");
+  }
+  
+  @Override
+  public boolean isEnabled()
+  {
+    return enabled;
   }
   
   public Home getHome(String playerName, String homeName)
