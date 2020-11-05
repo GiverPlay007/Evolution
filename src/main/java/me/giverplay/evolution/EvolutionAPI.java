@@ -1,24 +1,20 @@
 package me.giverplay.evolution;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 import me.giverplay.evolution.command.CommandManager;
 import me.giverplay.evolution.command.commands.EvolutionCommand;
 import me.giverplay.evolution.data.YamlConfig;
-import me.giverplay.evolution.modules.Module;
-import me.giverplay.evolution.modules.home.HomeModule;
+import me.giverplay.evolution.modules.ModuleManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 
 public final class EvolutionAPI
 {
-  private final ArrayList<Module> modules = new ArrayList<>();
-  
   private final Evolution plugin;
   private final YamlConfig config;
   
+  private ModuleManager moduleManager;
   private CommandManager commandManager;
-  private HomeModule homeModule;
   
   EvolutionAPI(Evolution plugin)
   {
@@ -31,25 +27,25 @@ public final class EvolutionAPI
     config.saveDefault(false);
     config.reload();
     
-    registerModules();
+    registerManagers();
     registerCommands();
+    
+    moduleManager.enable();
   }
   
   void unload()
   {
-    modules.forEach(Module::disable);
+    moduleManager.disable();
     config.save();
     
     Bukkit.getScheduler().cancelTasks(plugin);
     HandlerList.unregisterAll(plugin);
   }
   
-  private void registerModules()
+  private void registerManagers()
   {
     commandManager = new CommandManager(this);
-    
-    modules.add(homeModule = new HomeModule(this));
-    modules.forEach(Module::enable);
+    moduleManager = new ModuleManager(this);
   }
   
   private void registerCommands()
@@ -60,11 +56,6 @@ public final class EvolutionAPI
   public CommandManager getCommandManager()
   {
     return commandManager;
-  }
-  
-  public HomeModule getHomeModule()
-  {
-    return homeModule;
   }
   
   public YamlConfig getConfig()

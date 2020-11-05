@@ -1,7 +1,6 @@
 package me.giverplay.evolution.modules.home;
 
 import java.util.HashMap;
-import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.EvolutionAPI;
 import me.giverplay.evolution.data.YamlConfig;
 import me.giverplay.evolution.modules.Module;
@@ -29,17 +28,11 @@ public class HomeModule implements Module
   {
     if(enabled) return;
     
-    if(!plugin.getConfig().getBoolean("modules.home"))
-    {
-      plugin.getLogger().info("Módulo Homes está desativado, ignorando registro.");
-      return;
-    }
-    
-    enabled = true;
     config.reload();
     config.saveDefault(false);
     
-    plugin.getLogger().info("Módulo Homes habilitado.");
+    enabled = true;
+    plugin.getLogger().info("Modulo Homes habilitado.");
   }
   
   @Override
@@ -47,10 +40,10 @@ public class HomeModule implements Module
   {
     if(!enabled) return;
     
-    enabled = false;
     config.save();
     
-    plugin.getLogger().info("Módulo Homes desabilitado.");
+    enabled = false;
+    plugin.getLogger().info("Modulo Homes desabilitado.");
   }
   
   @Override

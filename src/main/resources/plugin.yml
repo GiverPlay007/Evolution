@@ -1,7 +1,14 @@
 name: Evolution
 version: @version@
+description: Plugin exclusivo do servidor Evolution
+website: 'https://github.com/foca-enterprises'
+authors: [ GiverPlay ]
+
 main: me.giverplay.evolution.Evolution
 api-version: 1.16
 load: STARTUP
-authors: [ GiverPlay ]
-description: Plugin exclusivo do servidor Evolution
+
+commands:
+  evolution:
+    description: 'Comando principal'
+    aliases: [evo, info]
