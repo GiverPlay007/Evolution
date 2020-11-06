@@ -31,6 +31,12 @@ repositories {
         url = 'https://ci.ender.zone/plugin/repository/everything/'
     }
 
+    // EssentialsX precisa disso
+    maven {
+        name = 'paper-mc'
+        url = 'https://papermc.io/repo/repository/maven-public/'
+    }
+
     flatDir {
         dirs 'libs'
     }

@@ -29,7 +29,7 @@ public final class Evolution extends JavaPlugin
     evolution = this;
     api = new EvolutionAPI(this);
   
-    getLogger().info(String.format("Habilitando Evolution v%s.", version));
+    getLogger().info("Habilitando.");
     
     if(!api.shouldLoad())
     {
@@ -51,13 +51,13 @@ public final class Evolution extends JavaPlugin
       return;
     }
  
-    getLogger().info(String.format("Evolution v%s foi desabilitado com sucesso!", version));
+    getLogger().info("Plugin habilitado com sucesso");
   }
   
   @Override
   public void onDisable()
   {
-    getLogger().info(String.format("Desabilitando Evolution v%s.", version));
+    getLogger().info("Desabilitando.");
     
     if(death)
     {
@@ -75,6 +75,6 @@ public final class Evolution extends JavaPlugin
       return;
     }
     
-    getLogger().info(String.format("Evolution v%s foi desabilitado com sucesso!", version));
+    getLogger().info("Plugin desabilitado com sucesso.");
   }
 }
