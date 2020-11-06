@@ -7,6 +7,9 @@ authors: [ GiverPlay ]
 main: me.giverplay.evolution.Evolution
 api-version: 1.16
 load: STARTUP
+softdepend:
+  - Vault
+  - Essentials
 
 commands:
   evolution:

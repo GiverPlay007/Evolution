@@ -10,13 +10,25 @@ targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+
     maven {
         name = 'spigotmc-repo'
         url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
     }
+
     maven {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+
+    maven {
+        name = 'jitpack'
+        url = 'https://jitpack.io'
+    }
+
+    maven {
+        name = 'ender-zone'
+        url = 'https://ci.ender.zone/plugin/repository/everything/'
     }
 
     flatDir {
@@ -26,6 +38,8 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.3-R0.1-SNAPSHOT'
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    compileOnly 'net.ess3:EssentialsX:2.18.1'
 
     // Access NMS and CraftBukkit classes
     compileOnly name: 'spigot-1.16.3'

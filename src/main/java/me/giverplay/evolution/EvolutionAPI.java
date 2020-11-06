@@ -43,6 +43,24 @@ public final class EvolutionAPI
     HandlerList.unregisterAll(plugin); // Para precavir, caso venha do setEnabled() sem o disablePlugin()
   }
   
+  boolean shouldLoad()
+  {
+    return checkDependency("Vault") && checkDependency("Essentials") && checkDependency("PermissionsEx");
+  }
+  
+  private boolean checkDependency(String name)
+  {
+    boolean has = true;
+    
+    if(!Bukkit.getPluginManager().isPluginEnabled(name))
+    {
+      getLogger().warning("Plugin " + name + " não foi encontrado no servidor ou está desabilitado.");
+      has = false;
+    }
+    
+    return has;
+  }
+  
   private void registerManagers()
   {
     commandManager = new CommandManager(this);

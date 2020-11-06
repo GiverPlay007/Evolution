@@ -3,7 +3,6 @@ package me.giverplay.evolution.modules.chat;
 import me.giverplay.evolution.EvolutionAPI;
 import me.giverplay.evolution.listeners.ChatModuleListener;
 import me.giverplay.evolution.modules.Module;
-import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 
 public class ChatModule implements Module
@@ -29,12 +28,6 @@ public class ChatModule implements Module
   public void enable()
   {
     if(enabled) return;
-    
-    if(!Bukkit.getPluginManager().isPluginEnabled("Vault"))
-    {
-      plugin.getLogger().warning("Plugin Vault não está habilitado, o módulo Chat não será inicializado");
-      return;
-    }
     
     if(listener == null)
     {

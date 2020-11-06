@@ -11,6 +11,11 @@ public class EvolutionPlayer
     this.settings = new PlayerSettings();
   }
   
+  public String getName()
+  {
+    return name;
+  }
+  
   public PlayerSettings getPlayerSettings()
   {
     return settings;

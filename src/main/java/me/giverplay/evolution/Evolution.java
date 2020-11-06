@@ -10,6 +10,8 @@ public final class Evolution extends JavaPlugin
   
   private String version;
   
+  private boolean death = false;
+  
   public static Evolution getInstance()
   {
     return evolution;
@@ -29,6 +31,15 @@ public final class Evolution extends JavaPlugin
   
     getLogger().info(String.format("Habilitando Evolution v%s.", version));
     
+    if(!api.shouldLoad())
+    {
+      getLogger().severe("O plugin não pôde ser iniciado com sucesso.");
+      death = true;
+      setEnabled(false);
+      
+      return;
+    }
+    
     try
     {
       api.load();
@@ -47,6 +58,12 @@ public final class Evolution extends JavaPlugin
   public void onDisable()
   {
     getLogger().info(String.format("Desabilitando Evolution v%s.", version));
+    
+    if(death)
+    {
+      getLogger().info("Desabilitado sem descarregar a API (death disable).");
+      return;
+    }
     
     try
     {
