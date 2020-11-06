@@ -26,6 +26,12 @@ public class CommandManager implements CommandExecutor
     EvolutionCommand cmd = commands.get(command.getName());
     CommandSource sender = new CommandSource(commandSender);
     
+    if(!cmd.isEnabled())
+    {
+      sender.sendMessage("&cEste comando está desabilitado!");
+      return true;
+    }
+    
     if(!sender.hasPermission(cmd.getBasePermission()))
     {
       sender.sendMessage("&cVocê não tem permissão para executar esse comando!");
@@ -62,5 +68,16 @@ public class CommandManager implements CommandExecutor
     command.setExecutor(this);
     command.setTabCompleter(cmd);
     commands.put(cmd.getName(), cmd);
+  }
+  
+  public void toggleCommand(String cmdName, boolean enabled)
+  {
+    EvolutionCommand cmd = commands.get(cmdName);
+    
+    if(cmd != null)
+    {
+      cmd.setEnabled(enabled);
+      evo.getLogger().info("O comando " + cmd + " foi " + (enabled ? "habilitado." : "desabilitado."));
+    }
   }
 }

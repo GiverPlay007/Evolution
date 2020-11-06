@@ -8,6 +8,8 @@ public abstract class EvolutionCommand implements TabCompleter
   private final String name;
   private final boolean allowConsole;
   
+  private boolean enabled = true;
+  
   public EvolutionCommand(String name, boolean allowConsole)
   {
     Validate.notNull(name, "O nome do comando não pode ser nulo!");
@@ -31,6 +33,16 @@ public abstract class EvolutionCommand implements TabCompleter
   public final String getBasePermission()
   {
     return "evolution.command." + name;
+  }
+  
+  public boolean isEnabled()
+  {
+    return enabled;
+  }
+  
+  public void setEnabled(boolean enabled)
+  {
+    this.enabled = enabled;
   }
   
   public void sendUsage(CommandSource source, String usage, String example)

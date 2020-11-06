@@ -7,6 +7,7 @@ import me.giverplay.evolution.data.YamlConfig;
 import me.giverplay.evolution.modules.ModuleManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
 
 public final class EvolutionAPI
 {
@@ -39,7 +40,7 @@ public final class EvolutionAPI
     config.save();
     
     Bukkit.getScheduler().cancelTasks(plugin);
-    HandlerList.unregisterAll(plugin);
+    HandlerList.unregisterAll(plugin); // Para precavir, caso venha do setEnabled() sem o disablePlugin()
   }
   
   private void registerManagers()
@@ -71,5 +72,10 @@ public final class EvolutionAPI
   public Logger getLogger()
   {
     return plugin.getLogger();
+  }
+  
+  public void registerListener(Listener listener)
+  {
+    Bukkit.getPluginManager().registerEvents(listener, plugin);
   }
 }
