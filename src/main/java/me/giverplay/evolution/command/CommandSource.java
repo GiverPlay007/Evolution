@@ -1,5 +1,7 @@
 package me.giverplay.evolution.command;
 
+import me.giverplay.evolution.Evolution;
+import me.giverplay.evolution.player.EvolutionPlayer;
 import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -17,6 +19,11 @@ public class CommandSource
     this.sender = sender;
   }
   
+  public String getName()
+  {
+    return sender.getName();
+  }
+  
   public boolean isPlayer()
   {
     return sender instanceof Player;
@@ -30,6 +37,11 @@ public class CommandSource
     }
     
     return null;
+  }
+  
+  public EvolutionPlayer getEvolutionPlayer()
+  {
+    return Evolution.getEvolutionAPI().getPlayerManager().getPlayer(sender.getName());
   }
   
   public CommandSender getSender()

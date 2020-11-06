@@ -1,20 +1,21 @@
 package me.giverplay.evolution.modules.home;
 
-import java.util.HashMap;
 import me.giverplay.evolution.EvolutionAPI;
-import me.giverplay.evolution.data.YamlConfig;
+import me.giverplay.evolution.command.commands.HomeCommand;
 import me.giverplay.evolution.modules.Module;
 
 public class HomeModule implements Module
 {
   private final EvolutionAPI plugin;
-  private final YamlConfig config;
+  
+  private HomeCommand homeCommand;
   private boolean enabled;
   
   public HomeModule(EvolutionAPI plugin)
   {
     this.plugin = plugin;
-    this.config = new YamlConfig("homes");
+    
+    setupCommands();
   }
   
   @Override
@@ -28,8 +29,7 @@ public class HomeModule implements Module
   {
     if(enabled) return;
     
-    config.reload();
-    config.saveDefault(false);
+    toggleCommands(true);
     
     enabled = true;
     plugin.getLogger().info("Modulo Homes habilitado.");
@@ -40,91 +40,27 @@ public class HomeModule implements Module
   {
     if(!enabled) return;
     
-    config.save();
+    toggleCommands(false);
     
     enabled = false;
     plugin.getLogger().info("Modulo Homes desabilitado.");
+  }
+  
+  private void toggleCommands(boolean status)
+  {
+    homeCommand.setEnabled(status);
+  }
+  
+  private void setupCommands()
+  {
+    this.homeCommand = new HomeCommand(plugin);
+  
+    plugin.getCommandManager().registerCommand(homeCommand);
   }
   
   @Override
   public boolean isEnabled()
   {
     return enabled;
-  }
-  
-  public Home getHome(String playerName, String homeName)
-  {
-    if(!hasHome(playerName, homeName))
-    {
-      return null;
-    }
-    
-    return new Home(config.getLocation(playerName + "." + homeName), homeName);
-  }
-  
-  public HashMap<String, Home> getHomes(String playerName)
-  {
-    HashMap<String, Home> homes = new HashMap<>();
-    
-    if(config.isConfigurationSection(playerName))
-    {
-      for(String key : config.getConfigurationSection(playerName).getKeys(false))
-      {
-        if(hasHome(playerName, key))
-        {
-          homes.put(key, getHome(playerName, key));
-        }
-      }
-    }
-    
-    return homes;
-  }
-  
-  public void setHome(String playerName, Home home)
-  {
-    config.set(playerName + "." + home.getName(), home.getLocation());
-  }
-  
-  public void deleteHome(String playerName, String homeName)
-  {
-    config.set(playerName + "." + homeName, null);
-  }
-  
-  public void deleteHomes(String playerName)
-  {
-    config.set(playerName, null);
-  }
-  
-  public int homesCount(String playerName)
-  {
-    int count = 0;
-    
-    if(config.isConfigurationSection(playerName))
-    {
-      for(String key : config.getConfigurationSection(playerName).getKeys(false))
-      {
-        if(hasHome(playerName, key))
-        {
-          count++;
-        }
-      }
-    }
-    
-    return count;
-  }
-  
-  public boolean hasHome(String playerName, String homeName)
-  {
-    return config.isLocation(playerName + "." + homeName);
-  }
-  
-  public void saveHomes()
-  {
-    config.save();
-  }
-  
-  public void reloadHomes()
-  {
-    config.reload();
   }
 }

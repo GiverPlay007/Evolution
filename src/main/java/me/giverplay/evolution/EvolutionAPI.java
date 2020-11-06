@@ -1,10 +1,12 @@
 package me.giverplay.evolution;
 
+import com.earth2me.essentials.Essentials;
 import java.util.logging.Logger;
 import me.giverplay.evolution.command.CommandManager;
 import me.giverplay.evolution.command.commands.EvolutionCommand;
 import me.giverplay.evolution.data.YamlConfig;
 import me.giverplay.evolution.modules.ModuleManager;
+import me.giverplay.evolution.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -12,14 +14,17 @@ import org.bukkit.event.Listener;
 public final class EvolutionAPI
 {
   private final Evolution plugin;
+  private final Essentials essentials;
   private final YamlConfig config;
   
-  private ModuleManager moduleManager;
   private CommandManager commandManager;
+  private ModuleManager moduleManager;
+  private PlayerManager playerManager;
   
   EvolutionAPI(Evolution plugin)
   {
     this.plugin = plugin;
+    this.essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
     this.config = new YamlConfig("settings");
   }
   
@@ -64,6 +69,7 @@ public final class EvolutionAPI
   private void registerManagers()
   {
     commandManager = new CommandManager(this);
+    playerManager = new PlayerManager(this);
     moduleManager = new ModuleManager(this);
   }
   
@@ -77,6 +83,16 @@ public final class EvolutionAPI
     return commandManager;
   }
   
+  public PlayerManager getPlayerManager()
+  {
+    return playerManager;
+  }
+  
+  public ModuleManager getModuleManager()
+  {
+    return moduleManager;
+  }
+  
   public YamlConfig getConfig()
   {
     return config;
@@ -85,6 +101,11 @@ public final class EvolutionAPI
   public Evolution getPlugin()
   {
     return this.plugin;
+  }
+  
+  public Essentials getEssentials()
+  {
+    return this.essentials;
   }
   
   public Logger getLogger()
