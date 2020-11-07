@@ -8,8 +8,10 @@ import me.giverplay.evolution.data.YamlConfig;
 import me.giverplay.evolution.modules.ModuleManager;
 import me.giverplay.evolution.player.PlayerManager;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
 
 public final class EvolutionAPI
 {
@@ -75,7 +77,7 @@ public final class EvolutionAPI
   
   private void registerCommands()
   {
-    commandManager.registerCommand(new EvolutionCommand());
+    commandManager.registerCommand(new EvolutionCommand(this));
   }
   
   public CommandManager getCommandManager()
@@ -116,5 +118,28 @@ public final class EvolutionAPI
   public void registerListener(Listener listener)
   {
     Bukkit.getPluginManager().registerEvents(listener, plugin);
+  }
+  
+  public void saveDatabase(CommandSender sender)
+  {
+    // TODO
+  }
+  
+  public void toggleLockdown()
+  {
+    // TODO
+  }
+  
+  public void reload(boolean plugin)
+  {
+    if(plugin)
+    {
+      PluginManager mng = Bukkit.getPluginManager();
+      mng.disablePlugin(this.plugin);
+      mng.enablePlugin(this.plugin);
+      return;
+    }
+    
+    // TODO
   }
 }
