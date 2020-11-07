@@ -8,20 +8,21 @@ import java.util.List;
 import me.giverplay.evolution.EvolutionAPI;
 import me.giverplay.evolution.command.CommandSource;
 import me.giverplay.evolution.command.EvolutionCommand;
+import me.giverplay.evolution.player.PlayerManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 public class SetHomeCommand extends EvolutionCommand
 {
   private final Commandsethome commandsethome;
-  private final EvolutionAPI evo;
+  private final PlayerManager pm;
   private final Essentials ess;
   
   public SetHomeCommand(EvolutionAPI evo)
   {
     super("sethome", false);
     
-    this.evo = evo;
+    this.pm = evo.getPlayerManager();
     this.ess = evo.getEssentials();
     commandsethome = new Commandsethome();
   }
@@ -31,7 +32,7 @@ public class SetHomeCommand extends EvolutionCommand
   {
     try
     {
-      commandsethome.run(ess.getServer(), sender.getEvolutionPlayer().getEssentialsUser(), "sethome", args);
+      commandsethome.run(ess.getServer(), sender.getEssentialsUser(), "sethome", args);
     }
     catch(NoChargeException ignored)
     {
@@ -51,6 +52,6 @@ public class SetHomeCommand extends EvolutionCommand
       return Collections.emptyList();
     }
   
-    return commandsethome.tabComplete(ess.getServer(), evo.getPlayerManager().getPlayer(sender.getName()).getEssentialsUser(), alias, command, args);
+    return commandsethome.tabComplete(ess.getServer(), pm.getPlayer(sender.getName()).getEssentialsUser(), alias, command, args);
   }
 }

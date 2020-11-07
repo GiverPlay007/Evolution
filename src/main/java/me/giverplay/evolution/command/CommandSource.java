@@ -1,5 +1,6 @@
 package me.giverplay.evolution.command;
 
+import com.earth2me.essentials.User;
 import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.player.EvolutionPlayer;
 import org.apache.commons.lang.Validate;
@@ -37,6 +38,16 @@ public class CommandSource
     }
     
     return null;
+  }
+  
+  public com.earth2me.essentials.CommandSource asEssentialsCommandSource()
+  {
+    return new com.earth2me.essentials.CommandSource(sender);
+  }
+  
+  public User getEssentialsUser()
+  {
+    return Evolution.getEvolutionAPI().getEssentials().getUser(sender.getName());
   }
   
   public EvolutionPlayer getEvolutionPlayer()
