@@ -1,7 +1,7 @@
 package me.giverplay.evolution.command.commands;
 
 import com.earth2me.essentials.Essentials;
-import com.earth2me.essentials.commands.Commandhome;
+import com.earth2me.essentials.commands.Commandsethome;
 import com.earth2me.essentials.commands.NoChargeException;
 import java.util.Collections;
 import java.util.List;
@@ -11,19 +11,19 @@ import me.giverplay.evolution.command.EvolutionCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-public class HomeCommand extends EvolutionCommand
+public class SetHomeCommand extends EvolutionCommand
 {
+  private final Commandsethome commandsethome;
   private final EvolutionAPI evo;
   private final Essentials ess;
-  private final Commandhome commandhome;
   
-  public HomeCommand(EvolutionAPI evo)
+  public SetHomeCommand(EvolutionAPI evo)
   {
-    super("home", false);
+    super("sethome", false);
     
     this.evo = evo;
     this.ess = evo.getEssentials();
-    this.commandhome = new Commandhome();
+    commandsethome = new Commandsethome();
   }
   
   @Override
@@ -31,7 +31,7 @@ public class HomeCommand extends EvolutionCommand
   {
     try
     {
-      commandhome.run(ess.getServer(), sender.getEvolutionPlayer().getEssentialsUser(), "home", args);
+      commandsethome.run(ess.getServer(), sender.getEvolutionPlayer().getEssentialsUser(), "sethome", args);
     }
     catch(NoChargeException ignored)
     {
@@ -50,7 +50,7 @@ public class HomeCommand extends EvolutionCommand
     {
       return Collections.emptyList();
     }
-    
-    return commandhome.tabComplete(ess.getServer(), evo.getPlayerManager().getPlayer(sender.getName()).getEssentialsUser(), alias, command, args);
+  
+    return commandsethome.tabComplete(ess.getServer(), evo.getPlayerManager().getPlayer(sender.getName()).getEssentialsUser(), alias, command, args);
   }
 }

@@ -2,6 +2,7 @@ package me.giverplay.evolution.modules.home;
 
 import me.giverplay.evolution.EvolutionAPI;
 import me.giverplay.evolution.command.commands.HomeCommand;
+import me.giverplay.evolution.command.commands.SetHomeCommand;
 import me.giverplay.evolution.modules.Module;
 
 public class HomeModule implements Module
@@ -9,6 +10,7 @@ public class HomeModule implements Module
   private final EvolutionAPI plugin;
   
   private HomeCommand homeCommand;
+  private SetHomeCommand setHomeCommand;
   private boolean enabled;
   
   public HomeModule(EvolutionAPI plugin)
@@ -49,13 +51,16 @@ public class HomeModule implements Module
   private void toggleCommands(boolean status)
   {
     homeCommand.setEnabled(status);
+    setHomeCommand.setEnabled(status);
   }
   
   private void setupCommands()
   {
-    this.homeCommand = new HomeCommand(plugin);
+    homeCommand = new HomeCommand(plugin);
+    setHomeCommand = new SetHomeCommand(plugin);
   
     plugin.getCommandManager().registerCommand(homeCommand);
+    plugin.getCommandManager().registerCommand(setHomeCommand);
   }
   
   @Override
