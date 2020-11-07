@@ -16,3 +16,15 @@ commands:
   evolution:
     description: 'Comando principal'
     aliases: [evo, info]
+
+  home:
+    description: 'Wrapper do comando Home do Essentials'
+    aliases: [homes, hometp]
+
+  sethome:
+    description: 'Wrapper do comando SetHome do Essentials'
+    aliases: [homeset, createhome, defhome]
+
+  delhome:
+    description: 'Wrapper do comando Delhome do Essentials'
+    aliases: [homedelete]

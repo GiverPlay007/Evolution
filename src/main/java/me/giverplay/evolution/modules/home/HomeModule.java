@@ -1,6 +1,7 @@
 package me.giverplay.evolution.modules.home;
 
 import me.giverplay.evolution.EvolutionAPI;
+import me.giverplay.evolution.command.commands.DelHomeCommand;
 import me.giverplay.evolution.command.commands.HomeCommand;
 import me.giverplay.evolution.command.commands.SetHomeCommand;
 import me.giverplay.evolution.modules.Module;
@@ -9,8 +10,10 @@ public class HomeModule implements Module
 {
   private final EvolutionAPI plugin;
   
-  private HomeCommand homeCommand;
   private SetHomeCommand setHomeCommand;
+  private DelHomeCommand delHomeCommand;
+  private HomeCommand homeCommand;
+  
   private boolean enabled;
   
   public HomeModule(EvolutionAPI plugin)
@@ -52,15 +55,19 @@ public class HomeModule implements Module
   {
     homeCommand.setEnabled(status);
     setHomeCommand.setEnabled(status);
+    delHomeCommand.setEnabled(status);
   }
   
   private void setupCommands()
   {
-    homeCommand = new HomeCommand(plugin);
     setHomeCommand = new SetHomeCommand(plugin);
+    delHomeCommand = new DelHomeCommand(plugin);
+    homeCommand = new HomeCommand(plugin);
+    
   
-    plugin.getCommandManager().registerCommand(homeCommand);
     plugin.getCommandManager().registerCommand(setHomeCommand);
+    plugin.getCommandManager().registerCommand(delHomeCommand);
+    plugin.getCommandManager().registerCommand(homeCommand);
   }
   
   @Override
