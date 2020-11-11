@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 public class EvolutionCommand extends me.giverplay.evolution.command.EvolutionCommand
 {
   private static final List<String> OPTIONS = Arrays.asList("save-db", "lockdown", "reload");
-  private static final List<String> OPTIONS_RELOAD = Arrays.asList("save-db", "lockdown", "reload");
+  private static final List<String> OPTIONS_RELOAD = Arrays.asList("plugin", "config");
   
   private final EvolutionAPI evo;
   

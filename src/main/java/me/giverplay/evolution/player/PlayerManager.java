@@ -26,6 +26,13 @@ public class PlayerManager
     }
   }
   
+  public EvolutionPlayer getPlayer(Player player)
+  {
+    Validate.notNull(player, "O jogador não pode ser nulo!");
+    
+    return getPlayer(player.getName());
+  }
+  
   public void registerPlayer(Player player)
   {
     Validate.notNull(player, "Não é possível registar um jogador nulo.");

@@ -45,4 +45,49 @@ public class EvolutionPlayer
   {
     return ess.getUser(player);
   }
+  
+  public boolean hasPermission(String permission)
+  {
+    return player.hasPermission(permission);
+  }
+  
+  public String getNameColor()
+  {
+    return ""; // todo
+  }
+  
+  public String getChatColor()
+  {
+    return ""; // TODO
+  }
+  
+  public String getTag()
+  {
+    return ""; // TODO
+  }
+  
+  public String getPrefix()
+  {
+    return ""; // TODO
+  }
+  
+  public int getLevel()
+  {
+    return 0; // TODO
+  }
+  
+  public void setLevel(int level)
+  {
+    // TODO
+  }
+  
+  public int getXp()
+  {
+    return 0; // TODO
+  }
+  
+  public void setXp(int xp)
+  {
+    // TODO
+  }
 }

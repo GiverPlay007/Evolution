@@ -56,4 +56,9 @@ public class ChatModule implements Module
   {
     return enabled;
   }
+  
+  public String getFormat()
+  {
+    return "&e[$level]&r $prefix&r $tag $color%1$s$chatcolor: %2$s";
+  }
 }
