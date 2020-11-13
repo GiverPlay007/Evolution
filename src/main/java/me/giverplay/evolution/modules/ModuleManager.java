@@ -5,6 +5,7 @@ import me.giverplay.evolution.EvolutionAPI;
 import me.giverplay.evolution.data.YamlConfig;
 import me.giverplay.evolution.modules.chat.ChatModule;
 import me.giverplay.evolution.modules.home.HomeModule;
+import me.giverplay.evolution.modules.trash.TrashModule;
 
 public class ModuleManager
 {
@@ -14,6 +15,7 @@ public class ModuleManager
   
   private HomeModule homes;
   private ChatModule chat;
+  private TrashModule trash;
   
   public ModuleManager(EvolutionAPI api)
   {
@@ -27,6 +29,7 @@ public class ModuleManager
     
     modules.add(homes = new HomeModule(plugin));
     modules.add(chat = new ChatModule(plugin));
+    modules.add(trash = new TrashModule(plugin));
     
     modules.forEach(this::checkEnable);
     plugin.getLogger().info("Carregamento de modulos finalizado.");
@@ -58,5 +61,10 @@ public class ModuleManager
   public ChatModule getChatModule()
   {
     return chat;
+  }
+  
+  public TrashModule getTrash()
+  {
+    return trash;
   }
 }
