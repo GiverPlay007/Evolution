@@ -14,11 +14,6 @@ import me.giverplay.evolution_old.Evolution;
 
 public class Menus
 {
-	public static Inventory lixeira()
-	{
-		return Bukkit.createInventory(null, 54, "§4Lixeira");
-	}
-	
 	public static Inventory repararMenu(Player player)
 	{
 		Inventory inv = Bukkit.createInventory(null, 27, "§0§lReparar");
