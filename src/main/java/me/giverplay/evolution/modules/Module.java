@@ -9,4 +9,12 @@ public interface Module
   void disable();
   
   boolean isEnabled();
+
+  default void setupCommands() { }
+
+  default void registerEvents() { }
+
+  default void unregisterEvents() { }
+
+  default void toggleCommands(boolean enabled){ }
 }

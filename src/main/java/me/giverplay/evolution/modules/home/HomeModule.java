@@ -50,29 +50,30 @@ public class HomeModule implements Module
     enabled = false;
     plugin.getLogger().info("Modulo Homes desabilitado.");
   }
-  
-  private void toggleCommands(boolean status)
+
+  @Override
+  public boolean isEnabled()
+  {
+    return enabled;
+  }
+
+  @Override
+  public void toggleCommands(boolean status)
   {
     homeCommand.setEnabled(status);
     setHomeCommand.setEnabled(status);
     delHomeCommand.setEnabled(status);
   }
-  
-  private void setupCommands()
+
+  @Override
+  public void setupCommands()
   {
     setHomeCommand = new SetHomeCommand(plugin);
     delHomeCommand = new DelHomeCommand(plugin);
     homeCommand = new HomeCommand(plugin);
-    
-  
+
     plugin.getCommandManager().registerCommand(setHomeCommand);
     plugin.getCommandManager().registerCommand(delHomeCommand);
     plugin.getCommandManager().registerCommand(homeCommand);
-  }
-  
-  @Override
-  public boolean isEnabled()
-  {
-    return enabled;
   }
 }

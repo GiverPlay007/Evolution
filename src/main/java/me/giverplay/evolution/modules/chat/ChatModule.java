@@ -28,13 +28,8 @@ public class ChatModule implements Module
   public void enable()
   {
     if(enabled) return;
-    
-    if(listener == null)
-    {
-      listener = new ChatModuleListener(this, plugin);
-    }
-    
-    plugin.registerListener(listener);
+
+    registerEvents();
     
     enabled = true;
     plugin.getLogger().info("Modulo Chat habilitado.");
@@ -45,7 +40,7 @@ public class ChatModule implements Module
   {
     if(!enabled) return;
     
-    HandlerList.unregisterAll(listener);
+    unregisterEvents();
     
     enabled = false;
     plugin.getLogger().info("Modulo Chat desabilitado.");
@@ -60,5 +55,25 @@ public class ChatModule implements Module
   public String getFormat()
   {
     return "&e[$level]&r $prefix&r $tag $color%1$s$chatcolor: %2$s";
+  }
+
+  @Override
+  public void registerEvents()
+  {
+    if(listener == null)
+    {
+      listener = new ChatModuleListener(this, plugin);
+    }
+
+    plugin.registerListener(listener);
+  }
+
+  @Override
+  public void unregisterEvents()
+  {
+    if(listener != null)
+    {
+      HandlerList.unregisterAll(listener);
+    }
   }
 }
