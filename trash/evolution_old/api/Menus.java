@@ -31,24 +31,4 @@ public class Menus
 		
 		return inv;
 	}
-	
-	public static Inventory playerWarps(String player)
-	{
-		Inventory inv = Bukkit.createInventory(null, 36, "Warps de " + player);
-		
-		ArrayList<PlayerWarp> warps = Evolution.getInstance().getWarps(player);
-		
-		int count = 0;
-		
-		if(warps != null)
-		{
-			for(PlayerWarp warp : warps)
-			{
-				inv.setItem(count, Stacks.add(Material.WRITABLE_BOOK, "§b" + warp.getWarpName(), Arrays.asList("§aClick para teleportar")));
-				count++;
-			}
-		}
-		
-		return inv;
-	}
 }
