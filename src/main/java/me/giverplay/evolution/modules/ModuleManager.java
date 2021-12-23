@@ -1,18 +1,19 @@
 package me.giverplay.evolution.modules;
 
-import java.util.ArrayList;
 import me.giverplay.evolution.EvolutionAPI;
-import me.giverplay.evolution.data.YamlConfig;
 import me.giverplay.evolution.modules.chat.ChatModule;
 import me.giverplay.evolution.modules.evolution.EvolutionModule;
 import me.giverplay.evolution.modules.home.HomeModule;
 import me.giverplay.evolution.modules.trash.TrashModule;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.util.ArrayList;
 
 public class ModuleManager
 {
   private final ArrayList<Module> modules = new ArrayList<>();
   private final EvolutionAPI plugin;
-  private final YamlConfig config;
+  private final YamlConfiguration config;
   
   private HomeModule homes;
   private ChatModule chat;

@@ -1,23 +1,27 @@
 package me.giverplay.evolution;
 
 import com.earth2me.essentials.Essentials;
-import java.util.logging.Logger;
 import me.giverplay.evolution.command.CommandManager;
 import me.giverplay.evolution.command.commands.EvolutionCommand;
-import me.giverplay.evolution.data.YamlConfig;
 import me.giverplay.evolution.modules.ModuleManager;
 import me.giverplay.evolution.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 public final class EvolutionAPI
 {
   private final Evolution plugin;
   private final Essentials essentials;
-  private final YamlConfig config;
+  private final YamlConfiguration config;
   
   private CommandManager commandManager;
   private ModuleManager moduleManager;
@@ -27,14 +31,19 @@ public final class EvolutionAPI
   {
     this.plugin = plugin;
     this.essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
-    this.config = new YamlConfig("settings");
+    this.config = new YamlConfiguration();
   }
   
   void load()
   {
-    config.saveDefault(false);
-    config.reload();
-    
+    plugin.saveResource("settings.yml", false);
+
+    try {
+      config.load(new File(plugin.getDataFolder(), "settings.yml"));
+    } catch (IOException | InvalidConfigurationException e) {
+      e.printStackTrace();
+    }
+
     registerManagers();
     registerCommands();
     
@@ -44,8 +53,13 @@ public final class EvolutionAPI
   void unload()
   {
     moduleManager.disable();
-    config.save();
-    
+
+    try {
+      config.save(new File(plugin.getDataFolder(), "settings.yml"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     Bukkit.getScheduler().cancelTasks(plugin);
     HandlerList.unregisterAll(plugin); // Para precavir, caso venha do setEnabled() sem o disablePlugin()
   }
@@ -95,7 +109,7 @@ public final class EvolutionAPI
     return moduleManager;
   }
   
-  public YamlConfig getConfig()
+  public YamlConfiguration getConfig()
   {
     return config;
   }

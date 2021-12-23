@@ -1,0 +1,4 @@
+modules:
+  home: true
+  chat: true
+  trash: true
