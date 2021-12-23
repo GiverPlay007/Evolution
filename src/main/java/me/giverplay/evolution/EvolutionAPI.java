@@ -17,25 +17,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-public final class EvolutionAPI
-{
+public final class EvolutionAPI {
+
   private final Evolution plugin;
   private final Essentials essentials;
   private final YamlConfiguration config;
-  
+
   private CommandManager commandManager;
   private ModuleManager moduleManager;
   private PlayerManager playerManager;
-  
-  EvolutionAPI(Evolution plugin)
-  {
+
+  EvolutionAPI(Evolution plugin) {
     this.plugin = plugin;
     this.essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
     this.config = new YamlConfiguration();
   }
-  
-  void load()
-  {
+
+  void load() {
     plugin.saveResource("settings.yml", false);
 
     try {
@@ -46,12 +44,11 @@ public final class EvolutionAPI
 
     registerManagers();
     registerCommands();
-    
+
     moduleManager.enable();
   }
-  
-  void unload()
-  {
+
+  void unload() {
     moduleManager.disable();
 
     try {
@@ -61,99 +58,74 @@ public final class EvolutionAPI
     }
 
     Bukkit.getScheduler().cancelTasks(plugin);
-    HandlerList.unregisterAll(plugin); // Para precavir, caso venha do setEnabled() sem o disablePlugin()
   }
-  
-  boolean shouldLoad()
-  {
-    return checkDependency("Vault") && checkDependency("Essentials") && checkDependency("PermissionsEx");
+
+  boolean serverHasDependencies() {
+    return checkDependency("Vault")
+      && checkDependency("Essentials")
+      && checkDependency("LuckPerms");
   }
-  
-  private boolean checkDependency(String name)
-  {
-    boolean has = true;
-    
-    if(!Bukkit.getPluginManager().isPluginEnabled(name))
-    {
-      getLogger().warning("Plugin " + name + " não foi encontrado no servidor ou está desabilitado.");
-      has = false;
+
+  private boolean checkDependency(String name) {
+    if (!Bukkit.getPluginManager().isPluginEnabled(name)) {
+      getLogger().warning("Dependency plugin " + name + " not installed or disabled");
+      return false;
     }
-    
-    return has;
+
+    return true;
   }
-  
-  private void registerManagers()
-  {
+
+  private void registerManagers() {
     commandManager = new CommandManager(this);
     playerManager = new PlayerManager(this);
     moduleManager = new ModuleManager(this);
   }
-  
-  private void registerCommands()
-  {
+
+  private void registerCommands() {
     commandManager.registerCommand(new EvolutionCommand(this));
   }
-  
-  public CommandManager getCommandManager()
-  {
+
+  public CommandManager getCommandManager() {
     return commandManager;
   }
-  
-  public PlayerManager getPlayerManager()
-  {
+
+  public PlayerManager getPlayerManager() {
     return playerManager;
   }
-  
-  public ModuleManager getModuleManager()
-  {
+
+  public ModuleManager getModuleManager() {
     return moduleManager;
   }
-  
-  public YamlConfiguration getConfig()
-  {
+
+  public YamlConfiguration getConfig() {
     return config;
   }
-  
-  public Evolution getPlugin()
-  {
+
+  public Evolution getPlugin() {
     return this.plugin;
   }
-  
-  public Essentials getEssentials()
-  {
+
+  public Essentials getEssentials() {
     return this.essentials;
   }
-  
-  public Logger getLogger()
-  {
+
+  public Logger getLogger() {
     return plugin.getLogger();
   }
-  
-  public void registerListener(Listener listener)
-  {
+
+  public void registerListener(Listener listener) {
     Bukkit.getPluginManager().registerEvents(listener, plugin);
   }
-  
-  public void saveDatabase(CommandSender sender)
-  {
+
+  public void saveDatabase(CommandSender sender) {
     // TODO
   }
-  
-  public void toggleLockdown()
-  {
+
+  public void toggleLockdown() {
     // TODO
   }
-  
-  public void reload(boolean plugin)
-  {
-    if(plugin)
-    {
-      PluginManager mng = Bukkit.getPluginManager();
-      mng.disablePlugin(this.plugin);
-      mng.enablePlugin(this.plugin);
-      return;
-    }
-    
+
+  public void reload(boolean plugin) {
     // TODO
   }
 }

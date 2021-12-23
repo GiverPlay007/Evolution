@@ -1,4 +1,4 @@
 modules:
-  home: true
-  chat: true
-  trash: true
+  home: false
+  chat: false
+  trash: false

@@ -1,80 +1,63 @@
 package me.giverplay.evolution;
 
 import java.util.logging.Level;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Evolution extends JavaPlugin
-{
+public final class Evolution extends JavaPlugin {
+
   private static Evolution evolution;
   private static EvolutionAPI api;
-  
-  private String version;
-  
+
   private boolean death = false;
-  
-  public static Evolution getInstance()
-  {
+
+  public static Evolution getInstance() {
     return evolution;
   }
-  
-  public static EvolutionAPI getEvolutionAPI()
-  {
+
+  public static EvolutionAPI getEvolutionAPI() {
     return api;
   }
-  
+
   @Override
-  public void onEnable()
-  {
-    version = getDescription().getVersion();
+  public void onEnable() {
     evolution = this;
     api = new EvolutionAPI(this);
-  
-    getLogger().info("Habilitando.");
-    
-    if(!api.shouldLoad())
-    {
-      getLogger().severe("O plugin não pôde ser iniciado com sucesso.");
+
+    if (!api.serverHasDependencies()) {
+      getLogger().severe("Plugin could not be loaded");
       death = true;
       setEnabled(false);
-      
+
       return;
     }
-    
-    try
-    {
+
+    try {
       api.load();
-    }
-    catch(Throwable t)
-    {
-      getLogger().log(Level.SEVERE, String.format("Exceção não tratada enquanto habilitava Evolution v%s.", version), t);
+    } catch (Throwable t) {
+      getLogger().log(Level.SEVERE, "Unhandled exception while loading " + getDescription().getFullName(), t);
       this.setEnabled(false);
       return;
     }
- 
-    getLogger().info("Plugin habilitado com sucesso");
+
+    getLogger().fine("Enabled successfully :ok_hand:");
   }
-  
+
   @Override
-  public void onDisable()
-  {
-    getLogger().info("Desabilitando.");
-    
-    if(death)
-    {
-      getLogger().info("Desabilitado sem descarregar a API (death disable).");
+  public void onDisable() {
+    if (death) {
+      getLogger().info("Disabling without API unloading (death disable)");
       return;
     }
-    
-    try
-    {
+
+    try {
       api.unload();
-    }
-    catch(Throwable t)
-    {
-      getLogger().log(Level.SEVERE, String.format("Exceção não trata enquanto desabilitava Evolution v%s.", version), t);
+    } catch (Throwable t) {
+      getLogger().log(Level.SEVERE, "Unhandled exception while unloading " + getDescription().getFullName(), t);
       return;
     }
-    
-    getLogger().info("Plugin desabilitado com sucesso.");
+
+    api = null;
+    getLogger().fine("Disabled perfectly :ok_hand:");
   }
 }
