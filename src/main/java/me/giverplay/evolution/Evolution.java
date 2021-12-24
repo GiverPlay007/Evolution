@@ -83,4 +83,12 @@ public final class Evolution extends JavaPlugin {
   public ModuleManager getModuleManager() {
     return moduleManager;
   }
+
+  public CommandHandler getCommandHandler() {
+    return commandHandler;
+  }
+
+  public Economy getVaultEconomy() {
+    return vaultEconomy;
+  }
 }

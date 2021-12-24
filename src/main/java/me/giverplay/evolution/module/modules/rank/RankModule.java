@@ -1,6 +1,8 @@
 package me.giverplay.evolution.module.modules.rank;
 
 import me.giverplay.evolution.Evolution;
+import me.giverplay.evolution.command.CommandHandler;
+import me.giverplay.evolution.command.commands.RankupCommand;
 import me.giverplay.evolution.listeners.RankModuleListener;
 import me.giverplay.evolution.module.Module;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -41,11 +43,18 @@ public final class RankModule extends Module {
 
     listener = new RankModuleListener(this);
     evolution.registerEventListener(listener);
+
+    CommandHandler commandHandler = evolution.getCommandHandler();
+    commandHandler.registerCommand(new RankupCommand(rankManager));
   }
 
   @Override
   protected void onDisable() {
     evolution.unregisterEventListener(listener);
+
+    CommandHandler commandHandler = evolution.getCommandHandler();
+    commandHandler.unregisterCommand("rankup");
+
     listener = null;
     config = null;
   }
