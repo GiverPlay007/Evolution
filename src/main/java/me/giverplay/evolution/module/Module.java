@@ -9,8 +9,8 @@ public abstract class Module {
 
   private boolean isEnabled;
 
-  public Module(Evolution plugin, String name) {
-    this.evolution = plugin;
+  public Module(Evolution evolution, String name) {
+    this.evolution = evolution;
     this.name = name;
   }
 
