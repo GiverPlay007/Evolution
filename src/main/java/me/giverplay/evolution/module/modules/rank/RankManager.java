@@ -32,18 +32,18 @@ public class RankManager {
       ConfigurationSection rankData = ranks.getConfigurationSection(key);
 
       String next = rankData.getString("Next");
-      boolean isLast = rankData.getBoolean("isLast");
-      boolean isFist = rankData.getBoolean("isFirst");
+      boolean isFirst = rankData.getBoolean("FirstRank");
+      boolean isLast = rankData.getBoolean("LastRank");
       double cost = rankData.getDouble("Cost");
 
-      Rank rank = new Rank(key, cost, isFist, isLast, next);
+      Rank rank = new Rank(key, cost, isFirst, isLast, next);
       this.ranks.put(key, rank);
 
       if(isLast) {
         lastRank = rank;
       }
 
-      if(isFist) {
+      if(isFirst) {
         firstRank = rank;
       }
     }
