@@ -6,10 +6,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.logging.Level;
 
 public class PlayerManager {
 
+  private final HashMap<String, YamlConfiguration> dataCache = new HashMap<>();
   private final Evolution plugin;
   private final File playersFolder;
 
@@ -24,9 +27,13 @@ public class PlayerManager {
   }
 
   public YamlConfiguration getPlayerData(String playerName) {
-    playerName = playerName.toLowerCase() + ".yml";
-    File playerFile = new File(playersFolder, playerName);
+    playerName = playerName.toLowerCase();
 
+    if(dataCache.containsKey(playerName)) {
+      return dataCache.get(playerName);
+    }
+
+    File playerFile = new File(playersFolder, playerName + ".yml");
     YamlConfiguration playerData = new YamlConfiguration();
 
     if(!playerFile.exists()) {
@@ -41,6 +48,7 @@ public class PlayerManager {
       e.printStackTrace();
     }
 
+    dataCache.put(playerName, playerData);
     return playerData;
   }
 }
