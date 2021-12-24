@@ -90,6 +90,7 @@ public class RankManager {
     PlayerData playerData = evolution.getPlayerManager().getPlayerData(player);
     playerData.set("Rank.Rank", nextRank.getName());
     playerData.set("Rank.LastRankup", System.currentTimeMillis());
+    playerData.save();
     economy.withdrawPlayer(player, nextRank.getCost());
 
     ConsoleCommandSender sender = Bukkit.getConsoleSender();
