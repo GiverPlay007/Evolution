@@ -17,7 +17,7 @@ public final class RankModule extends Module {
   private RankManager rankManager;
   private RankModuleListener listener;
 
-  private RankModule(Evolution evolution) {
+  public RankModule(Evolution evolution) {
     super(evolution, "Rank");
     evolution.requireVault();
   }

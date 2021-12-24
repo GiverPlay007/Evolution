@@ -3,6 +3,7 @@ package me.giverplay.evolution;
 import me.giverplay.evolution.command.CommandHandler;
 import me.giverplay.evolution.listeners.PlayerManagerListener;
 import me.giverplay.evolution.module.ModuleManager;
+import me.giverplay.evolution.module.modules.rank.RankModule;
 import me.giverplay.evolution.player.PlayerManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.event.HandlerList;
@@ -33,6 +34,8 @@ public final class Evolution extends JavaPlugin {
     }
 
     commandHandler = new CommandHandler(this);
+
+    moduleManager.registerModule(new RankModule(this));
     moduleManager.enableAll();
 
     getServer().getPluginManager().registerEvents(new PlayerManagerListener(this), this);

@@ -12,3 +12,8 @@ softdepend:
   - Vault
   - Essentials
   - LuckPerms
+
+commands:
+  rankup:
+    description: 'Go to the next rank'
+    aliases: [up, upar, nextrank]
