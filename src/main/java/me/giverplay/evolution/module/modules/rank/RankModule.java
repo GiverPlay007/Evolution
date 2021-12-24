@@ -1,6 +1,7 @@
 package me.giverplay.evolution.module.modules.rank;
 
 import me.giverplay.evolution.Evolution;
+import me.giverplay.evolution.listeners.RankModuleListener;
 import me.giverplay.evolution.module.Module;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,6 +13,7 @@ public final class RankModule extends Module {
 
   private YamlConfiguration config;
   private RankManager rankManager;
+  private RankModuleListener listener;
 
   private RankModule(Evolution evolution) {
     super(evolution, "Rank");
@@ -36,10 +38,15 @@ public final class RankModule extends Module {
 
     rankManager = new RankManager(this);
     rankManager.loadRanks();
+
+    listener = new RankModuleListener(this);
+    evolution.registerEventListener(listener);
   }
 
   @Override
   protected void onDisable() {
+    evolution.unregisterEventListener(listener);
+    listener = null;
     config = null;
   }
 

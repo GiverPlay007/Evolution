@@ -38,6 +38,10 @@ public abstract class Module {
     return isEnabled;
   }
 
+  public Evolution getEvolution() {
+    return evolution;
+  }
+
   public Logger getLogger() {
     return evolution.getLogger();
   }

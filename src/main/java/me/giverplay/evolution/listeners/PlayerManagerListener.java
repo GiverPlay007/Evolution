@@ -4,6 +4,7 @@ import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.player.PlayerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -16,7 +17,7 @@ public class PlayerManagerListener implements Listener {
     this.plugin = evolution;
   }
 
-  @EventHandler
+  @EventHandler(priority = EventPriority.LOWEST)
   public void onPlayerJoin(PlayerJoinEvent event) {
     PlayerManager manager = plugin.getPlayerManager();
     Player player = event.getPlayer();
@@ -30,7 +31,7 @@ public class PlayerManagerListener implements Listener {
     manager.getPlayerData(player);
   }
 
-  @EventHandler
+  @EventHandler(priority = EventPriority.MONITOR)
   public void onPlayerQuit(PlayerQuitEvent event) {
     PlayerManager manager = plugin.getPlayerManager();
     Player player = event.getPlayer();

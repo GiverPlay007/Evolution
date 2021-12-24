@@ -4,6 +4,8 @@ import me.giverplay.evolution.listeners.PlayerManagerListener;
 import me.giverplay.evolution.module.ModuleManager;
 import me.giverplay.evolution.player.PlayerManager;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,6 +43,14 @@ public final class Evolution extends JavaPlugin {
     }
 
     playerManager = null;
+  }
+
+  public void registerEventListener(Listener listener) {
+    getServer().getPluginManager().registerEvents(listener, this);
+  }
+
+  public void unregisterEventListener(Listener listener) {
+    HandlerList.unregisterAll(listener);
   }
 
   private boolean hookVault() {
