@@ -19,11 +19,13 @@ public abstract class Module {
   public final void enable() {
     evolution.getLogger().info("Enabling module " + name);
     isEnabled = true;
+    onEnable();
   }
 
   public final void disable() {
     evolution.getLogger().info("Disabling module " + name);
     isEnabled = false;
+    onDisable();
   }
 
   protected abstract void onEnable();
