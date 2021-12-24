@@ -85,4 +85,24 @@ public class PlayerManager {
   private File getPlayerFile(String uuid) {
     return new File(playersFolder, uuid + ".yml");
   }
+
+  public boolean isPlayerRegistered(Player player) {
+    return getPlayerFile(player.getUniqueId().toString()).exists();
+  }
+
+  public void registerPlayer(Player player) {
+    UUID uuid = player.getUniqueId();
+    YamlConfiguration playerData = new YamlConfiguration();
+
+    File playerFile = getPlayerFile(uuid.toString());
+
+    try {
+      playerData.save(playerFile);
+    } catch (IOException e) {
+      plugin.getLogger().log(Level.SEVERE, "Failed to save player data " + uuid, e);
+      return;
+    }
+
+    dataCache.put(uuid, playerData);
+  }
 }
