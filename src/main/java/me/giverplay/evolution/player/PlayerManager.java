@@ -2,26 +2,22 @@ package me.giverplay.evolution.player;
 
 import me.giverplay.evolution.Evolution;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.logging.Level;
 
 public class PlayerManager {
 
-  private final HashMap<UUID, YamlConfiguration> dataCache = new HashMap<>();
-  private final Evolution plugin;
+  private final HashMap<UUID, PlayerData> dataCache = new HashMap<>();
+  private final Evolution evolution;
   private final File playersFolder;
 
-  public PlayerManager(Evolution plugin) {
-    this.plugin = plugin;
+  public PlayerManager(Evolution evolution) {
+    this.evolution = evolution;
 
-    playersFolder = new File(plugin.getDataFolder(), "players");
+    playersFolder = new File(evolution.getDataFolder(), "players");
 
     if(!playersFolder.exists()) {
       playersFolder.mkdirs();
@@ -38,48 +34,43 @@ public class PlayerManager {
 
   public void savePlayerData(UUID uuid) {
     if(!dataCache.containsKey(uuid)) {
-      plugin.getLogger().warning("Could save player data " + uuid + " because it's not loaded");
+      evolution.getLogger().warning("Could save player data " + uuid + " because it's not loaded");
       return;
     }
 
-    YamlConfiguration playerData = dataCache.get(uuid);
+    PlayerData data = dataCache.get(uuid);
 
-    try {
-      playerData.save(getPlayerFile(uuid.toString()));
-    } catch (IOException e) {
-      plugin.getLogger().log(Level.SEVERE, "Failed to save player data " + uuid, e);
+    if(!data.save()) {
+      evolution.getLogger().severe("Failed to save player data " + data);
     }
   }
 
-  public YamlConfiguration getPlayerData(OfflinePlayer offlinePlayer) {
+  public PlayerData getPlayerData(OfflinePlayer offlinePlayer) {
     return getPlayerData(offlinePlayer.getUniqueId());
   }
 
-  public YamlConfiguration getPlayerData(Player player) {
+  public PlayerData getPlayerData(Player player) {
     return getPlayerData(player.getUniqueId());
   }
 
-  public YamlConfiguration getPlayerData(UUID uuid) {
+  public PlayerData getPlayerData(UUID uuid) {
     if(dataCache.containsKey(uuid)) {
       return dataCache.get(uuid);
     }
 
-    File playerFile = getPlayerFile(uuid.toString());
-    YamlConfiguration playerData = new YamlConfiguration();
+    PlayerData data = new PlayerData(playersFolder, uuid);
 
-    if(!playerFile.exists()) {
-      plugin.getLogger().warning("Player data " + uuid + " does not exists");
-      return playerData;
+    if(!data.exists()) {
+      evolution.getLogger().warning("Player data " + uuid + " does not exists");
+      return data;
     }
 
-    try {
-      playerData.load(playerFile);
-    } catch (IOException | InvalidConfigurationException e) {
-      plugin.getLogger().log(Level.SEVERE, "Failed to load player data " + uuid, e);
+    if(!data.load()) {
+      evolution.getLogger().severe("Failed to load player data " + uuid);
     }
 
-    dataCache.put(uuid, playerData);
-    return playerData;
+    dataCache.put(uuid, data);
+    return data;
   }
 
   private File getPlayerFile(String uuid) {
@@ -92,18 +83,16 @@ public class PlayerManager {
 
   public void registerPlayer(Player player) {
     UUID uuid = player.getUniqueId();
-    YamlConfiguration playerData = new YamlConfiguration();
+    PlayerData data = new PlayerData(playersFolder, uuid);
 
-    File playerFile = getPlayerFile(uuid.toString());
+    data.setRegisteredAt(System.currentTimeMillis());
+    data.setNickname(player.getName());
 
-    try {
-      playerData.save(playerFile);
-    } catch (IOException e) {
-      plugin.getLogger().log(Level.SEVERE, "Failed to save player data " + uuid, e);
-      return;
+    if(!data.save()) {
+      evolution.getLogger().severe("Failed to save player data " + uuid);
     }
 
-    dataCache.put(uuid, playerData);
+    dataCache.put(uuid, data);
   }
 
   public void removeFromCache(Player player) {
