@@ -105,4 +105,8 @@ public class PlayerManager {
 
     dataCache.put(uuid, playerData);
   }
+
+  public void removeFromCache(Player player) {
+    dataCache.remove(player.getUniqueId());
+  }
 }

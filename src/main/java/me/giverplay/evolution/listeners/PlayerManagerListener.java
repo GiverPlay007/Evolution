@@ -29,6 +29,10 @@ public class PlayerManagerListener implements Listener {
 
   @EventHandler
   public void onPlayerQuit(PlayerQuitEvent event) {
-    plugin.getPlayerManager().savePlayerData(event.getPlayer());
+    PlayerManager manager = plugin.getPlayerManager();
+    Player player = event.getPlayer();
+
+    manager.savePlayerData(player);
+    manager.removeFromCache(player);
   }
 }
