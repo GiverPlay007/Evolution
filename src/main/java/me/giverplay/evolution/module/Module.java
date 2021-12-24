@@ -2,6 +2,8 @@ package me.giverplay.evolution.module;
 
 import me.giverplay.evolution.Evolution;
 
+import java.util.logging.Logger;
+
 public abstract class Module {
 
   protected final Evolution evolution;
@@ -14,12 +16,12 @@ public abstract class Module {
     this.name = name;
   }
 
-  public void enable() {
+  public final void enable() {
     evolution.getLogger().info("Enabling module " + name);
     isEnabled = true;
   }
 
-  public void disable() {
+  public final void disable() {
     evolution.getLogger().info("Disabling module " + name);
     isEnabled = false;
   }
@@ -28,11 +30,15 @@ public abstract class Module {
 
   protected abstract void onDisable();
 
-  public String getName() {
+  public final String getName() {
     return name;
   }
 
-  public boolean isEnabled() {
+  public final boolean isEnabled() {
     return isEnabled;
+  }
+
+  public Logger getLogger() {
+    return evolution.getLogger();
   }
 }

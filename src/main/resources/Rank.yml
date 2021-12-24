@@ -1,0 +1,13 @@
+Ranks:
+  Newbie:
+    FistRank: true
+    Next: Expert
+  Expert:
+    Cost: 1000
+    Next: Pro
+  Pro:
+    Cost: 2000
+    Next: Master
+  Master:
+    Cost: 3000
+    LastRank: true
