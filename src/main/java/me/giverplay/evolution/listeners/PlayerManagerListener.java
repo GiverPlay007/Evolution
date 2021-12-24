@@ -2,6 +2,7 @@ package me.giverplay.evolution.listeners;
 
 import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.player.PlayerManager;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,6 +24,10 @@ public class PlayerManagerListener implements Listener {
 
     if(!manager.isPlayerRegistered(player)) {
       manager.registerPlayer(player);
+
+      YamlConfiguration playerData = manager.getPlayerData(player);
+      playerData.set("Info.RegisteredAt", System.currentTimeMillis());
+
       plugin.getLogger().info("Registered player " + player.getName());
     }
   }
