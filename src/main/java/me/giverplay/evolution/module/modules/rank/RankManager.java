@@ -97,6 +97,6 @@ public class RankManager {
     Bukkit.dispatchCommand(sender, "lp user " + player.getName() + " parent add " + nextRank.getName());
 
     evolution.getLogger().info("Player " + player.getName() + " rank upped to " + nextRank.getName());
-    player.sendMessage(ChatColor.GREEN + "Parabéns! Você upou para o rank " + nextRank.getNextRank() + "!");
+    player.sendMessage(ChatColor.GREEN + "Parabéns! Você upou para o rank " + nextRank.getName() + "!");
   }
 }

@@ -26,6 +26,7 @@ public final class Evolution extends JavaPlugin {
   public void onEnable() {
     playerManager = new PlayerManager(this);
     moduleManager = new ModuleManager(this);
+    moduleManager.registerModule(new RankModule(this));
 
     if(isVaultRequired && !hookVault()) {
       getLogger().severe("Plugin Vault found, disabling...");
@@ -34,8 +35,6 @@ public final class Evolution extends JavaPlugin {
     }
 
     commandHandler = new CommandHandler(this);
-
-    moduleManager.registerModule(new RankModule(this));
     moduleManager.enableAll();
 
     getServer().getPluginManager().registerEvents(new PlayerManagerListener(this), this);
