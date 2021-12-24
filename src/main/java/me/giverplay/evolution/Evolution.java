@@ -1,5 +1,6 @@
 package me.giverplay.evolution;
 
+import me.giverplay.evolution.command.CommandHandler;
 import me.giverplay.evolution.listeners.PlayerManagerListener;
 import me.giverplay.evolution.module.ModuleManager;
 import me.giverplay.evolution.player.PlayerManager;
@@ -12,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Evolution extends JavaPlugin {
 
+  private CommandHandler commandHandler;
   private PlayerManager playerManager;
   private ModuleManager moduleManager;
 
@@ -30,6 +32,7 @@ public final class Evolution extends JavaPlugin {
       return;
     }
 
+    commandHandler = new CommandHandler(this);
     moduleManager.enableAll();
 
     getServer().getPluginManager().registerEvents(new PlayerManagerListener(this), this);
@@ -42,6 +45,8 @@ public final class Evolution extends JavaPlugin {
       moduleManager = null;
     }
 
+    commandHandler.unregisterAll();
+    commandHandler = null;
     playerManager = null;
   }
 
