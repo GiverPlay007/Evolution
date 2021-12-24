@@ -1,5 +1,5 @@
 name: Evolution
-version: @version@
+version: ${version}
 description: Plugin exclusivo do servidor Evolution
 website: 'https://github.com/FocaEnterprises'
 authors: [ GiverPlay ]
@@ -7,24 +7,8 @@ authors: [ GiverPlay ]
 main: me.giverplay.evolution.Evolution
 api-version: 1.18
 load: POSTWORLD
+
 softdepend:
   - Vault
   - Essentials
   - LuckPerms
-
-commands:
-  evolution:
-    description: 'Comando principal'
-    aliases: [evo, info]
-
-  home:
-    description: 'Wrapper do comando Home do Essentials'
-    aliases: [homes, hometp]
-
-  sethome:
-    description: 'Wrapper do comando SetHome do Essentials'
-    aliases: [homeset, createhome, defhome]
-
-  delhome:
-    description: 'Wrapper do comando Delhome do Essentials'
-    aliases: [homedelete]
