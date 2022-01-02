@@ -51,8 +51,8 @@ public class RankManager {
   }
 
   public Rank getPlayerRank(Player player) {
-    PlayerData data = rankModule.getEvolution().getPlayerManager().getPlayerData(player);
-    return getRank(data.getString("Rank.Rank"));
+    ConfigurationSection data = rankModule.getEvolution().getPlayerManager().getPlayerData(player).getNode(rankModule);
+    return getRank(data.getString("Rank"));
   }
 
   public Rank getRank(String rank) {
@@ -87,8 +87,9 @@ public class RankManager {
     }
 
     PlayerData playerData = evolution.getPlayerManager().getPlayerData(player);
-    playerData.set("Rank.Rank", nextRank.getName());
-    playerData.set("Rank.LastRankup", System.currentTimeMillis());
+    ConfigurationSection node = playerData.getNode(rankModule);
+    node.set("Rank", nextRank.getName());
+    node.set("LastRankup", System.currentTimeMillis());
     playerData.save();
     economy.withdrawPlayer(player, nextRank.getCost());
 

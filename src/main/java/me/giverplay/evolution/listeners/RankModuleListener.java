@@ -3,6 +3,7 @@ package me.giverplay.evolution.listeners;
 import me.giverplay.evolution.module.modules.rank.RankManager;
 import me.giverplay.evolution.module.modules.rank.RankModule;
 import me.giverplay.evolution.player.PlayerData;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,12 +21,15 @@ public class RankModuleListener implements Listener {
   public void onJoin(PlayerJoinEvent event) {
     Player player = event.getPlayer();
     PlayerData data = rank.getEvolution().getPlayerManager().getPlayerData(player);
+    ConfigurationSection node = data.getNode(rank);
 
     RankManager manager = rank.getRankManager();
 
-    if(!data.isConfigurationSection("Rank")) {
-      data.set("Rank.Rank", manager.getFirstRank().getName());
-      data.set("Rank.LastRankup", System.currentTimeMillis());
+    if(node == null) {
+      node = data.createNode(rank);
+      node.set("Rank", manager.getFirstRank().getName());
+      node.set("LastRankup", System.currentTimeMillis());
+      data.save();
     }
   }
 }
