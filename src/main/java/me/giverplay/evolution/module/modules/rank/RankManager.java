@@ -9,7 +9,6 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-import javax.swing.plaf.SplitPaneUI;
 import java.util.HashMap;
 import java.util.Map;
 
