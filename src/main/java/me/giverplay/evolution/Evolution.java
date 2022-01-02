@@ -21,6 +21,7 @@ public final class Evolution extends JavaPlugin {
   private Economy vaultEconomy;
 
   private boolean isVaultRequired;
+  private boolean isVaultHooked;
 
   @Override
   public void onEnable() {
@@ -71,11 +72,20 @@ public final class Evolution extends JavaPlugin {
       vaultEconomy = economyProvider.getProvider();
     }
 
-    return vaultEconomy != null;
+    isVaultHooked = vaultEconomy != null;
+    return isVaultHooked;
   }
 
   public void requireVault() {
+    if(isVaultHooked) {
+      throw new IllegalStateException("Vault is already hooked... Call this on module constructor!");
+    }
+
     isVaultRequired = true;
+  }
+
+  public boolean isVaultHooked() {
+    return isVaultHooked;
   }
 
   public PlayerManager getPlayerManager() {
