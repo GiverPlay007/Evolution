@@ -1,11 +1,12 @@
 package me.giverplay.evolution;
 
 import me.giverplay.evolution.command.CommandHandler;
-import me.giverplay.evolution.listeners.PlayerManagerListener;
+import me.giverplay.evolution.listeners.PlayerListener;
 import me.giverplay.evolution.module.ModuleManager;
 import me.giverplay.evolution.module.modules.rank.RankModule;
 import me.giverplay.evolution.player.PlayerManager;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -25,6 +26,9 @@ public final class Evolution extends JavaPlugin {
 
   @Override
   public void onEnable() {
+    saveDefaultConfig();
+    reloadConfig();
+
     playerManager = new PlayerManager(this);
     moduleManager = new ModuleManager(this);
     moduleManager.registerModule(new RankModule(this));
@@ -38,21 +42,24 @@ public final class Evolution extends JavaPlugin {
     commandHandler = new CommandHandler(this);
     moduleManager.enableAll();
 
-    getServer().getPluginManager().registerEvents(new PlayerManagerListener(this), this);
+    getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+    getServer().getOnlinePlayers().forEach(this::playerJoin);
   }
 
   @Override
   public void onDisable() {
-    saveDefaultConfig();
-    reloadConfig();
+    getServer().getOnlinePlayers().forEach(this::playerQuit);
 
     if(moduleManager != null) {
       moduleManager.disableAll();
       moduleManager = null;
     }
 
-    commandHandler.unregisterAll();
-    commandHandler = null;
+    if(commandHandler != null) {
+      commandHandler.unregisterAll();
+      commandHandler = null;
+    }
+
     playerManager = null;
   }
 
@@ -85,6 +92,21 @@ public final class Evolution extends JavaPlugin {
     }
 
     isVaultRequired = true;
+  }
+
+  public void playerJoin(Player player) {
+    if(!playerManager.isPlayerRegistered(player)) {
+      playerManager.registerPlayer(player);
+      getLogger().info("Registered player " + player.getName());
+      return;
+    }
+
+    playerManager.getPlayerData(player);
+  }
+
+  public void playerQuit(Player player) {
+    playerManager.savePlayerData(player);
+    playerManager.removeFromCache(player);
   }
 
   public boolean isVaultHooked() {
