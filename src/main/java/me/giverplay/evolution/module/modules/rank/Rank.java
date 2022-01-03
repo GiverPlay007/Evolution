@@ -1,6 +1,10 @@
 package me.giverplay.evolution.module.modules.rank;
 
+import java.util.List;
+
 public class Rank {
+
+  private final List<String> commands;
 
   private final String name;
   private final String next;
@@ -10,8 +14,9 @@ public class Rank {
   private final boolean isFirst;
   private final boolean isLast;
 
-  public Rank(String name, double cost, boolean isFirst, boolean isLast, String next) {
+  public Rank(String name, List<String> commands, double cost, boolean isFirst, boolean isLast, String next) {
     this.name = name;
+    this.commands = commands;
     this.cost = cost;
     this.isFirst = isFirst;
     this.isLast = isLast;
@@ -36,5 +41,9 @@ public class Rank {
 
   public boolean isLast() {
     return isLast;
+  }
+
+  public List<String> getCommands() {
+    return commands;
   }
 }

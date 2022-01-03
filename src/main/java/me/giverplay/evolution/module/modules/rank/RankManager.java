@@ -10,6 +10,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RankManager {
@@ -31,11 +32,12 @@ public class RankManager {
       ConfigurationSection rankData = ranks.getConfigurationSection(key);
 
       String next = rankData.getString("Next");
+      List<String> commands = rankData.getStringList("Commands");
       boolean isFirst = rankData.getBoolean("FirstRank");
       boolean isLast = rankData.getBoolean("LastRank");
       double cost = rankData.getDouble("Cost");
 
-      Rank rank = new Rank(key, cost, isFirst, isLast, next);
+      Rank rank = new Rank(key, commands, cost, isFirst, isLast, next);
       this.ranks.put(key, rank);
 
       if(isLast) {
@@ -94,8 +96,10 @@ public class RankManager {
     economy.withdrawPlayer(player, nextRank.getCost());
 
     ConsoleCommandSender sender = Bukkit.getConsoleSender();
-    Bukkit.dispatchCommand(sender, "lp user " + player.getName() + " parent remove " + rank.getName());
-    Bukkit.dispatchCommand(sender, "lp user " + player.getName() + " parent add " + nextRank.getName());
+
+    for(String command : nextRank.getCommands()) {
+      Bukkit.dispatchCommand(sender, command.replace("$player", player.getName()));
+    }
 
     evolution.getLogger().info("Player " + player.getName() + " rank upped to " + nextRank.getName());
     player.sendMessage(ChatColor.GREEN + "Parabéns! Você upou para o rank " + nextRank.getName() + "!");

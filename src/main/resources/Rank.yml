@@ -2,12 +2,23 @@ Ranks:
   Newbie:
     FistRank: true
     Next: Expert
+    Commands:
+      - lp user $player parent add Newbie
   Expert:
     Cost: 1000
     Next: Pro
+    Commands:
+      - lp user $player parent remove Newbie
+      - lp user $player parent add Expert
   Pro:
     Cost: 2000
     Next: Master
+    Commands:
+      - lp user $player parent remove Expert
+      - lp user $player parent add Pro
   Master:
     Cost: 3000
     LastRank: true
+    Commands:
+      - lp user $player parent remove Pro
+      - lp user $player parent add Master
