@@ -1,5 +1,6 @@
 package me.giverplay.evolution;
 
+import com.earth2me.essentials.Essentials;
 import me.giverplay.evolution.command.CommandHandler;
 import me.giverplay.evolution.listeners.PlayerListener;
 import me.giverplay.evolution.module.ModuleManager;
@@ -10,7 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Evolution extends JavaPlugin {
@@ -19,10 +22,13 @@ public final class Evolution extends JavaPlugin {
   private PlayerManager playerManager;
   private ModuleManager moduleManager;
 
+  private Essentials essentials;
   private Economy vaultEconomy;
 
   private boolean isVaultRequired;
   private boolean isVaultHooked;
+  private boolean isEssentialsRequired;
+  private boolean isEssentialsHooked;
 
   @Override
   public void onEnable() {
@@ -61,6 +67,12 @@ public final class Evolution extends JavaPlugin {
     }
 
     playerManager = null;
+
+    vaultEconomy = null;
+    isVaultHooked = false;
+
+    essentials = null;
+    isEssentialsHooked = false;
   }
 
   public void registerEventListener(Listener listener) {
@@ -86,12 +98,31 @@ public final class Evolution extends JavaPlugin {
     return isVaultHooked;
   }
 
+  private boolean hookEssentials() {
+    PluginManager manager = getServer().getPluginManager();
+    Plugin essentials = manager.getPlugin("Essentials");
+
+    if(manager.isPluginEnabled(essentials)) {
+      this.essentials = (Essentials) essentials;
+    }
+
+    return this.essentials != null;
+  }
+
   public void requireVault() {
     if(isVaultHooked) {
       throw new IllegalStateException("Vault is already hooked... Call this on module constructor!");
     }
 
     isVaultRequired = true;
+  }
+
+  public void requireEssentials() {
+    if(isEssentialsHooked) {
+      throw new IllegalStateException("Essentials is already hooked... Call this on module constructor!");
+    }
+
+    isEssentialsHooked = true;
   }
 
   public void playerJoin(Player player) {
@@ -113,6 +144,10 @@ public final class Evolution extends JavaPlugin {
     return isVaultHooked;
   }
 
+  public boolean isEssentialsHooked() {
+    return isEssentialsHooked;
+  }
+
   public PlayerManager getPlayerManager() {
     return playerManager;
   }
@@ -127,5 +162,9 @@ public final class Evolution extends JavaPlugin {
 
   public Economy getVaultEconomy() {
     return vaultEconomy;
+  }
+
+  public Essentials getEssentials() {
+    return essentials;
   }
 }
