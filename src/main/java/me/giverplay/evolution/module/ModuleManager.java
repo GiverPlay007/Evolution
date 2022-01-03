@@ -1,6 +1,7 @@
 package me.giverplay.evolution.module;
 
 import me.giverplay.evolution.Evolution;
+import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,13 @@ public class ModuleManager {
   }
 
   public void enableAll() {
-    modules.values().forEach(EvolutionModule::enable);
+    ConfigurationSection config = evolution.getConfig().getConfigurationSection("ModuleEnabled");
+
+    for (EvolutionModule module : modules.values()) {
+      if(config.getBoolean(module.name)) {
+        module.enable();
+      }
+    }
   }
 
   public void disableAll() {

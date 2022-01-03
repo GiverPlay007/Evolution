@@ -43,6 +43,9 @@ public final class Evolution extends JavaPlugin {
 
   @Override
   public void onDisable() {
+    saveDefaultConfig();
+    reloadConfig();
+
     if(moduleManager != null) {
       moduleManager.disableAll();
       moduleManager = null;
