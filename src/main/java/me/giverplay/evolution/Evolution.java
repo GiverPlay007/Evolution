@@ -39,7 +39,13 @@ public final class Evolution extends JavaPlugin {
     moduleManager.registerModule(new RankModule(this));
 
     if(isVaultRequired && !hookVault()) {
-      getLogger().severe("Plugin Vault found, disabling...");
+      getLogger().severe("Plugin Vault was not found, disabling...");
+      getServer().getPluginManager().disablePlugin(this);
+      return;
+    }
+
+    if(isEssentialsRequired && !hookEssentials()) {
+      getLogger().severe("Plugin Essentials was not found, disabling...");
       getServer().getPluginManager().disablePlugin(this);
       return;
     }
