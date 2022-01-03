@@ -29,5 +29,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public interface ClickAction {
 
-    void run(InventoryClickEvent e);
+  void run(InventoryClickEvent e);
+  
 }

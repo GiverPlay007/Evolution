@@ -34,24 +34,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class InventoryListener implements Listener {
 
-    public InventoryListener(JavaPlugin plugin) {
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+  public InventoryListener(JavaPlugin plugin) {
+    plugin.getServer().getPluginManager().registerEvents(this, plugin);
+  }
+
+  @EventHandler
+  public void onClick(InventoryClickEvent event) {
+    if(!(event.getWhoClicked() instanceof Player) || event.getCurrentItem() == null) return;
+
+    if(event.getInventory().getHolder() != null
+      && event.getInventory().getHolder() instanceof final InventoryGUI inventoryGUI) {
+
+      event.setCancelled(inventoryGUI.isDefaultAllCancel());
+      inventoryGUI.onClick(event);
     }
-
-    @EventHandler
-    public void onClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player) || event.getCurrentItem() == null) {
-            return;
-        }
-
-        if (event.getInventory().getHolder() != null &&
-                event.getInventory().getHolder() instanceof InventoryGUI) {
-
-            final InventoryGUI inventoryGUI = (InventoryGUI) event.getInventory().getHolder();
-
-            event.setCancelled(inventoryGUI.isDefaultAllCancell());
-
-            inventoryGUI.onClick(event);
-        }
-    }
+  }
 }

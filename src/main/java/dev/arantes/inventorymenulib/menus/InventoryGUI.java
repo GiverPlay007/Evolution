@@ -38,65 +38,69 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InventoryGUI implements InventoryHolder {
-    private final Inventory inv;
-    private Map<Integer, ItemButton> callbacks;
-    private boolean defaultCancell = false;
-    private boolean defaultAllCancell = false;
 
-    public InventoryGUI(final String title, final InventorySize size) {
-        this(title, size.getSlotsAmount());
+  private final Map<Integer, ItemButton> callbacks;
+
+  private final Inventory inv;
+
+  private boolean defaultCancel = false;
+  private boolean defaultAllCancel = false;
+
+  public InventoryGUI(final String title, final InventorySize size) {
+    this(title, size.getSlotsAmount());
+  }
+
+  public InventoryGUI(final String title, final int size) {
+    inv = Bukkit.createInventory(this, size, title);
+    callbacks = new HashMap<>();
+  }
+
+  @Override
+  public Inventory getInventory() {
+    return inv;
+  }
+
+  public void setButton(int pos, ItemButton button) {
+    inv.setItem(pos, button.getItem());
+    callbacks.put(pos, button);
+  }
+
+  public void removeButton(int slot) {
+    inv.clear(slot);
+    callbacks.remove(slot);
+  }
+
+  public void show(Player player) {
+    player.openInventory(inv);
+  }
+
+  public boolean isDefaultCancel() {
+    return defaultCancel;
+  }
+
+  public void setDefaultCancel(boolean defaultCancel) {
+    this.defaultCancel = defaultCancel;
+  }
+
+  public boolean isDefaultAllCancel() {
+    return defaultAllCancel;
+  }
+
+  public void setDefaultAllCancel(boolean defaultAllCancel) {
+    this.defaultAllCancel = defaultAllCancel;
+  }
+
+  public void onClick(InventoryClickEvent event) {
+    if(!callbacks.containsKey(event.getRawSlot())) return;
+
+    if (defaultCancel || defaultAllCancel) {
+      event.setCancelled(true);
     }
 
-    public InventoryGUI(final String title, final int size) {
-        inv = Bukkit.createInventory(this, size, title);
-        callbacks = new HashMap<>();
-    }
+    final ClickAction action = callbacks.get(event.getRawSlot()).getAction(event.getClick());
 
-    @Override
-    public Inventory getInventory() {
-        return inv;
+    if(action != null) {
+      action.run(event);
     }
-
-    public void setButton(int pos, ItemButton button) {
-        inv.setItem(pos, button.getItem());
-        callbacks.put(pos, button);
-    }
-
-    public void removeButton(int slot) {
-        inv.clear(slot);
-        callbacks.remove(slot);
-    }
-
-    public void show(Player player) {
-        player.openInventory(inv);
-    }
-
-    public boolean isDefaultCancell() {
-        return defaultCancell;
-    }
-
-    public void setDefaultCancell(boolean defaultCancell) {
-        this.defaultCancell = defaultCancell;
-    }
-
-    public boolean isDefaultAllCancell() {
-        return defaultAllCancell;
-    }
-
-    public void setDefaultAllCancell(boolean defaultAllCancell) {
-        this.defaultAllCancell = defaultAllCancell;
-    }
-
-    public void onClick(InventoryClickEvent event) {
-        if (!callbacks.containsKey(event.getRawSlot())) {
-            return;
-        }
-        if (defaultCancell || defaultAllCancell)
-            event.setCancelled(true);
-
-        final ClickAction action = callbacks.get(event.getRawSlot()).getAction(event.getClick());
-        if (action != null) {
-            action.run(event);
-        }
-    }
+  }
 }

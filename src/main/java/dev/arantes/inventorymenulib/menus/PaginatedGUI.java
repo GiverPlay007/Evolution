@@ -31,66 +31,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaginatedGUI {
-    private List<InventoryGUI> pages;
-    private int currentPage;
 
-    public PaginatedGUI() {
-        this.pages = new ArrayList<>();
-        this.currentPage = 0;
-    }
+  private final List<InventoryGUI> pages;
 
-    public PaginatedGUI(List<InventoryGUI> pages) {
-        this.pages = pages;
-        this.currentPage = 0;
-    }
+  private int currentPage;
 
-    public void addPage(InventoryGUI page) {
-        pages.add(page);
-    }
+  public PaginatedGUI() {
+    this.pages = new ArrayList<>();
+    this.currentPage = 0;
+  }
 
-    public void setPage(int pos, InventoryGUI page) {
-        pages.set(pos, page);
-    }
+  public PaginatedGUI(List<InventoryGUI> pages) {
+    this.pages = pages;
+    this.currentPage = 0;
+  }
 
-    public void removePage(int pos){
-        pages.remove(pos);
-    }
+  public void addPage(InventoryGUI page) {
+    pages.add(page);
+  }
 
-    public void show(Player player) {
-        if (pages.size() == 0) {
-            return;
-        }
+  public void setPage(int pos, InventoryGUI page) {
+    pages.set(pos, page);
+  }
 
-        pages.get(0).show(player);
-        currentPage = 0;
-    }
+  public void removePage(int pos) {
+    pages.remove(pos);
+  }
 
-    public void show(Player player, int page) {
-        if (page >= pages.size()) {
-            return;
-        }
+  public void show(Player player) {
+    if(pages.size() == 0) return;
 
-        pages.get(page).show(player);
-        currentPage = page;
-    }
+    pages.get(0).show(player);
+    currentPage = 0;
+  }
 
-    public void showPrevious(Player player) {
-        final int page = currentPage - 1;
-        if (page < 0) {
-            return;
-        }
+  public void show(Player player, int page) {
+    if(page >= pages.size()) return;
 
-        pages.get(page).show(player);
-        currentPage = page;
-    }
+    pages.get(page).show(player);
+    currentPage = page;
+  }
 
-    public void showNext(Player player) {
-        final int page = currentPage + 1;
-        if (page >= pages.size()) {
-            return;
-        }
+  public void showPrevious(Player player) {
+    final int page = currentPage - 1;
 
-        pages.get(page).show(player);
-        currentPage = page;
-    }
+    if(page < 0) return;
+
+    pages.get(page).show(player);
+    currentPage = page;
+  }
+
+  public void showNext(Player player) {
+    final int page = currentPage + 1;
+
+    if(page >= pages.size()) return;
+
+    pages.get(page).show(player);
+    currentPage = page;
+  }
 }
