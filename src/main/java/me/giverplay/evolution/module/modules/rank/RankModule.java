@@ -4,9 +4,9 @@ import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.command.CommandHandler;
 import me.giverplay.evolution.command.commands.RankupCommand;
 import me.giverplay.evolution.listeners.RankModuleListener;
-import me.giverplay.evolution.module.Module;
+import me.giverplay.evolution.module.EvolutionModule;
 
-public final class RankModule extends Module {
+public final class RankModule extends EvolutionModule {
 
   private RankManager rankManager;
   private RankModuleListener listener;

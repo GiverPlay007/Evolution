@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ModuleManager {
 
-  private final Map<String, Module> modules = new HashMap<>();
+  private final Map<String, EvolutionModule> modules = new HashMap<>();
   private final Evolution evolution;
 
   public ModuleManager(Evolution evolution) {
@@ -15,14 +15,14 @@ public class ModuleManager {
   }
 
   public void enableAll() {
-    modules.values().forEach(Module::enable);
+    modules.values().forEach(EvolutionModule::enable);
   }
 
   public void disableAll() {
-    modules.values().forEach(Module::disable);
+    modules.values().forEach(EvolutionModule::disable);
   }
 
-  public void registerModule(Module module) {
+  public void registerModule(EvolutionModule module) {
     if(modules.containsKey(module.getName())) {
       throw new IllegalArgumentException("Module " + module.getName() + " is already registered");
     }
@@ -30,7 +30,7 @@ public class ModuleManager {
     modules.put(module.getName(), module);
   }
 
-  public Module getModule(String moduleName) {
+  public EvolutionModule getModule(String moduleName) {
     return modules.get(moduleName);
   }
 }

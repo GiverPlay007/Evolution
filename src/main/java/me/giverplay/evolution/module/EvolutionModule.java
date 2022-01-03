@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class Module {
+public abstract class EvolutionModule {
 
   protected final Evolution evolution;
   protected final String name;
@@ -23,7 +23,7 @@ public abstract class Module {
   private FileConfiguration config;
   private boolean isEnabled;
 
-  public Module(Evolution evolution, String name) {
+  public EvolutionModule(Evolution evolution, String name) {
     this.evolution = evolution;
     this.name = name;
     this.configName = name + ".yml";

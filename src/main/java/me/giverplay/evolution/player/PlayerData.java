@@ -4,7 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import me.giverplay.evolution.module.Module;
+import me.giverplay.evolution.module.EvolutionModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,11 +60,11 @@ public class PlayerData extends YamlConfiguration {
     return file.exists();
   }
 
-  public ConfigurationSection getNode(Module module) {
+  public ConfigurationSection getNode(EvolutionModule module) {
     return getConfigurationSection(module.getName());
   }
 
-  public ConfigurationSection createNode(Module module) {
+  public ConfigurationSection createNode(EvolutionModule module) {
     return createSection(module.getName());
   }
 }
