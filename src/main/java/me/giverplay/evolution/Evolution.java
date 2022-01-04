@@ -4,6 +4,7 @@ import com.earth2me.essentials.Essentials;
 import me.giverplay.evolution.command.CommandHandler;
 import me.giverplay.evolution.listeners.PlayerListener;
 import me.giverplay.evolution.module.ModuleManager;
+import me.giverplay.evolution.module.modules.kit.KitModule;
 import me.giverplay.evolution.module.modules.rank.RankModule;
 import me.giverplay.evolution.player.PlayerManager;
 import net.milkbowl.vault.economy.Economy;
@@ -37,6 +38,7 @@ public final class Evolution extends JavaPlugin {
     playerManager = new PlayerManager(this);
     moduleManager = new ModuleManager(this);
     moduleManager.registerModule(new RankModule(this));
+    moduleManager.registerModule(new KitModule(this));
 
     if(isVaultRequired && !hookVault()) {
       getLogger().severe("Plugin Vault was not found, disabling...");
