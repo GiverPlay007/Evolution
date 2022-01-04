@@ -1,4 +1,9 @@
 VipKits:
+  Title: '&aKits Vips'
+  Lore:
+    - ' '
+    - ' &aClique para saber mais'
+    - ' '
   VipGuerreiro:
     Slot: 13
     Item: GOLD_INGOT
@@ -16,6 +21,11 @@ VipKits:
       - ' &cPode pegar kk'
       - ' '
 RankKits:
+  Title: '&aKits Ranks'
+  Lore:
+      - ' '
+      - ' &aClique para saber mais'
+      - ' '
   Ouro:
     Slot: 13
     Item: GOLD_INGOT
@@ -33,6 +43,11 @@ RankKits:
       - ' &cPega aí na moral'
       - ' '
 SpecialKits:
+  Title: '&aKits Especiais'
+  Lore:
+    - ' '
+    - ' &aClique para saber mais'
+    - ' '
   BoasVindas:
     Slot: 15
     Item: IRON_PICKAXE
