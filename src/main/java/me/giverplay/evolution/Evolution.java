@@ -1,6 +1,8 @@
 package me.giverplay.evolution;
 
 import com.earth2me.essentials.Essentials;
+import dev.arantes.inventorymenulib.listeners.InventoryListener;
+import dev.arantes.inventorymenulib.menus.InventoryGUI;
 import me.giverplay.evolution.command.CommandHandler;
 import me.giverplay.evolution.listeners.PlayerListener;
 import me.giverplay.evolution.module.ModuleManager;
@@ -57,6 +59,7 @@ public final class Evolution extends JavaPlugin {
 
     getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
     getServer().getOnlinePlayers().forEach(this::playerJoin);
+    new InventoryListener(this);
   }
 
   @Override
