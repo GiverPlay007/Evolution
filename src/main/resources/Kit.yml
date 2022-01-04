@@ -1,0 +1,43 @@
+VipKits:
+  VipGuerreiro:
+    Slot: 13
+    Item: GOLD_INGOT
+    Title: '&bVip Guerreiro'
+    Lore:
+      - ' '
+      - ' &cPega ai kk'
+      - ' '
+  VipHeroico:
+    Slot: 17
+    Item: DIAMOND
+    Title: '&bVip Heroico'
+    Lore:
+      - ' '
+      - ' &cPode pegar kk'
+      - ' '
+RankKits:
+  Ouro:
+    Slot: 13
+    Item: GOLD_INGOT
+    Title: '&bOuro'
+    Lore:
+      - ' '
+      - ' &cPega aík'
+      - ' '
+  Diamante:
+    Slot: 17
+    Item: DIAMOND
+    Title: '&aDiamante'
+    Lore:
+      - ' '
+      - ' &cPega aí na moral'
+      - ' '
+SpecialKits:
+  BoasVindas:
+    Slot: 15
+    Item: IRON_PICKAXE
+    Title: '&bBoas Vindas'
+    Lore:
+      - ' '
+      - ' &cBem-vindo'
+      - ' '
