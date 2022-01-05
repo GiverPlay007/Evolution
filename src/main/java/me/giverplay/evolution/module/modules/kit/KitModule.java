@@ -64,7 +64,7 @@ public class KitModule extends EvolutionModule {
     vipsCategoryMenu = new InventoryGUI("Kits VIP", InventorySize.SIX_ROWS);
     setCategoryButton(vipsSection, 15, vipsCategoryMenu);
 
-    ConfigurationSection specialSection = getConfig().getConfigurationSection("SpecialSKits");
+    ConfigurationSection specialSection = getConfig().getConfigurationSection("SpecialKits");
     specialCategoryMenu = new InventoryGUI("Kits Especiais", InventorySize.SIX_ROWS);
     setCategoryButton(specialSection, 17, specialCategoryMenu);
   }
