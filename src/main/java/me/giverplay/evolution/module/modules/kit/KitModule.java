@@ -7,6 +7,7 @@ import dev.arantes.inventorymenulib.buttons.ItemButton;
 import dev.arantes.inventorymenulib.menus.InventoryGUI;
 import dev.arantes.inventorymenulib.utils.InventorySize;
 import me.giverplay.evolution.Evolution;
+import me.giverplay.evolution.command.commands.KitCommand;
 import me.giverplay.evolution.module.EvolutionModule;
 import me.giverplay.evolution.utils.ItemUtils;
 import net.ess3.provider.SerializationProvider;
@@ -38,11 +39,13 @@ public class KitModule extends EvolutionModule {
     saveDefaultConfig();
     reloadConfig();
     loadMenus();
+
+    evolution.getCommandHandler().registerCommand(new KitCommand(this));
   }
 
   @Override
   protected void onDisable() {
-
+    evolution.getCommandHandler().unregisterCommand("kit");
   }
 
   public void openKitCategoriesMenu(Player player) {

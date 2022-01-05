@@ -17,3 +17,6 @@ commands:
   rankup:
     description: 'Go to the next rank'
     aliases: [up, upar, nextrank]
+  kit:
+    description: 'Open kit categories menu'
+    aliases: [kits]
