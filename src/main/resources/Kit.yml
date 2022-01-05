@@ -1,5 +1,6 @@
 VipKits:
   Title: '&aKits Vips'
+  Item: EMERALD
   Lore:
     - ' '
     - ' &aClique para saber mais'
@@ -22,6 +23,7 @@ VipKits:
       - ' '
 RankKits:
   Title: '&aKits Ranks'
+  Item: STONE_PICKAXE
   Lore:
       - ' '
       - ' &aClique para saber mais'
@@ -44,6 +46,7 @@ RankKits:
       - ' '
 SpecialKits:
   Title: '&aKits Especiais'
+  Item: GOLD_INGOT
   Lore:
     - ' '
     - ' &aClique para saber mais'

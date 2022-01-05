@@ -29,6 +29,7 @@ import me.giverplay.evolution.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
 import java.util.HashMap;
@@ -127,6 +128,11 @@ public class ItemButton {
 
   public ItemStack getItem() {
     return item;
+  }
+
+  public String getName() {
+    ItemMeta meta = item.getItemMeta();
+    return meta != null ? meta.getDisplayName() : null;
   }
 
   public ClickAction getAction(ClickType type) {

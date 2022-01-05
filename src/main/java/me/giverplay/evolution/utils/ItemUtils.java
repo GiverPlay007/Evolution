@@ -1,6 +1,7 @@
 package me.giverplay.evolution.utils;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -16,6 +17,10 @@ public final class ItemUtils {
   private ItemUtils() { }
 
   public static ItemStack parse(Material material, int amount, String name, String... lore) {
+    return parse(material, amount, name, Arrays.asList(lore));
+  }
+
+  public static ItemStack parse(Material material, int amount, String name, List<String> lore) {
     ItemStack item = new ItemStack(material, amount);
     ItemMeta meta = item.getItemMeta();
     meta.setDisplayName(ColorUtils.translate(name));
@@ -95,5 +100,13 @@ public final class ItemUtils {
 
     item.setItemMeta(meta);
     return item;
+  }
+
+  public static ItemStack fromSection(ConfigurationSection section) {
+    Material material = Material.getMaterial(section.getString("Item"));
+    String name = section.getString("Title");
+    List<String> lore = section.getStringList("Lore");
+
+    return setLore(parse(material, 1, name), lore);
   }
 }
