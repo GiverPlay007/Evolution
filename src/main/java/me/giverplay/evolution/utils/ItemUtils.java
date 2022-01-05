@@ -74,17 +74,16 @@ public final class ItemUtils {
   }
 
   public static ItemStack setGlow(ItemStack item, boolean glow) {
-    ItemMeta meta = item.getItemMeta();
+    ItemMeta meta;
 
     if(glow) {
-      item.addUnsafeEnchantment(
-        item.getType() != Material.BOW ? Enchantment.ARROW_INFINITE : Enchantment.LUCK,
-        10
-      );
-      meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+      item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+      meta = item.getItemMeta();
+      meta.addItemFlags(ItemFlag.values());
     } else {
-      item.removeEnchantment(item.getType() != Material.BOW ? Enchantment.ARROW_INFINITE : Enchantment.LUCK);
-      meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+      item.removeEnchantment(Enchantment.DURABILITY);
+      meta = item.getItemMeta();
+      meta.removeItemFlags(ItemFlag.values());
     }
 
     item.setItemMeta(meta);
