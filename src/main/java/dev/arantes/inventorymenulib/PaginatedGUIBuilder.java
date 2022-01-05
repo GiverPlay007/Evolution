@@ -30,13 +30,13 @@ import dev.arantes.inventorymenulib.buttons.ClickAction;
 import dev.arantes.inventorymenulib.buttons.ItemButton;
 import dev.arantes.inventorymenulib.menus.InventoryGUI;
 import dev.arantes.inventorymenulib.menus.PaginatedGUI;
+import me.giverplay.evolution.utils.ItemUtils;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.List;
@@ -81,15 +81,8 @@ public class PaginatedGUIBuilder {
     return this;
   }
 
-
   public PaginatedGUIBuilder setNextPageItem(Material material, int amount, String name, String... lore) {
-    ItemStack item = new ItemStack(material, amount);
-    ItemMeta meta = item.getItemMeta();
-    meta.setDisplayName(name);
-    meta.setLore(Arrays.asList(lore));
-    item.setItemMeta(meta);
-
-    return setNextPageItem(item);
+    return setNextPageItem(ItemUtils.parse(material, amount, name, lore));
   }
 
   public PaginatedGUIBuilder setNextPageItem(ItemStack button) {
@@ -98,13 +91,7 @@ public class PaginatedGUIBuilder {
   }
 
   public PaginatedGUIBuilder setPreviousPageItem(Material material, int amount, String name, String... lore) {
-    ItemStack item = new ItemStack(material, amount);
-    ItemMeta meta = item.getItemMeta();
-    meta.setDisplayName(name);
-    meta.setLore(Arrays.asList(lore));
-    item.setItemMeta(meta);
-
-    return setPreviousPageItem(item);
+    return setPreviousPageItem(ItemUtils.parse(material, amount, name, lore));
   }
 
   public PaginatedGUIBuilder setPreviousPageItem(ItemStack button) {

@@ -28,6 +28,7 @@ package dev.arantes.inventorymenulib.menus;
 import dev.arantes.inventorymenulib.buttons.ClickAction;
 import dev.arantes.inventorymenulib.buttons.ItemButton;
 import dev.arantes.inventorymenulib.utils.InventorySize;
+import me.giverplay.evolution.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -51,7 +52,7 @@ public class InventoryGUI implements InventoryHolder {
   }
 
   public InventoryGUI(final String title, final int size) {
-    inv = Bukkit.createInventory(this, size, title);
+    inv = Bukkit.createInventory(this, size, ColorUtils.translate(title));
     callbacks = new HashMap<>();
   }
 

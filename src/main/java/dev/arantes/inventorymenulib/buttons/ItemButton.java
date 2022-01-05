@@ -25,17 +25,12 @@
 
 package dev.arantes.inventorymenulib.buttons;
 
+import me.giverplay.evolution.utils.ItemUtils;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,24 +66,12 @@ public class ItemButton {
   }
 
   public ItemButton setItem(Material material, int amount, String name, String... lore) {
-    final ItemStack item = new ItemStack(material, amount);
-    final ItemMeta meta = item.getItemMeta();
-    meta.setDisplayName(name);
-    meta.setLore(Arrays.asList(lore));
-    item.setItemMeta(meta);
-
-    this.item = item;
+    this.item = ItemUtils.parse(material, amount, name, lore);
     return this;
   }
 
   public ItemButton setDamage(short damage) {
-    ItemMeta meta = item.getItemMeta();
-
-    if(meta instanceof Damageable) {
-      ((Damageable) meta).setDamage(damage);
-    }
-
-    item.setItemMeta(meta);
+    ItemUtils.setDamage(item, damage);
     return this;
   }
 
@@ -99,70 +82,32 @@ public class ItemButton {
   }
 
   public ItemButton setName(String name) {
-    final ItemMeta meta = item.getItemMeta();
-    meta.setDisplayName(name);
-    item.setItemMeta(meta);
+    ItemUtils.setDisplayName(item, name);
     return this;
   }
 
   public ItemButton setLore(String... lines) {
-    final ItemMeta meta = item.getItemMeta();
-    meta.setLore(Arrays.asList(lines));
-    item.setItemMeta(meta);
+    ItemUtils.setLore(item, lines);
     return this;
   }
 
   public ItemButton setLore(List<String> lines) {
-    final ItemMeta meta = item.getItemMeta();
-    meta.setLore(lines);
-    item.setItemMeta(meta);
+    ItemUtils.setLore(item, lines);
     return this;
   }
 
   public ItemButton setLore(int pos, String line) {
-    final ItemMeta meta = item.getItemMeta();
-    List<String> lores = new ArrayList<>();
-
-    if(meta.hasLore()) {
-      lores = meta.getLore();
-    }
-
-    if(lores.get(pos) != null) {
-      lores.set(pos, line);
-
-      meta.setLore(lores);
-      item.setItemMeta(meta);
-    }
+    ItemUtils.setLore(item, pos, line);
     return this;
   }
 
   public ItemButton addLore(String... lines) {
-    final ItemMeta meta = item.getItemMeta();
-    final List<String> lore = meta.getLore();
-
-    lore.addAll(Arrays.asList(lines));
-
-    meta.setLore(lore);
-    item.setItemMeta(meta);
-
+    ItemUtils.addLore(item, lines);
     return this;
   }
 
   public ItemButton setGlow(boolean glow) {
-    final ItemMeta meta = item.getItemMeta();
-
-    if(glow) {
-      item.addUnsafeEnchantment(
-        item.getType() != Material.BOW ? Enchantment.ARROW_INFINITE : Enchantment.LUCK,
-        10
-      );
-      meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-    } else {
-      item.removeEnchantment(item.getType() != Material.BOW ? Enchantment.ARROW_INFINITE : Enchantment.LUCK);
-      meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-    }
-
-    item.setItemMeta(meta);
+    ItemUtils.setGlow(item, glow);
     return this;
   }
 
