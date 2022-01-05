@@ -1,12 +1,13 @@
 VipKits:
   Title: '&aKits Vips'
   Item: EMERALD
+  Slot: 11
   Lore:
     - ' '
     - ' &aClique para saber mais'
     - ' '
   VipGuerreiro:
-    Slot: 13
+    Slot: 11
     Item: GOLD_INGOT
     Title: '&bVip Guerreiro'
     Lore:
@@ -14,7 +15,7 @@ VipKits:
       - ' &cPega ai kk'
       - ' '
   VipHeroico:
-    Slot: 17
+    Slot: 15
     Item: DIAMOND
     Title: '&bVip Heroico'
     Lore:
@@ -24,12 +25,13 @@ VipKits:
 RankKits:
   Title: '&aKits Ranks'
   Item: STONE_PICKAXE
+  Slot: 13
   Lore:
       - ' '
       - ' &aClique para saber mais'
       - ' '
   Ouro:
-    Slot: 13
+    Slot: 11
     Item: GOLD_INGOT
     Title: '&bOuro'
     Lore:
@@ -37,7 +39,7 @@ RankKits:
       - ' &cPega aík'
       - ' '
   Diamante:
-    Slot: 17
+    Slot: 15
     Item: DIAMOND
     Title: '&aDiamante'
     Lore:
@@ -47,12 +49,13 @@ RankKits:
 SpecialKits:
   Title: '&aKits Especiais'
   Item: GOLD_INGOT
+  Slot: 15
   Lore:
     - ' '
     - ' &aClique para saber mais'
     - ' '
   BoasVindas:
-    Slot: 15
+    Slot: 11
     Item: IRON_PICKAXE
     Title: '&bBoas Vindas'
     Lore:

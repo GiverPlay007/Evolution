@@ -58,21 +58,21 @@ public class KitModule extends EvolutionModule {
 
     ConfigurationSection ranksSection = getConfig().getConfigurationSection("RankKits");
     ranksCategoryMenu = new InventoryGUI("Kits dos Ranks", InventorySize.SIX_ROWS);
-    setCategoryButton(ranksSection, 13, ranksCategoryMenu);
+    setCategoryButton(ranksSection, ranksCategoryMenu);
 
     ConfigurationSection vipsSection = getConfig().getConfigurationSection("VipKits");
     vipsCategoryMenu = new InventoryGUI("Kits VIP", InventorySize.SIX_ROWS);
-    setCategoryButton(vipsSection, 15, vipsCategoryMenu);
+    setCategoryButton(vipsSection, vipsCategoryMenu);
 
     ConfigurationSection specialSection = getConfig().getConfigurationSection("SpecialKits");
     specialCategoryMenu = new InventoryGUI("Kits Especiais", InventorySize.SIX_ROWS);
-    setCategoryButton(specialSection, 17, specialCategoryMenu);
+    setCategoryButton(specialSection, specialCategoryMenu);
   }
 
-  private void setCategoryButton(ConfigurationSection section, int slot, InventoryGUI target) {
+  private void setCategoryButton(ConfigurationSection section, InventoryGUI target) {
     ItemStack item = ItemUtils.fromSection(section);
     ItemButton button = new ItemButton(item).setGlow(true);
-    categoriesMenu.setButton(slot, button);
+    categoriesMenu.setButton(section.getInt("Slot"), button);
     button.addAction(ClickType.LEFT, (event) -> target.show((Player) event.getWhoClicked()));
   }
 
