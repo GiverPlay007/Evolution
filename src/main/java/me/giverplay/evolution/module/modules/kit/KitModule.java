@@ -59,14 +59,18 @@ public class KitModule extends EvolutionModule {
     ConfigurationSection ranksSection = getConfig().getConfigurationSection("RankKits");
     ranksCategoryMenu = new InventoryGUI("Kits dos Ranks", InventorySize.SIX_ROWS);
     setCategoryButton(ranksSection, ranksCategoryMenu);
+    setKitButtons(ranksSection, ranksCategoryMenu);
 
     ConfigurationSection vipsSection = getConfig().getConfigurationSection("VipKits");
     vipsCategoryMenu = new InventoryGUI("Kits VIP", InventorySize.SIX_ROWS);
     setCategoryButton(vipsSection, vipsCategoryMenu);
+    setKitButtons(vipsSection, vipsCategoryMenu);
 
     ConfigurationSection specialSection = getConfig().getConfigurationSection("SpecialKits");
     specialCategoryMenu = new InventoryGUI("Kits Especiais", InventorySize.SIX_ROWS);
     setCategoryButton(specialSection, specialCategoryMenu);
+    setKitButtons(specialSection, specialCategoryMenu);
+
   }
 
   private void setCategoryButton(ConfigurationSection section, InventoryGUI target) {
@@ -74,6 +78,25 @@ public class KitModule extends EvolutionModule {
     ItemButton button = new ItemButton(item).setGlow(true);
     categoriesMenu.setButton(section.getInt("Slot"), button);
     button.addAction(ClickType.LEFT, (event) -> target.show((Player) event.getWhoClicked()));
+  }
+
+  private void setKitButtons(ConfigurationSection section, InventoryGUI category) {
+    for(String key : section.getKeys(false)) {
+      if(key.equals("Slot") || key.equals("Item") || key.equals("Lore") || key.equals("Title")) continue;
+
+      setCategoryButton(section.getConfigurationSection(key), category);
+    }
+  }
+
+  private void setKitButton(ConfigurationSection section, InventoryGUI category) {
+    ItemStack item = ItemUtils.fromSection(section);
+    ItemButton button = new ItemButton(item).setGlow(true);
+    category.setButton(section.getInt("Slot"), button);
+    button.addAction(ClickType.LEFT, (event) -> previewKit((Player) event.getWhoClicked(), section.getName()));
+  }
+
+  public void previewKit(Player player, String kitName) {
+    player.sendMessage("Prevendo menu hehe " + kitName);
   }
 
   public List<ItemStack> getKitItems(String kitName) {
