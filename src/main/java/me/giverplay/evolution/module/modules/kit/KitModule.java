@@ -84,7 +84,7 @@ public class KitModule extends EvolutionModule {
     for(String key : section.getKeys(false)) {
       if(key.equals("Slot") || key.equals("Item") || key.equals("Lore") || key.equals("Title")) continue;
 
-      setCategoryButton(section.getConfigurationSection(key), category);
+      setKitButton(section.getConfigurationSection(key), category);
     }
   }
 
