@@ -22,7 +22,14 @@ public class KitCommand extends EvolutionCommandExecutor {
 
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-    kitModule.openKitCategoriesMenu((Player) sender);
+    Player player = (Player) sender;
+
+    if(args.length == 0) {
+     kitModule.openKitCategoriesMenu(player);
+     return true;
+    }
+
+    kitModule.previewKit(player, args[0]);
     return true;
   }
 
