@@ -132,7 +132,7 @@ public final class Evolution extends JavaPlugin {
       throw new IllegalStateException("Essentials is already hooked... Call this on module constructor!");
     }
 
-    isEssentialsHooked = true;
+    isEssentialsRequired = true;
   }
 
   public void playerJoin(Player player) {
