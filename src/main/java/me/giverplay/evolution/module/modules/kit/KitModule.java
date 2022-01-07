@@ -11,6 +11,7 @@ import me.giverplay.evolution.command.commands.KitCommand;
 import me.giverplay.evolution.module.EvolutionModule;
 import me.giverplay.evolution.utils.ItemUtils;
 import net.ess3.provider.SerializationProvider;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -73,7 +74,6 @@ public class KitModule extends EvolutionModule {
     specialCategoryMenu.setDefaultCancel(true);
     setCategoryButton(specialSection, specialCategoryMenu);
     setKitButtons(specialSection, specialCategoryMenu);
-
   }
 
   private void setCategoryButton(ConfigurationSection section, InventoryGUI target) {
@@ -99,7 +99,29 @@ public class KitModule extends EvolutionModule {
   }
 
   public void previewKit(Player player, String kitName) {
-    player.sendMessage("Prevendo menu hehe " + kitName);
+    Kit kit;
+
+    try {
+      kit = new Kit(kitName.toLowerCase(), evolution.getEssentials());
+    } catch (Exception e) {
+      player.sendMessage(ChatColor.RED + "Esse kit não existe!");
+      return;
+    }
+
+    InventoryGUI inventory = new InventoryGUI("Conteúdo do kit " + kitName, InventorySize.SIX_ROWS);
+    inventory.setDefaultCancel(true);
+
+    List<ItemStack> items = getKitItems(kit);
+
+    for (int index = 0; index < items.size(); index++) {
+      ItemButton button = new ItemButton(items.get(index));
+      inventory.setButton(index, button);
+    }
+
+    ItemButton claim = new ItemButton(Material.CHEST_MINECART, "&ePegar o kit", " ", " &aSó clicar", " ");
+    inventory.setButton(49, claim);
+
+    inventory.show(player);
   }
 
   public List<ItemStack> getKitItems(String kitName) {
