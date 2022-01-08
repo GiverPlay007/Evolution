@@ -3,6 +3,11 @@ package me.giverplay.evolution.module.modules.kit;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.Kit;
 import com.earth2me.essentials.MetaItemStack;
+import com.earth2me.essentials.User;
+import com.earth2me.essentials.commands.Commandkit;
+import com.earth2me.essentials.commands.NoChargeException;
+import com.earth2me.essentials.utils.DateUtil;
+import dev.arantes.inventorymenulib.buttons.ClickAction;
 import dev.arantes.inventorymenulib.buttons.ItemButton;
 import dev.arantes.inventorymenulib.menus.InventoryGUI;
 import dev.arantes.inventorymenulib.utils.InventorySize;
@@ -21,7 +26,10 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
+
+import static com.earth2me.essentials.I18n.tl;
 
 public class KitModule extends EvolutionModule {
 
@@ -99,10 +107,12 @@ public class KitModule extends EvolutionModule {
   }
 
   public void previewKit(Player player, String kitName) {
+
+    Essentials essentials = evolution.getEssentials();
     Kit kit;
 
     try {
-      kit = new Kit(kitName.toLowerCase(), evolution.getEssentials());
+      kit = new Kit(kitName.toLowerCase(), essentials);
     } catch (Exception e) {
       player.sendMessage(ChatColor.RED + "Esse kit não existe!");
       return;
@@ -118,10 +128,51 @@ public class KitModule extends EvolutionModule {
       inventory.setButton(index, button);
     }
 
-    ItemButton claim = new ItemButton(Material.CHEST_MINECART, "&ePegar o kit", " ", " &aSó clicar", " ");
-    inventory.setButton(49, claim);
+    ClickAction action = null;
+    Material material;
+    String title;
+    String[] lore;
 
+    try {
+      User user = essentials.getUser(player);
+      kit.checkPerms(user);
+
+      long nextUse = kit.getNextUse(user);
+
+      if(nextUse == 0) {
+        material = Material.CHEST_MINECART;
+        title = "&aPegar o kit";
+        lore = new String[]{" ", " &aClique aqui para", " &cpegar o kit", " "};
+        action = (event) -> claim(kitName, player);
+      } else {
+        material = Material.HOPPER_MINECART;
+        title = "&cAguarde";
+        lore = new String[] {" ", " &cVocê poderá pegar o kit", " &cnovamente em " + DateUtil.formatDateDiff(nextUse), " "};
+      }
+    } catch (Exception e) {
+      material = Material.BARRIER;
+      title = "&cSem permissão";
+      lore = new String[] {" ", "&cVocê não pode pegar", " &cesse kit", " "};
+    }
+
+    ItemButton claim = new ItemButton(material, title, lore);
+
+    if(action != null) claim.addAction(ClickType.LEFT, action);
+
+    inventory.setButton(49, claim);
     inventory.show(player);
+  }
+
+  private void claim(String kitName, Player player) {
+    try {
+      Essentials essentials = evolution.getEssentials();
+      Kit kit = new Kit(kitName.toLowerCase(), essentials);
+      kit.expandItems(essentials.getUser(player));
+      player.sendMessage(tl("kitReceive", kitName));
+    } catch (Exception e) {
+      getLogger().log(Level.SEVERE, "Failed to deliver kit %s to %s".formatted(kitName, player.getName()), e);
+      player.sendMessage(ChatColor.RED + "Ocorreu um erro ao tentar pegar o kit, por favor, comunique um administrador.");
+    }
   }
 
   public List<ItemStack> getKitItems(String kitName) {
