@@ -155,7 +155,7 @@ public class KitModule extends EvolutionModule {
       lore = new String[] {" ", "&cVocê não pode pegar", " &cesse kit", " "};
     }
 
-    ItemButton claim = new ItemButton(material, title, lore);
+    ItemButton claim = new ItemButton(material, title, lore).setGlow(true);
 
     if(action != null) claim.addAction(ClickType.LEFT, action);
 
