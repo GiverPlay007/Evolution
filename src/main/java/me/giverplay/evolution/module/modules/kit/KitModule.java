@@ -4,8 +4,6 @@ import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.Kit;
 import com.earth2me.essentials.MetaItemStack;
 import com.earth2me.essentials.User;
-import com.earth2me.essentials.commands.Commandkit;
-import com.earth2me.essentials.commands.NoChargeException;
 import com.earth2me.essentials.utils.DateUtil;
 import dev.arantes.inventorymenulib.buttons.ClickAction;
 import dev.arantes.inventorymenulib.buttons.ItemButton;
@@ -26,7 +24,6 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 
 import static com.earth2me.essentials.I18n.tl;
@@ -97,6 +94,8 @@ public class KitModule extends EvolutionModule {
 
       setKitButton(section.getConfigurationSection(key), category);
     }
+
+    addBackButton(category);
   }
 
   private void setKitButton(ConfigurationSection section, InventoryGUI category) {
@@ -106,8 +105,13 @@ public class KitModule extends EvolutionModule {
     button.addAction(ClickType.LEFT, (event) -> previewKit((Player) event.getWhoClicked(), section.getName()));
   }
 
-  public void previewKit(Player player, String kitName) {
+  private void addBackButton(InventoryGUI menu) {
+    ItemButton back = new ItemButton(Material.ARROW, "&eVoltar").setGlow(true);
+    back.addAction(ClickType.LEFT, event -> categoriesMenu.show((Player) event.getWhoClicked()));
+    menu.setButton(menu.getInventory().getSize() -1, back);
+  }
 
+  public void previewKit(Player player, String kitName) {
     Essentials essentials = evolution.getEssentials();
     Kit kit;
 
@@ -159,6 +163,7 @@ public class KitModule extends EvolutionModule {
 
     if(action != null) claim.addAction(ClickType.LEFT, action);
 
+    addBackButton(inventory);
     inventory.setButton(49, claim);
     inventory.show(player);
   }
