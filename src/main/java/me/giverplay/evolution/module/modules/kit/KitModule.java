@@ -164,6 +164,8 @@ public class KitModule extends EvolutionModule {
   }
 
   private void claim(String kitName, Player player) {
+    player.closeInventory();
+
     try {
       Essentials essentials = evolution.getEssentials();
       Kit kit = new Kit(kitName.toLowerCase(), essentials);
