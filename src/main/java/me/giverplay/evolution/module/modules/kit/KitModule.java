@@ -29,7 +29,7 @@ import java.util.logging.Level;
 import static com.earth2me.essentials.I18n.tl;
 
 public class KitModule extends EvolutionModule {
-
+  
   private InventoryGUI categoriesMenu;
   private InventoryGUI ranksCategoryMenu;
   private InventoryGUI vipsCategoryMenu;
@@ -119,6 +119,7 @@ public class KitModule extends EvolutionModule {
       kit = new Kit(kitName.toLowerCase(), essentials);
     } catch (Exception e) {
       player.sendMessage(ChatColor.RED + "Esse kit não existe!");
+      player.closeInventory();
       return;
     }
 
