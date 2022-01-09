@@ -1,9 +1,14 @@
 plugins {
     java
+    application
 }
 
 group = "me.giverplay"
 version = "3.3.8"
+
+application {
+    applicationDefaultJvmArgs = listOf("-Dfile.encondig=utf-8")
+}
 
 repositories {
     mavenCentral()
