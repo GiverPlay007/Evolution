@@ -29,7 +29,12 @@ public class KitCommand extends EvolutionCommandExecutor {
      return true;
     }
 
-    kitModule.previewKit(player, args[0]);
+    if(args.length > 2 && args[1].equalsIgnoreCase("claim")) {
+      kitModule.claim(args[1].toLowerCase(), player);
+      return true;
+    }
+
+    kitModule.previewKit(player, args[0].toLowerCase());
     return true;
   }
 
