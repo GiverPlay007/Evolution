@@ -169,13 +169,21 @@ public class KitModule extends EvolutionModule {
     inventory.show(player);
   }
 
-  private void claim(String kitName, Player player) {
+  public void claim(String kitName, Player player) {
     player.closeInventory();
 
     try {
       Essentials essentials = evolution.getEssentials();
       Kit kit = new Kit(kitName.toLowerCase(), essentials);
-      kit.expandItems(essentials.getUser(player));
+      User user = essentials.getUser(player);
+
+      try {
+        kit.checkPerms(user);
+      } catch (Exception e) {
+        return;
+      }
+
+      kit.expandItems(user);
       player.sendMessage(tl("kitReceive", kitName));
     } catch (Exception e) {
       getLogger().log(Level.SEVERE, "Failed to deliver kit %s to %s".formatted(kitName, player.getName()), e);
