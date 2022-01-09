@@ -15,6 +15,7 @@ jobs:
       uses: actions/setup-java@v2.5.0
       with:
         java-version: 17
+        distribution: jdk
 
     - name: Grant execute permission
       run: "chmod +x ./gradlew"
