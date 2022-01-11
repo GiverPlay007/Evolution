@@ -8,6 +8,7 @@ import me.giverplay.evolution.listeners.PlayerListener;
 import me.giverplay.evolution.module.ModuleManager;
 import me.giverplay.evolution.module.modules.kit.KitModule;
 import me.giverplay.evolution.module.modules.rank.RankModule;
+import me.giverplay.evolution.module.modules.trash.TrashModule;
 import me.giverplay.evolution.player.PlayerManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
@@ -41,6 +42,7 @@ public final class Evolution extends JavaPlugin {
     moduleManager = new ModuleManager(this);
     moduleManager.registerModule(new RankModule(this));
     moduleManager.registerModule(new KitModule(this));
+    moduleManager.registerModule(new TrashModule(this));
 
     if(isVaultRequired && !hookVault()) {
       getLogger().severe("Plugin Vault was not found, disabling...");

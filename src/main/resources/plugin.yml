@@ -20,3 +20,6 @@ commands:
   kit:
     description: 'Open kit categories menu'
     aliases: [kits]
+  trash:
+    description: 'Open the trash'
+    aliases: [lixo, lixeira]
