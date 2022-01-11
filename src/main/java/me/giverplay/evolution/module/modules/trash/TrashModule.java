@@ -2,16 +2,19 @@ package me.giverplay.evolution.module.modules.trash;
 
 import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.command.commands.TrashCommand;
+import me.giverplay.evolution.listeners.TrashModuleListener;
 import me.giverplay.evolution.module.EvolutionModule;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
 public class TrashModule extends EvolutionModule {
 
+  private TrashModuleListener listener;
   private Inventory trash;
   private BukkitTask task;
 
@@ -22,8 +25,11 @@ public class TrashModule extends EvolutionModule {
   @Override
   protected void onEnable() {
     trash = Bukkit.createInventory(null, 54, ChatColor.DARK_RED + "Lixeira");
+    listener = new TrashModuleListener(this);
     startTask();
+
     evolution.getCommandHandler().registerCommand(new TrashCommand(this));
+    Bukkit.getPluginManager().registerEvents(listener, evolution);
   }
 
   @Override
@@ -33,6 +39,11 @@ public class TrashModule extends EvolutionModule {
     if(task != null) {
       task.cancel();
       task = null;
+    }
+
+    if(listener != null) {
+      HandlerList.unregisterAll(listener);
+      listener = null;
     }
 
     trash = null;
