@@ -13,8 +13,8 @@ application {
 repositories {
     mavenCentral()
 
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    maven("https://oss.sonatype.org/content/groups/public/")
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
+    maven("https://oss.sonatype.org/content/repositories/central")
     maven("https://repo.essentialsx.net/snapshots/")
     maven("https://jitpack.io/")
 
@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly(":spigot-1.18.1-R0.1-SNAPSHOT")
+    compileOnly(":paper-1.17.1")
 
     compileOnly("net.essentialsx:EssentialsX:2.19.3-SNAPSHOT")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")

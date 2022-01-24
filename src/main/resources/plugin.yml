@@ -5,7 +5,7 @@ website: 'https://github.com/FocaEnterprises'
 authors: [ GiverPlay ]
 
 main: me.giverplay.evolution.Evolution
-api-version: 1.18
+api-version: 1.17
 load: POSTWORLD
 
 softdepend:
