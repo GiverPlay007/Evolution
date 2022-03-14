@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
     compileOnly(":paper-1.18.2")
+    compileOnly(":RedProtect-7.7.3-b410")
 
     compileOnly("net.essentialsx:EssentialsX:2.20.0-SNAPSHOT")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")

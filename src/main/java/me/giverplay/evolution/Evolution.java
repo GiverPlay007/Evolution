@@ -1,10 +1,13 @@
 package me.giverplay.evolution;
 
+import br.net.fabiozumbi12.RedProtect.Bukkit.API.RedProtectAPI;
+import br.net.fabiozumbi12.RedProtect.Bukkit.RedProtect;
 import com.earth2me.essentials.Essentials;
 import dev.arantes.inventorymenulib.listeners.InventoryListener;
-import dev.arantes.inventorymenulib.menus.InventoryGUI;
 import me.giverplay.evolution.command.CommandHandler;
+import me.giverplay.evolution.command.commands.FlyCommand;
 import me.giverplay.evolution.listeners.PlayerListener;
+import me.giverplay.evolution.listeners.RedProtectListener;
 import me.giverplay.evolution.module.ModuleManager;
 import me.giverplay.evolution.module.modules.kit.KitModule;
 import me.giverplay.evolution.module.modules.rank.RankModule;
@@ -26,6 +29,7 @@ public final class Evolution extends JavaPlugin {
   private PlayerManager playerManager;
   private ModuleManager moduleManager;
 
+  private RedProtectAPI redProtect;
   private Essentials essentials;
   private Economy vaultEconomy;
 
@@ -59,11 +63,16 @@ public final class Evolution extends JavaPlugin {
     }
 
     commandHandler = new CommandHandler(this);
+    commandHandler.registerCommand(new FlyCommand(this));
     moduleManager.enableAll();
 
-    getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-    getServer().getOnlinePlayers().forEach(this::playerJoin);
     new InventoryListener(this);
+    registerEventListener(new PlayerListener(this));
+    getServer().getOnlinePlayers().forEach(this::playerJoin);
+
+    if(hookRedProtect()) {
+      registerEventListener(new RedProtectListener());
+    }
   }
 
   @Override
@@ -84,9 +93,13 @@ public final class Evolution extends JavaPlugin {
 
     vaultEconomy = null;
     isVaultHooked = false;
+    isVaultRequired = false;
 
     essentials = null;
     isEssentialsHooked = false;
+    isEssentialsRequired = false;
+
+    redProtect = null;
   }
 
   public void registerEventListener(Listener listener) {
@@ -120,7 +133,19 @@ public final class Evolution extends JavaPlugin {
       this.essentials = (Essentials) essentials;
     }
 
-    return this.essentials != null;
+    isEssentialsHooked = this.essentials != null;
+    return isEssentialsHooked;
+  }
+
+  private boolean hookRedProtect() {
+    PluginManager manager = getServer().getPluginManager();
+    Plugin redProtect = manager.getPlugin("RedProtect");
+
+    if(manager.isPluginEnabled(redProtect)) {
+      this.redProtect = ((RedProtect) redProtect).getAPI();
+    }
+
+    return isRedProtectHooked();
   }
 
   public void requireVault() {
@@ -180,5 +205,13 @@ public final class Evolution extends JavaPlugin {
 
   public Essentials getEssentials() {
     return essentials;
+  }
+
+  public boolean isRedProtectHooked() {
+    return redProtect != null;
+  }
+
+  public RedProtectAPI getRedProtect() {
+    return redProtect;
   }
 }

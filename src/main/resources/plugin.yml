@@ -12,6 +12,7 @@ softdepend:
   - Vault
   - Essentials
   - LuckPerms
+  - RedProtect
 
 commands:
   rankup:
@@ -32,3 +33,6 @@ commands:
   tpdeny:
     description: 'Rejeita um pedido de teleporte'
     aliases: [tpnegar, tprecusar, tpno]
+  fly:
+    description: 'Ativa ou desativa o modo de voo'
+    aliases: [voo, voar, flight]
