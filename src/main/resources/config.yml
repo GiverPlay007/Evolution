@@ -1,3 +1,5 @@
 ModuleEnabled:
   Rank: true
   Kit: true
+  Trash: true
+  Teleport: true

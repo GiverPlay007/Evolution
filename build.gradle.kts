@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.giverplay"
-version = "3.3.8"
+version = "3.4.0"
 
 application {
     applicationDefaultJvmArgs = listOf("-Dfile.encondig=utf-8")

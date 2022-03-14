@@ -15,11 +15,14 @@ softdepend:
 
 commands:
   rankup:
-    description: 'Go to the next rank'
+    description: 'Sobe para o proximo rank'
     aliases: [up, upar, nextrank]
   kit:
-    description: 'Open kit categories menu'
+    description: 'Abre o menu dos kits'
     aliases: [kits]
   trash:
-    description: 'Open the trash'
+    description: 'Abre a lixeira'
     aliases: [lixo, lixeira]
+  tpa:
+    description: 'Solicita teleporte para outro jogador'
+    aliases: [requesttp, teleportrequest, pedirtp]
