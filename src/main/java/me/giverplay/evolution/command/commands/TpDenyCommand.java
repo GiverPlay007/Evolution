@@ -8,6 +8,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TpDenyCommand extends EvolutionCommandExecutor {
 
   private final TeleportModule teleport;
@@ -49,5 +52,10 @@ public class TpDenyCommand extends EvolutionCommandExecutor {
     teleport.setRequest(whoRequested, null);
     teleport.setCooldown(whoRequested, teleport.getCooldown());
     return true;
+  }
+
+  @Override
+  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    return args.length != 1 ? new ArrayList<>() : null;
   }
 }

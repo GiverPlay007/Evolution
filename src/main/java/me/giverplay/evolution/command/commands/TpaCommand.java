@@ -13,6 +13,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TpaCommand extends EvolutionCommandExecutor {
 
   private final TeleportModule teleport;
@@ -97,8 +101,10 @@ public class TpaCommand extends EvolutionCommandExecutor {
 
     final int requestCooldown = teleport.getCooldown();
 
+    other.sendMessage(" ");
     other.sendMessage(ChatColor.GRAY + player.getName() + " pediu para teleportar até você.");
     other.spigot().sendMessage(message);
+    other.sendMessage(" ");
     player.sendMessage(ChatColor.GREEN + "Pedido de teleporte enviado para " + other.getName() + "!");
     teleport.setCooldown(player, requestCooldown);
     teleport.setRequest(player, other);
@@ -114,5 +120,10 @@ public class TpaCommand extends EvolutionCommandExecutor {
       }
     }, requestCooldown * 20L);
     return true;
+  }
+
+  @Override
+  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    return args.length != 1 ? new ArrayList<>() : null;
   }
 }
