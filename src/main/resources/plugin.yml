@@ -26,3 +26,6 @@ commands:
   tpa:
     description: 'Solicita teleporte para outro jogador'
     aliases: [requesttp, teleportrequest, pedirtp]
+  tpaccept:
+    description: 'Aceita um pedido de teleporte'
+    aliases: [tpaceitar, tpacc]

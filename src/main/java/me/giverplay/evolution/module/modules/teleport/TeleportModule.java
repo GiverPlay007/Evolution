@@ -1,6 +1,7 @@
 package me.giverplay.evolution.module.modules.teleport;
 
 import me.giverplay.evolution.Evolution;
+import me.giverplay.evolution.command.commands.TpAcceptCommand;
 import me.giverplay.evolution.command.commands.TpaCommand;
 import me.giverplay.evolution.module.EvolutionModule;
 import org.bukkit.entity.Player;
@@ -13,6 +14,8 @@ public class TeleportModule extends EvolutionModule {
   private final Map<Player, Player> requests = new HashMap<>();
   private final Map<Player, Long> cooldowns = new HashMap<>();
 
+  private final int cooldown = 20;
+
   public TeleportModule(Evolution evolution) {
     super(evolution, "Teleport");
   }
@@ -20,11 +23,13 @@ public class TeleportModule extends EvolutionModule {
   @Override
   protected void onEnable() {
     evolution.getCommandHandler().registerCommand(new TpaCommand(this));
+    evolution.getCommandHandler().registerCommand(new TpAcceptCommand(this));
   }
 
   @Override
   protected void onDisable() {
     evolution.getCommandHandler().unregisterCommand("tpa");
+    evolution.getCommandHandler().unregisterCommand("tpaccept");
     requests.clear();
   }
 
@@ -32,7 +37,7 @@ public class TeleportModule extends EvolutionModule {
     return requests.get(player);
   }
 
-  public void setInvitation(Player player, Player other) {
+  public void setRequest(Player player, Player other) {
     if(other == null) {
       requests.remove(player);
       return;
@@ -51,6 +56,10 @@ public class TeleportModule extends EvolutionModule {
     }
 
     return (int) cooldown / 1000;
+  }
+
+  public int getCooldown() {
+    return cooldown;
   }
 
   public void setCooldown(Player player, int delay) {

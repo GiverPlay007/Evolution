@@ -86,20 +86,23 @@ public class TpaCommand extends EvolutionCommandExecutor {
         .create())
       .create();
 
+    final int requestCooldown = teleport.getCooldown();
+
     other.sendMessage(ChatColor.YELLOW + player.getName() + "Pediu para teleportar até você.");
     other.spigot().sendMessage(message);
     player.sendMessage(ChatColor.GREEN + "Pedido de teleporte enviado para " + other.getName() + "!");
-    teleport.setCooldown(player, 20);
+    teleport.setCooldown(player, requestCooldown);
 
     Bukkit.getScheduler().runTaskLater(teleport.getEvolution(), () -> {
       Player requested = teleport.getRequest(player);
 
       if(requested == other) {
-        teleport.setInvitation(player, null);
+        teleport.setRequest(player, null);
+        teleport.setCooldown(player, requestCooldown);
         player.sendMessage(ChatColor.RED + other.getName() + "Não aceitou seu pedido de teleporte.");
         other.sendMessage(ChatColor.YELLOW + "Pedido de teleporte expirado!");
       }
-    }, 20 * 20L);
+    }, requestCooldown * 20L);
     return true;
   }
 }
