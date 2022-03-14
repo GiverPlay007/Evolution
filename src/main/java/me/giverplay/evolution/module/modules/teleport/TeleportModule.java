@@ -2,6 +2,7 @@ package me.giverplay.evolution.module.modules.teleport;
 
 import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.command.commands.TpAcceptCommand;
+import me.giverplay.evolution.command.commands.TpDenyCommand;
 import me.giverplay.evolution.command.commands.TpaCommand;
 import me.giverplay.evolution.module.EvolutionModule;
 import org.bukkit.entity.Player;
@@ -24,12 +25,14 @@ public class TeleportModule extends EvolutionModule {
   protected void onEnable() {
     evolution.getCommandHandler().registerCommand(new TpaCommand(this));
     evolution.getCommandHandler().registerCommand(new TpAcceptCommand(this));
+    evolution.getCommandHandler().registerCommand(new TpDenyCommand(this));
   }
 
   @Override
   protected void onDisable() {
     evolution.getCommandHandler().unregisterCommand("tpa");
     evolution.getCommandHandler().unregisterCommand("tpaccept");
+    evolution.getCommandHandler().unregisterCommand("tpdeny");
     requests.clear();
   }
 

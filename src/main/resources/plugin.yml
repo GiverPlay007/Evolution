@@ -28,4 +28,7 @@ commands:
     aliases: [requesttp, teleportrequest, pedirtp]
   tpaccept:
     description: 'Aceita um pedido de teleporte'
-    aliases: [tpaceitar, tpacc]
+    aliases: [tpaceitar, tpacc, tpyes]
+  tpdeny:
+    description: 'Rejeita um pedido de teleporte'
+    aliases: [tpnegar, tprecusar, tpno]
