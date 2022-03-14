@@ -7,7 +7,6 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -40,10 +39,10 @@ public class TpaCommand extends EvolutionCommandExecutor {
       return true;
     }
 
-    Player invitation = teleport.getInvitation(player);
+    Player request = teleport.getRequest(player);
 
-    if(invitation != null) {
-      if(invitation == other) {
+    if(request != null) {
+      if(request == other) {
         player.sendMessage(ChatColor.RED + "Você já solicitou teleporte para este jogador!");
         return true;
       }
@@ -88,14 +87,14 @@ public class TpaCommand extends EvolutionCommandExecutor {
       .create();
 
     other.sendMessage(ChatColor.YELLOW + player.getName() + "Pediu para teleportar até você.");
-    other.spigot().sendMessage();
+    other.spigot().sendMessage(message);
     player.sendMessage(ChatColor.GREEN + "Pedido de teleporte enviado para " + other.getName() + "!");
     teleport.setCooldown(player, 20);
 
     Bukkit.getScheduler().runTaskLater(teleport.getEvolution(), () -> {
-      Player invite = teleport.getInvitation(player);
+      Player requested = teleport.getRequest(player);
 
-      if(invite == other) {
+      if(requested == other) {
         teleport.setInvitation(player, null);
         player.sendMessage(ChatColor.RED + other.getName() + "Não aceitou seu pedido de teleporte.");
         other.sendMessage(ChatColor.YELLOW + "Pedido de teleporte expirado!");

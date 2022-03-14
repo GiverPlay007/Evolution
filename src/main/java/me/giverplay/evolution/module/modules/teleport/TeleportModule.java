@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class TeleportModule extends EvolutionModule {
 
-  private final Map<Player, Player> invitations = new HashMap<>();
+  private final Map<Player, Player> requests = new HashMap<>();
   private final Map<Player, Long> cooldowns = new HashMap<>();
 
   public TeleportModule(Evolution evolution) {
@@ -25,20 +25,20 @@ public class TeleportModule extends EvolutionModule {
   @Override
   protected void onDisable() {
     evolution.getCommandHandler().unregisterCommand("tpa");
-    invitations.clear();
+    requests.clear();
   }
 
-  public Player getInvitation(Player player) {
-    return invitations.get(player);
+  public Player getRequest(Player player) {
+    return requests.get(player);
   }
 
   public void setInvitation(Player player, Player other) {
     if(other == null) {
-      invitations.remove(player);
+      requests.remove(player);
       return;
     }
 
-    invitations.put(player, other);
+    requests.put(player, other);
   }
 
   public int getCooldown(Player player) {
