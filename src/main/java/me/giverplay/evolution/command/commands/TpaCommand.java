@@ -59,7 +59,7 @@ public class TpaCommand extends EvolutionCommandExecutor {
       return true;
     }
 
-    TextComponent message = new TextComponent("Clique");
+    TextComponent message = new TextComponent("Clique ");
     message.setColor(ChatColor.GRAY);
 
     BaseComponent[] acceptHover = new ComponentBuilder("Aceitar pedido de teleporte de " + sender.getName())
@@ -101,6 +101,7 @@ public class TpaCommand extends EvolutionCommandExecutor {
     other.spigot().sendMessage(message);
     player.sendMessage(ChatColor.GREEN + "Pedido de teleporte enviado para " + other.getName() + "!");
     teleport.setCooldown(player, requestCooldown);
+    teleport.setRequest(player, other);
 
     Bukkit.getScheduler().runTaskLater(teleport.getEvolution(), () -> {
       Player requested = teleport.getRequest(player);
