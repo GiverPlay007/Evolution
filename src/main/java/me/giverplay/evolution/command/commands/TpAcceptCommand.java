@@ -41,6 +41,7 @@ public class TpAcceptCommand extends EvolutionCommandExecutor {
 
     whoRequested.sendMessage(ChatColor.YELLOW + "Teleportando até " + player.getName() + "...");
     player.sendMessage(ChatColor.YELLOW + "Teleportando " + whoRequested.getName() + " até você...");
+    whoRequested.teleport(player);
     teleport.setRequest(whoRequested, null);
     teleport.setCooldown(whoRequested, teleport.getCooldown());
     return true;
