@@ -29,6 +29,11 @@ public class TpAcceptCommand extends EvolutionCommandExecutor {
 
     Player whoRequested = Bukkit.getPlayer(args[0]);
 
+    if(whoRequested == player) {
+      player.sendMessage(ChatColor.RED + "Este jogador é você!");
+      return true;
+    }
+
     if(whoRequested == null) {
       player.sendMessage(ChatColor.RED + "Este jogador não existe ou está offline.");
       return true;

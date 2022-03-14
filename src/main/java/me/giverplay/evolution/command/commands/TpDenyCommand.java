@@ -29,6 +29,11 @@ public class TpDenyCommand extends EvolutionCommandExecutor {
 
     Player whoRequested = Bukkit.getPlayer(args[0]);
 
+    if(whoRequested == player) {
+      player.sendMessage(ChatColor.RED + "Este jogador é você!");
+      return true;
+    }
+
     if(whoRequested == null) {
       player.sendMessage(ChatColor.RED + "Este jogador não existe ou está offline.");
       return true;
@@ -39,7 +44,7 @@ public class TpDenyCommand extends EvolutionCommandExecutor {
       return true;
     }
 
-    whoRequested.sendMessage(ChatColor.RED + player.getName() + "Recusou seu pedido de teleporte!");
+    whoRequested.sendMessage(ChatColor.RED + player.getName() + " recusou seu pedido de teleporte!");
     player.sendMessage(ChatColor.YELLOW + "Pedido de teleporte recusado!");
     teleport.setRequest(whoRequested, null);
     teleport.setCooldown(whoRequested, teleport.getCooldown());
