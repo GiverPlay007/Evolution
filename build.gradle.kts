@@ -24,10 +24,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly(":paper-1.17.1")
+    compileOnly(":paper-1.18.2")
 
-    compileOnly("net.essentialsx:EssentialsX:2.19.3-SNAPSHOT")
-    compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+    compileOnly("net.essentialsx:EssentialsX:2.20.0-SNAPSHOT")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 }
 
 tasks.processResources {
