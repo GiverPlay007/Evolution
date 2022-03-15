@@ -16,25 +16,22 @@ jobs:
       with:
         java-version: 17
         distribution: adopt
-
-    - name: Create server folder
-      run: "mkdir server && cd server"
-
-    - name: Download PaperMC
-      run: "curl -s -o paper.jar https://papermc.io/api/v2/projects/paper/versions/1.18.2/builds/250/downloads/paper-1.18.2-250.jar"
       
-    - name: Start server
+    - name: Download PaperMC
       continue-on-error: true
-      run: "java -Xmx500M -jar paper.jar"
-    
-    - name: "Copy patched jar"
-      run: "mkdir ../libs && mv ./versions/1.18.2/paper-1.18.2.jar ../libs && cd ../"
+      run: |
+       mkdir libs
+       mkdir server
+       cd server
+       curl -s -o paper.jar https://papermc.io/api/v2/projects/paper/versions/1.18.2/builds/250/downloads/paper-1.18.2-250.jar
+       java -Xmx500M -jar paper.jar
+       mv ./versions/1.18.2/paper-1.18.2.jar ../libs
+       cd ../
     
     - name: "Download RedProtect"
       run: |
-       cd ./libs
-       curl -s https://www.spigotmc.org/resources/redprotect-anti-grief-server-protection-region-management-1-7-1-18.15841/download?version=442387
-       cd ../
+       curl -s -o RedProtect-7.7.3-b410.jar ./libs https://www.spigotmc.org/resources/redprotect-anti-grief-server-protection-region-management-1-7-1-18.15841/download?version=442387
+       mv RedProtect-7.7.3-b410.jar libs/
        
     - name: Grant execute permission
       run: "chmod +x ./gradlew"
