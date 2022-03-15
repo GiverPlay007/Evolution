@@ -89,7 +89,7 @@ public class RestartCommand extends EvolutionCommandExecutor {
 
     for(Player player : Bukkit.getOnlinePlayers()) {
       player.sendMessage(" ");
-      player.sendMessage("%sReinciando servidor em %s%d%s minutos!".formatted(ChatColor.GREEN, ChatColor.WHITE, time, ChatColor.GREEN));
+      player.sendMessage("%sReinciando servidor em %s%s%s minutos!".formatted(ChatColor.GREEN, ChatColor.WHITE, TimeUtils.format(time), ChatColor.GREEN));
 
       if(reason != null) {
         player.sendMessage("%sMotivo: %s%s".formatted(ChatColor.GREEN, ChatColor.WHITE, reason));
