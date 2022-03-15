@@ -81,10 +81,10 @@ public class RestartCommand extends EvolutionCommandExecutor {
       StringBuilder reason = new StringBuilder();
 
       for(int i = 1; i < args.length; i++) {
-        reason.append(args[i]);
+        reason.append(args[i]).append(" ");
       }
 
-      this.reason = reason.toString();
+      this.reason = reason.toString().trim();
     }
 
     for(Player player : Bukkit.getOnlinePlayers()) {
@@ -117,7 +117,7 @@ public class RestartCommand extends EvolutionCommandExecutor {
     String message = "&eReiniciando em %s &7[%s&7]"
       .formatted(
         TimeUtils.format(remainingTime),
-        ProgressBar.bar(time - remainingTime, time, 10, "|", "&a", "&c")
+        ProgressBar.bar(time - remainingTime, time, 20, "|", "&a", "&c")
       );
     TextComponent component = new TextComponent(ColorUtils.translate(message));
 
