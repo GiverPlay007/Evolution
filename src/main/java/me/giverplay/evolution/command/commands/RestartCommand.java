@@ -2,11 +2,10 @@ package me.giverplay.evolution.command.commands;
 
 import me.giverplay.evolution.Evolution;
 import me.giverplay.evolution.command.EvolutionCommandExecutor;
+import me.giverplay.evolution.utils.ChatUtils;
 import me.giverplay.evolution.utils.ColorUtils;
 import me.giverplay.evolution.utils.ProgressBar;
 import me.giverplay.evolution.utils.TimeUtils;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -40,7 +39,14 @@ public class RestartCommand extends EvolutionCommandExecutor {
         time = 0;
         Bukkit.getScheduler().cancelTask(taskId);
         taskId = -1;
-        sender.sendMessage(ChatColor.RED + "O servidor não vai mais reiniciar.");
+
+        for(Player player : Bukkit.getOnlinePlayers()) {
+          player.sendMessage(" ");
+          player.sendMessage(ChatColor.RED + "O servidor não vai mais reiniciar...");
+          player.sendMessage(" ");
+          player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_DEATH, 100, 1);
+        }
+
         return true;
       }
 
@@ -121,10 +127,10 @@ public class RestartCommand extends EvolutionCommandExecutor {
         TimeUtils.format(remainingTime),
         ProgressBar.bar(time - remainingTime, time, 20, "|", "&a", "&c")
       );
-    TextComponent component = new TextComponent(ColorUtils.translate(message));
+    message = ColorUtils.translate(message);
 
     for(Player player : Bukkit.getOnlinePlayers()) {
-      player.spigot().sendMessage(ChatMessageType.ACTION_BAR, component);
+      ChatUtils.sendAction(player, message);
     }
   }
 }
