@@ -44,6 +44,11 @@ public class TpaCommand extends EvolutionCommandExecutor {
       return true;
     }
 
+    if(other == player) {
+      player.sendMessage(ChatColor.RED + "Este jogador é você!");
+      return true;
+    }
+
     Player request = teleport.getRequest(player);
 
     if(request != null) {
@@ -75,7 +80,7 @@ public class TpaCommand extends EvolutionCommandExecutor {
     accept.setBold(true);
     accept.setUnderlined(true);
     accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, acceptHover));
-    accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpaceitar " + sender.getName()));
+    accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpaccept " + sender.getName()));
 
     BaseComponent[] denyHover = new ComponentBuilder("Negar pedido de teleporte de " + sender.getName())
       .color(ChatColor.RED)
@@ -86,7 +91,7 @@ public class TpaCommand extends EvolutionCommandExecutor {
     deny.setBold(true);
     deny.setUnderlined(true);
     deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, denyHover));
-    deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpanegar " + sender.getName()));
+    deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpdeny " + sender.getName()));
 
     TextComponent acceptOr = new TextComponent(" para aceitar ou ");
     acceptOr.setColor(ChatColor.GRAY);

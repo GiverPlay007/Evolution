@@ -32,7 +32,7 @@ commands:
     aliases: [tpaceitar, tpacc, tpyes]
   tpdeny:
     description: 'Rejeita um pedido de teleporte'
-    aliases: [tpnegar, tprecusar, tpno]
+    aliases: [tpnegar, tprecusar, tpno, tpanegar]
   fly:
     description: 'Ativa ou desativa o modo de voo'
     aliases: [voo, voar, flight]
