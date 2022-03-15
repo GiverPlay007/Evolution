@@ -100,11 +100,12 @@ public class RestartCommand extends EvolutionCommandExecutor {
 
     this.time = time;
     remainingTime = time;
-    taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(evolution, this::restart, 20L, 20L);
+    isRestarting = true;
+    taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(evolution, this::restartTimer, 20L, 20L);
     return true;
   }
 
-  private void restart() {
+  private void restartTimer() {
     remainingTime--;
 
     if(remainingTime == 0) {
@@ -113,10 +114,10 @@ public class RestartCommand extends EvolutionCommandExecutor {
       return;
     }
 
-    String message = "&#fffc54Reiniciando em %s &7[%s&7]"
+    String message = "&eReiniciando em %s &7[%s&7]"
       .formatted(
         TimeUtils.format(remainingTime),
-        ProgressBar.bar(time - remainingTime, time, 10, "|", "&a", "%c")
+        ProgressBar.bar(time - remainingTime, time, 10, "|", "&a", "&c")
       );
     TextComponent component = new TextComponent(ColorUtils.translate(message));
 
