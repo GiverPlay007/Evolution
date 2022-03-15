@@ -30,7 +30,7 @@ jobs:
     
     - name: "Download RedProtect"
       run: |
-       wget RedProtect-7.7.3-b410.jar https://cdn.discordapp.com/attachments/796091203082649640/953111565215883284/RedProtect-7.7.3-b410.jar
+       wget https://cdn.discordapp.com/attachments/796091203082649640/953111565215883284/RedProtect-7.7.3-b410.jar
        mv RedProtect-7.7.3-b410.jar libs/
        
     - name: Grant execute permission
