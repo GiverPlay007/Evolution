@@ -36,3 +36,6 @@ commands:
   fly:
     description: 'Ativa ou desativa o modo de voo'
     aliases: [voo, voar, flight]
+  restart:
+    description: 'Reinicia o servidor'
+    aliases: [reiniciar]

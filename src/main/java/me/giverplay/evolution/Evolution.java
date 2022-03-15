@@ -6,6 +6,7 @@ import com.earth2me.essentials.Essentials;
 import dev.arantes.inventorymenulib.listeners.InventoryListener;
 import me.giverplay.evolution.command.CommandHandler;
 import me.giverplay.evolution.command.commands.FlyCommand;
+import me.giverplay.evolution.command.commands.RestartCommand;
 import me.giverplay.evolution.listeners.PlayerListener;
 import me.giverplay.evolution.listeners.RedProtectListener;
 import me.giverplay.evolution.module.ModuleManager;
@@ -64,6 +65,7 @@ public final class Evolution extends JavaPlugin {
 
     commandHandler = new CommandHandler(this);
     commandHandler.registerCommand(new FlyCommand(this));
+    commandHandler.registerCommand(new RestartCommand(this));
     moduleManager.enableAll();
 
     new InventoryListener(this);
