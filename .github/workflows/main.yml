@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2.4.0
+
+    - name: Setup JDK
+      uses: actions/setup-java@v2.5.0
+      with:
+        java-version: 17
+        distribution: adopt
+
+    - name: Create server folder
+      run: "mkdir server && cd server"
+
+    - name: Download PaperMC
+      run: "curl -s -o paper.jar https://papermc.io/api/v2/projects/paper/versions/1.18.2/builds/250/downloads/paper-1.18.2-250.jar"
+      
+    - name: Start server
+      continue-on-error: true
+      run: "java -Xmx500M -jar paper.jar"
+    
+    - name: "Copy patched jar"
+      run: "mkdir ../libs && mv ./versions/1.18.2/paper-1.18.2.jar ../libs && cd ../"
+    
+    - name: "Download RedProtect"
+      run: |
+       cd ./libs
+       curl -s https://www.spigotmc.org/resources/redprotect-anti-grief-server-protection-region-management-1-7-1-18.15841/download?version=442387
+       cd ../
+       
+    - name: Grant execute permission
+      run: "chmod +x ./gradlew"
+
+    - name: Build with Gradle
+      run: "./gradlew build"
+
+    - name: Copy compiled jars into output folder
+      run: mkdir output && cp build/libs/*.jar output
+
+    - name: Upload compiled jars
+      uses: actions/upload-artifact@v2.3.1
+      with:
+        name: Artifacts
+        path: output
