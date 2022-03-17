@@ -33,24 +33,21 @@ public class RestartCommand extends EvolutionCommandExecutor {
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if(args.length == 0) {
       if(isRestarting) {
-        reason = "Sem motivo.";
-        isRestarting = false;
-        remainingTime = 0;
-        time = 0;
-        Bukkit.getScheduler().cancelTask(taskId);
-        taskId = -1;
-
-        for(Player player : Bukkit.getOnlinePlayers()) {
-          player.sendMessage(" ");
-          player.sendMessage(ChatColor.RED + "O servidor não vai mais reiniciar...");
-          player.sendMessage(" ");
-          player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_DEATH, 100, 1);
-        }
-
+        cancelRestart();
         return true;
       }
 
-      sender.sendMessage(ChatColor.RED + "Utilize /restart <segundos | now>");
+      sender.sendMessage(ChatColor.RED + "Utilize /restart <segundos | now | cancel>");
+      return true;
+    }
+
+    if(args[0].equalsIgnoreCase("cancel"))  {
+      if(!isRestarting) {
+        sender.sendMessage(ChatColor.RED + "O servidor não está reiniciando!");
+        return true;
+      }
+
+      cancelRestart();
       return true;
     }
 
@@ -131,6 +128,22 @@ public class RestartCommand extends EvolutionCommandExecutor {
 
     for(Player player : Bukkit.getOnlinePlayers()) {
       ChatUtils.sendAction(player, message);
+    }
+  }
+
+  private void cancelRestart() {
+    reason = "Sem motivo.";
+    isRestarting = false;
+    remainingTime = 0;
+    time = 0;
+    Bukkit.getScheduler().cancelTask(taskId);
+    taskId = -1;
+
+    for(Player player : Bukkit.getOnlinePlayers()) {
+      player.sendMessage(" ");
+      player.sendMessage(ChatColor.RED + "O servidor não vai mais reiniciar...");
+      player.sendMessage(" ");
+      player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_DEATH, 100, 1);
     }
   }
 }
