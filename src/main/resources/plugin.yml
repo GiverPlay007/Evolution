@@ -41,3 +41,4 @@ commands:
     aliases: [reiniciar]
   evolution:
     description: 'Comando principal'
+    aliases: [about, sobre]

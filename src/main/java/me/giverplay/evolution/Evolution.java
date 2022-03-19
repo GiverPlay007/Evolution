@@ -5,6 +5,7 @@ import br.net.fabiozumbi12.RedProtect.Bukkit.RedProtect;
 import com.earth2me.essentials.Essentials;
 import dev.arantes.inventorymenulib.listeners.InventoryListener;
 import me.giverplay.evolution.command.CommandHandler;
+import me.giverplay.evolution.command.commands.EvolutionCommand;
 import me.giverplay.evolution.command.commands.FlyCommand;
 import me.giverplay.evolution.command.commands.RestartCommand;
 import me.giverplay.evolution.listeners.PlayerListener;
@@ -16,6 +17,7 @@ import me.giverplay.evolution.module.modules.teleport.TeleportModule;
 import me.giverplay.evolution.module.modules.trash.TrashModule;
 import me.giverplay.evolution.player.PlayerManager;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -66,6 +68,7 @@ public final class Evolution extends JavaPlugin {
     }
 
     commandHandler = new CommandHandler(this);
+    commandHandler.registerCommand(new EvolutionCommand(this));
     commandHandler.registerCommand(new FlyCommand(this));
     commandHandler.registerCommand(new RestartCommand(this));
     moduleManager.enableAll();
@@ -168,6 +171,13 @@ public final class Evolution extends JavaPlugin {
     isEssentialsRequired = true;
   }
 
+  public void reload() {
+    onDisable();
+    Bukkit.getScheduler().cancelTasks(this);
+    HandlerList.unregisterAll(this);
+    onEnable();
+  }
+
   public void playerJoin(Player player) {
     if(!playerManager.isPlayerRegistered(player)) {
       playerManager.registerPlayer(player);
@@ -188,7 +198,7 @@ public final class Evolution extends JavaPlugin {
       "%s %s by GiverPlay".formatted(ChatColor.YELLOW, getDescription().getFullName()),
       " ",
       ChatColor.GREEN + "Este servidor foi desenvolvido por GiverPlay e está em constantes atualizações.",
-      "O que poderíamos fazer para melhorar a sua experiência?",
+      ChatColor.GREEN + "O que poderíamos fazer para melhorar a sua experiência?",
       " ");
   }
 
