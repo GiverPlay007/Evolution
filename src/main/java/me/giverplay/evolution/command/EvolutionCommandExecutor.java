@@ -30,6 +30,10 @@ public abstract class EvolutionCommandExecutor implements CommandExecutor, TabCo
     return permission + "." + child;
   }
 
+  public final boolean checkPermission(CommandSender sender, String child) {
+    return sender.hasPermission(getPermission(child));
+  }
+
   public void setEnabled(boolean isEnabled) {
     this.isEnabled = isEnabled;
   }

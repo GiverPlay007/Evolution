@@ -29,7 +29,7 @@ public class FlyCommand extends EvolutionCommandExecutor {
     if(args.length > 0) {
       Player other = Bukkit.getPlayer(args[1]);
 
-      if(!sender.hasPermission(getPermission("other"))) {
+      if(!checkPermission(sender, "other")) {
         sender.sendMessage(ChatColor.RED + "Você não pode alterar o modo fly de outro jogador!");
         return true;
       }
