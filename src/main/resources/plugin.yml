@@ -39,3 +39,5 @@ commands:
   restart:
     description: 'Reinicia o servidor'
     aliases: [reiniciar]
+  evolution:
+    description: 'Comando principal'

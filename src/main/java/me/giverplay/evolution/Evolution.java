@@ -16,6 +16,8 @@ import me.giverplay.evolution.module.modules.teleport.TeleportModule;
 import me.giverplay.evolution.module.modules.trash.TrashModule;
 import me.giverplay.evolution.player.PlayerManager;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -179,6 +181,15 @@ public final class Evolution extends JavaPlugin {
   public void playerQuit(Player player) {
     playerManager.savePlayerData(player);
     playerManager.removeFromCache(player);
+  }
+
+  public void sendInformation(CommandSender sender) {
+    sender.sendMessage(" ",
+      "%s %s by GiverPlay".formatted(ChatColor.YELLOW, getDescription().getFullName()),
+      " ",
+      ChatColor.GREEN + "Este servidor foi desenvolvido por GiverPlay e está em constantes atualizações.",
+      "O que poderíamos fazer para melhorar a sua experiência?",
+      " ");
   }
 
   public boolean isVaultHooked() {
