@@ -35,15 +35,19 @@ public abstract class EvolutionModule {
   protected abstract void onDisable();
 
   public final void enable() {
-    evolution.getLogger().info("Enabling module " + name);
-    isEnabled = true;
-    onEnable();
+    if(!isEnabled) {
+      evolution.getLogger().info("Enabling module " + name);
+      isEnabled = true;
+      onEnable();
+    }
   }
 
   public final void disable() {
-    evolution.getLogger().info("Disabling module " + name);
-    isEnabled = false;
-    onDisable();
+    if(isEnabled) {
+      evolution.getLogger().info("Disabling module " + name);
+      isEnabled = false;
+      onDisable();
+    }
   }
 
   public void saveConfig() {
