@@ -55,22 +55,13 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
   public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
     EvolutionCommandExecutor executor = commands.get(command.getName());
 
-    if(!executor.isEnabled) {
+    if(!executor.isEnabled
+      || !sender.hasPermission(executor.getPermission())
+      || !executor.isPlayerAllowed && sender instanceof Player
+      || !executor.isConsoleAllowed && !(sender instanceof Player)) {
       return new ArrayList<>();
     }
-
-    if(!sender.hasPermission(executor.getPermission())) {
-      return new ArrayList<>();
-    }
-
-    if(!executor.isPlayerAllowed && (sender instanceof Player)) {
-      return new ArrayList<>();
-    }
-
-    if(!executor.isConsoleAllowed && !(sender instanceof Player)) {
-      return new ArrayList<>();
-    }
-
+ 
     return executor.onTabComplete(sender, command, alias, args);
   }
 
